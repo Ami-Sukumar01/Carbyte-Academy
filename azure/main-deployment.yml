@@ -1,0 +1,33 @@
+# See also:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+# Batch the builds, so that the newest always happens at last 
+trigger:
+  batch: true
+  branches:
+    include:
+    - main
+
+pool:
+  vmImage: ubuntu-latest
+ 
+variables:
+- group: app-am-prod
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '20.11.x'
+    displayName: 'Install Node.js'
+
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+      includeRootFolder: false
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      replaceExistingArchive: true
+
+  - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+    artifact: Access-Management-Build
+    displayName: 'Publish Access-Management Build'

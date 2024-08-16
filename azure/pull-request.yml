@@ -1,0 +1,28 @@
+# See also:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger: none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+- group: app-am-dev
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '20.11.x'
+  displayName: 'Install Node.js'
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    command: install
+
+- task: Npm@1
+  displayName: 'npm build'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run build'
