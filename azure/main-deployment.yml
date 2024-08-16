@@ -29,5 +29,5 @@ steps:
       replaceExistingArchive: true
 
   - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-    artifact: Access-Management-Build
-    displayName: 'Publish Access-Management Build'
+    artifact: Academy-Build-Prod
+    displayName: 'Publish Academy Build Prod'
