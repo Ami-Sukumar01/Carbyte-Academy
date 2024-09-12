@@ -15,7 +15,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-- group: app-am-dev
+- group: academy-dev
 
 steps:
   - task: NodeTool@0

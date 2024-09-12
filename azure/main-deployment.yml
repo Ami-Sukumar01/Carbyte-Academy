@@ -12,7 +12,7 @@ pool:
   vmImage: ubuntu-latest
  
 variables:
-- group: app-am-prod
+- group: academy-prod
 
 steps:
   - task: NodeTool@0
