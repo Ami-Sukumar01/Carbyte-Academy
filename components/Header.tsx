@@ -23,7 +23,7 @@ const PageHeader = () => {
         </div>
   
         {/* Icons on top of the nav */}
-        <div className="absolute top-3 right-0 m-4 z-10 flex space-x-4 hover:shadow-[6px_6px_0_black">
+        <div className="absolute top-3 right-0 m-4 z-10 flex space-x-4">
           <IconBox icon={<MdOutlineDashboard size={24} />} />
           <IconBox icon={<FiHome size={24} />} />
           <IconBox icon={<FiSearch size={24} />} />
