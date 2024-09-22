@@ -58,7 +58,7 @@ export default function SpacesLayout({
             >
               {/* Back Button */}
               <button
-                className="bg-white text-black px-4 py-2 rounded-lg shadow-md"
+                className="bg-white text-black px-4 py-2 rounded-lg shadow-md transition-shadow duration-300 ease-in-out hover:shadow-[6px_6px_0_black] "
                 style={{
                   width: "150px",
                   height: "46px",
@@ -72,7 +72,7 @@ export default function SpacesLayout({
               {/* Request a Topic Button and Question Icon */}
               <div className="flex items-center space-x-2 relative">
                 <button
-                  className="bg-white text-black px-4 py-2 rounded-lg shadow-md"
+                  className="bg-white text-black px-4 py-2 rounded-lg shadow-md transition-shadow duration-300 ease-in-out hover:shadow-[6px_6px_0_black]"
                   style={{
                     width: "226px",
                     height: "46px",
