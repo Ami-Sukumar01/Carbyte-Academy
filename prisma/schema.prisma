@@ -16,71 +16,118 @@ datasource db {
 }
 
 model Space {
-  id            String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name          String
-  alias         String         @db.VarChar(20)
-  description   String
-  isPublic      Boolean        @default(false)
-  resources     Resource[]
-  learningPaths LearningPath[]
-  projects      Project[]
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name             String         @db.VarChar(255)
+  slug             String         @unique
+  alias            String         @db.VarChar(20)
+  description      String
+  isPublic         Boolean        @default(false)
+  resources        Resource[]
+  learningPaths    LearningPath[]
+  projects         Project[]
+  lastModifiedById String         @db.Uuid
+  lastModifiedBy   User           @relation(fields: [lastModifiedById], references: [id])
+  contributions    Contribution[]
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 }
 
 model Resource {
-  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title       String //need varchar?
-  description String
-  spaceId     String   @db.Uuid
-  space       Space    @relation(fields: [spaceId], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title            String         @db.VarChar(255)
+  slug             String         @unique
+  description      String
+  spaceId          String         @db.Uuid
+  space            Space          @relation(fields: [spaceId], references: [id])
+  lastModifiedById String         @db.Uuid
+  lastModifiedBy   User           @relation(fields: [lastModifiedById], references: [id])
+  contributions    Contribution[]
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 }
 
 model LearningPath {
-  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title       String //need varchar??
-  description String
-  spaceId     String   @db.Uuid
-  space       Space    @relation(fields: [spaceId], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title            String         @db.VarChar(255)
+  description      String
+  spaceId          String         @db.Uuid
+  space            Space          @relation(fields: [spaceId], references: [id])
+  lastModifiedById String         @db.Uuid
+  lastModifiedBy   User           @relation(fields: [lastModifiedById], references: [id])
+  contributions    Contribution[]
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 }
 
 model Project {
-  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title       String //need varchar?
-  description String
-  spaceId     String   @db.Uuid
-  space       Space    @relation(fields: [spaceId], references: [id])
-  client      String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title            String         @db.VarChar(255)
+  description      String
+  spaceId          String         @db.Uuid
+  space            Space          @relation(fields: [spaceId], references: [id])
+  clientId         String         @db.Uuid
+  client           Client         @relation(fields: [clientId], references: [id])
+  lastModifiedById String         @db.Uuid
+  lastModifiedBy   User           @relation(fields: [lastModifiedById], references: [id])
+  contributions    Contribution[]
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 }
 
-// model Post {
-//   id        Int      @id @default(autoincrement())
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-//   title     String   @db.VarChar(255)
-//   content   String?
-//   published Boolean  @default(false)
-//   author    User     @relation(fields: [authorId], references: [id])
-//   authorId  Int
-// }
+model Profile {
+  id     String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  bio    String?
+  user   User    @relation(fields: [userId], references: [id])
+  userId String  @unique @db.Uuid
+}
 
-// model Profile {
-//   id     Int     @id @default(autoincrement())
-//   bio    String?
-//   user   User    @relation(fields: [userId], references: [id])
-//   userId Int     @unique
-// }
+model User {
+  id            String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email         String         @unique
+  name          String
+  profile       Profile?
+  spaces        Space[]
+  resources     Resource[]
+  learningPaths LearningPath[]
+  clients       Client[]
+  contributions Contribution[]
+  projects      Project[]
+}
 
-// model User {
-//   id      Int      @id @default(autoincrement())
-//   email   String   @unique
-//   name    String?
-//   posts   Post[]
-//   profile Profile?
-// }
+model Client {
+  id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name             String
+  description      String
+  url              String?
+  projects         Project[]
+  lastModifiedById String    @db.Uuid
+  lastModifiedBy   User      @relation(fields: [lastModifiedById], references: [id])
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+model Contribution {
+  id             String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  contributorId  String        @db.Uuid
+  contributor    User          @relation(fields: [contributorId], references: [id])
+  spaceId        String        @db.Uuid
+  space          Space         @relation(fields: [spaceId], references: [id])
+  resourceId     String?       @db.Uuid
+  resource       Resource?     @relation(fields: [resourceId], references: [id])
+  learningPathId String?       @db.Uuid
+  learningPath   LearningPath? @relation(fields: [learningPathId], references: [id])
+  projectId      String?       @db.Uuid
+  project        Project?      @relation(fields: [projectId], references: [id])
+  pointRuleId    String        @db.Uuid
+  pointRule      PointRule     @relation(fields: [pointRuleId], references: [id])
+}
+
+model PointRule {
+  id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  type         String
+  description  String
+  points       Int
+  contribution Contribution[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
