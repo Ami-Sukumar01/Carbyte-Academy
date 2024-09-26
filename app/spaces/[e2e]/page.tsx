@@ -88,7 +88,7 @@ function Modal({ onClose, content }: { onClose: () => void, content: string }) {
   return (
     <div className="fixed inset-0 flex justify-center items-center z-50 pointer-events-none">
       <div
-        className="p-4 rounded-xl shadow-xl border border-gray-300 pointer-events-auto relative"
+        className="p-4 rounded-[5px] shadow-xl border border-gray-300 pointer-events-auto relative"
         style={{
           backgroundColor: '#F5F9FF',
           width: '361px',
