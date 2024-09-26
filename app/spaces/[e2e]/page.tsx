@@ -25,11 +25,16 @@ export default function PostID({ params }: any) {
         const fetchedPost = await getPostById(params.spaceId);
         setPost(fetchedPost);
       } catch (err) {
-        setError(err.message);
+        if (err instanceof Error) {
+          setError(err.message); // Safe to access message
+        } else {
+          setError('An unknown error occurred'); // Handle unknown types
+        }
       }
     }
     fetchData();
   }, [params.spaceId]);
+  
 
   if (error) {
     return <main><p>Error: {error}</p></main>;
@@ -39,10 +44,15 @@ export default function PostID({ params }: any) {
     return <main><p>No data available</p></main>;
   }
 
-  return <PostContent post={post} />;
+  return (
+    <div className="flex flex-col lg:flex-row w-full ml-[40px] mt-[60px] space-x-6">
+      <MainContent post={post} />
+      <AsideContent />
+    </div>
+  );
 }
 
-function PostContent({ post }: { post: any }) {
+function MainContent({ post }: { post: any }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
@@ -50,25 +60,60 @@ function PostContent({ post }: { post: any }) {
   };
 
   return (
-    <main className="w-[520px] h-[248px] relative ml-[40px] mt-[60px]">
-      <h1 className="text-[50px] leading-[36px] font-sans mb-4">
-        {post.alias}
-      </h1>
+    <main className="flex-1">
+      <div className="w-full max-w-[520px] h-auto">
+        <h1 className="text-[50px] leading-[36px] font-sans mb-4">
+          {post.alias}
+        </h1>
 
-      <p className="text-[16px] leading-[24px] font-sans">
-        {`${post.description.slice(0, post.description.lastIndexOf(' ', 250))}...`}
-        <span
+        <p className="text-[16px] leading-[24px] font-sans">
+          {`${post.description.slice(0, post.description.lastIndexOf(' ', 250))}...`}
+          <span
             className="text-[#9846FF] cursor-pointer ml-1"
-          onClick={toggleModal}
-        >
-          read more
-        </span>
-      </p>
+            onClick={toggleModal}
+          >
+            read more
+          </span>
+        </p>
 
-      {isModalOpen && (
-        <Modal onClose={toggleModal} content={post.description} />
-      )}
+        {isModalOpen && (
+          <Modal onClose={toggleModal} content={post.description} />
+        )}
+      </div>
     </main>
+  );
+}
+
+function AsideContent() {
+  return (
+    <aside className="w-[358px] flex flex-col space-y-4" style={{ marginRight: '40px' }}>
+      {/* First Box, Top contributer : Adonis*/} 
+      <div
+        className="w-full h-[226px] rounded-[2px] border border-black"
+        style={{ backgroundColor: '#E3EAFF', marginLeft: '-40px' }}
+      >
+        <div
+          className="w-full h-[46px] rounded-t-[2px]"
+          style={{ backgroundColor: '#576595' }}
+        >
+<h2 className="text-white text-left leading-[46px] ml-4">Top contributors</h2>
+
+        </div>
+        <div className="p-4">
+          <p>Box 1 Content</p>
+        </div>
+      </div>
+
+      {/* Second Box */}
+      <div
+        className="w-full h-[277px] rounded-[2px] border border-black"
+        style={{ backgroundColor: '#FFFDF2', marginLeft: '-40px', marginTop: '30px', }}
+      >
+        <div className="p-4">
+          <p>Box 2, User update</p>
+        </div>
+      </div>
+    </aside>
   );
 }
 
@@ -110,4 +155,3 @@ function Modal({ onClose, content }: { onClose: () => void, content: string }) {
     </div>
   );
 }
-
