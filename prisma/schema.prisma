@@ -125,12 +125,26 @@ model Contribution {
 
 model PointRule {
   id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  type             String
-  description      String
+  objectId         Int
+  object           Object         @relation(fields: [objectId], references: [id])
+  actionId         Int
+  action           Action         @relation(fields: [actionId], references: [id])
   points           Int
-  contribution     Contribution[]
   lastModifiedById String         @db.Uuid
   lastModifiedBy   User           @relation(fields: [lastModifiedById], references: [id])
+  contribution     Contribution[]
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
+}
+
+model Object {
+  id        Int         @id @default(autoincrement())
+  name      String      @unique
+  pointRule PointRule[]
+}
+
+model Action {
+  id        Int         @id @default(autoincrement())
+  name      String      @unique
+  pointRule PointRule[]
 }
