@@ -1,4 +1,5 @@
 import { PrismaClient, Prisma } from "@prisma/client";
+import { connect } from "http2";
 
 const prisma = new PrismaClient()
 
@@ -160,9 +161,300 @@ const spaceData: Prisma.SpaceCreateInput[] = [
   },
 ]
 
-async function main() {
-  console.log(`Start seeding...`)
+const clientData: Prisma.ClientCreateInput[] = [
+  {
+    id: "fdb27ff3-973a-4be9-a13a-2c062e289ba1",
+    name: "VW",
+    description: "Volkswagen",
+    url: "https://www.volkswagen.de/de.html",
+    lastModifiedBy: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } }
+  },
+  {
+    id: "73c07b92-26f6-4ee2-b980-280008bfb270",
+    name: "Carbyte",
+    description: "Carbyte Internal Project",
+    url: "https://carbyte.de",
+    lastModifiedBy: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } }
+  },
+  {
+    id: "f4dc96fb-d08a-4154-904b-e6a82584b289",
+    name: "CARIAD",
+    description: "CARIAD A VW GROUP COMPANY",
+    url: "https://cariad.technology",
+    lastModifiedBy: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } }
+  },
 
+
+]
+
+//Here; All Projects belong to E2E
+const projectData: Prisma.ProjectCreateInput[] = [
+  {
+    id: "8406fa2a-2bc6-4c70-87bd-d3f1254d90f6",
+    title: "Cloud-Optimierung Connected Car",
+    description: "The aim of the project was to reduce the number of existing systems and thus significantly reduce complexity. We not only supported the technical implementation, but also took on the coordination of all stakeholders. The result is a robust, future-proof IT landscape.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    client: { connect: { id: "f4dc96fb-d08a-4154-904b-e6a82584b289" } },
+    lastModifiedBy: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } }
+  },
+  {
+    id: "dc5ce998-13f0-4458-a88c-8fc678111666",
+    title: "Implementing CI/CD for seamless integration and accelerated product development",
+    description: "By implementing CI/CD practices with nightly releases and robust variant handling, we have achieved seamless integration, rapid deployment and reliable delivery. This enables the development of the highest quality products with improved responsiveness.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    client: { connect: { id: "f4dc96fb-d08a-4154-904b-e6a82584b289" } },
+    lastModifiedBy: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } }
+  },
+  {
+    id: "b31db5f0-afd3-43fb-a34b-d1e8b32b711c",
+    title: "Efficient and cost-optimized cloud infrastructure: from complexity to sustainability",
+    description: "Thanks to our expertise in optimizing cloud infrastructures, we were able to significantly increase a customer's competitiveness. We transformed an inefficient cloud solution, reduced communication nodes, eliminated redundancies and optimized development processes. The result: significantly lower infrastructure costs, improved efficiency and a sustainably reduced ecological footprint.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    client: { connect: { id: "f4dc96fb-d08a-4154-904b-e6a82584b289" } },
+    lastModifiedBy: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } }
+  },
+  {
+    id: "05d272bf-0fe0-4e67-ad3b-ad646b95525d",
+    title: "Community-Driven EdTech SaaS",
+    description: "Our self-developed P2P Learning Platform promotes personal development. It facilitates orientation and knowledge transfer, increases satisfaction and shortens training times. Community-driven learning makes it possible to explore topics based on the needs of the users.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    client: { connect: { id: "f4dc96fb-d08a-4154-904b-e6a82584b289" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } }
+  },
+]
+
+const actionData: Prisma.ActionCreateInput[] = [
+  {
+    id: "0ea10b65-748f-4ed1-ab99-3ca1ec1da3f6",
+    name: "add",
+    description: "added"
+  },
+  {
+    id: "9f5a4054-d10f-4189-b0be-5621b18c6b0f",
+    name: "update",
+    description: "updated"
+  },
+  {
+    id: "d523aa6d-d7a4-4236-a047-0bcf40b17b79",
+    name: "comment",
+    description: "commented"
+  },
+  {
+    id: "0633685f-d661-4953-8175-3e9003846b60",
+    name: "upvote",
+    description: "upvoted"
+  },
+  {
+    id: "d2503e62-d580-4102-954e-1d23de74ae98",
+    name: "suggest",
+    description: "made a suggestion" //missing Suggestion Model
+  },
+  {
+    id: "408afa38-d8a4-4de6-8d23-0e569ee76437",
+    name: "save",
+    description: "saved for later"
+  },
+  {
+    id: "9c767ecd-c921-416f-a612-a1b7883a1117",
+    name: "flag",
+    description: "flagged as outdated"
+  },
+]
+
+const objectData: Prisma.ObjectCreateInput[] = [
+  {
+    id: "4afa7c60-f692-44a1-a743-5529f37f04d1",
+    name: "space",
+  },
+  {
+    id: "5ad3c9ae-4e02-466a-a655-147a931b3bd6",
+    name: "learning path",
+  },
+  {
+    id: "e6d136ea-1278-458e-9951-babe1f6b268b",
+    name: "resource",
+  },
+  {
+    id: "e00fe501-eea3-46ca-ab42-989598a9dd70",
+    name: "project",
+  },
+  {
+    id: "9936d2d1-a6d9-45c2-8ddb-4d929985473b",
+    name: "client",
+  },
+]
+
+
+
+const pointRuleData: Prisma.PointRuleCreateInput[] = [
+  {
+    // Add a learning path
+    id: "f4c786fa-2956-43ca-8b3d-823de835451f",
+    action: { connect: { id: "0ea10b65-748f-4ed1-ab99-3ca1ec1da3f6" } },
+    object: { connect: { id: "5ad3c9ae-4e02-466a-a655-147a931b3bd6" } },
+    points: 50,
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    // Add a resource
+    id: "8b4684e2-7f4e-4111-a4b0-9629614742a2",
+    action: { connect: { id: "0ea10b65-748f-4ed1-ab99-3ca1ec1da3f6" } },
+    object: { connect: { id: "e6d136ea-1278-458e-9951-babe1f6b268b" } },
+    points: 25,
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    // Add a project
+    id: "eba39987-2707-48b5-a0f8-cd4ba5ad6951",
+    action: { connect: { id: "0ea10b65-748f-4ed1-ab99-3ca1ec1da3f6" } },
+    object: { connect: { id: "e00fe501-eea3-46ca-ab42-989598a9dd70" } },
+    points: 25,
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    // Updated a learning path
+    id: "ff433e55-d4e9-44b8-9479-a92c4eb61735",
+    action: { connect: { id: "9f5a4054-d10f-4189-b0be-5621b18c6b0f" } },
+    object: { connect: { id: "5ad3c9ae-4e02-466a-a655-147a931b3bd6" } },
+    points: 20,
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    // Updated a resource
+    id: "41ce2f9d-0749-431e-9bab-0ebf1a5407fa",
+    action: { connect: { id: "9f5a4054-d10f-4189-b0be-5621b18c6b0f" } },
+    object: { connect: { id: "e6d136ea-1278-458e-9951-babe1f6b268b" } },
+    points: 15,
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    // Updated a project
+    id: "32c6de68-0e57-4579-b66b-14ab23d66f30",
+    action: { connect: { id: "9f5a4054-d10f-4189-b0be-5621b18c6b0f" } },
+    object: { connect: { id: "e00fe501-eea3-46ca-ab42-989598a9dd70" } },
+    points: 15,
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    // Comment a learning path
+    id: "3fbc4e10-a4a7-4ad5-8c4f-49b5b8281ae7",
+    action: { connect: { id: "d523aa6d-d7a4-4236-a047-0bcf40b17b79" } },
+    object: { connect: { id: "5ad3c9ae-4e02-466a-a655-147a931b3bd6" } },
+    points: 5,
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    // Comment a resource
+    id: "52c9b4f8-0c6e-4e40-856c-52be46ad023c",
+    action: { connect: { id: "d523aa6d-d7a4-4236-a047-0bcf40b17b79" } },
+    object: { connect: { id: "e6d136ea-1278-458e-9951-babe1f6b268b" } },
+    points: 5,
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  //
+  {
+    // Upvoted a learning path
+    id: "ab1e2439-4493-4905-a685-7ea1e690b8ce",
+    action: { connect: { id: "0633685f-d661-4953-8175-3e9003846b60" } },
+    object: { connect: { id: "5ad3c9ae-4e02-466a-a655-147a931b3bd6" } },
+    points: 5,
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    // Upvoted a resource
+    id: "e45eacfa-b309-4a5e-a2b5-51505329cffe",
+    action: { connect: { id: "0633685f-d661-4953-8175-3e9003846b60" } },
+    object: { connect: { id: "e6d136ea-1278-458e-9951-babe1f6b268b" } },
+    points: 5,
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+
+  {
+    // Saved a learning path
+    id: "8cfad23f-f741-4080-8835-3fcf3bb2191f",
+    action: { connect: { id: "408afa38-d8a4-4de6-8d23-0e569ee76437" } },
+    object: { connect: { id: "5ad3c9ae-4e02-466a-a655-147a931b3bd6" } },
+    points: 10,
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  }
+  ,
+  {
+    // Saved a resource
+    id: "11759fb5-a62e-466d-b168-3cbc53233d8a",
+    action: { connect: { id: "408afa38-d8a4-4de6-8d23-0e569ee76437" } },
+    object: { connect: { id: "e6d136ea-1278-458e-9951-babe1f6b268b" } },
+    points: 10,
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    // Made a suggestion on resource
+    id: "2dd16b3e-beac-4c1e-88ca-aaac58009ea9",
+    action: { connect: { id: "d2503e62-d580-4102-954e-1d23de74ae98" } },
+    object: { connect: { id: "e6d136ea-1278-458e-9951-babe1f6b268b" } },
+    points: 10,
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    // Flag outdated a resource
+    id: "fa6aa502-ccca-46e6-a975-252ea7fe695d",
+    action: { connect: { id: "9c767ecd-c921-416f-a612-a1b7883a1117" } },
+    object: { connect: { id: "e6d136ea-1278-458e-9951-babe1f6b268b" } },
+    points: 10,
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  }
+]
+
+async function upsertClients() {
+  console.log(`\n- Creating clients`)
+  for (const c of clientData) {
+    const client = await prisma.client.upsert({
+      where: { id: c.id },
+      update: {
+        name: c.name,
+        description: c.description,
+        url: c.url,
+        lastModifiedBy: c.lastModifiedBy
+      },
+      create: {
+        id: c.id,
+        name: c.name,
+        description: c.description,
+        url: c.url,
+        lastModifiedBy: c.lastModifiedBy
+      }
+    })
+    console.log(`Create or modify client: ${client.name}`)
+  }
+}
+
+async function upsertProjects() {
+  console.log(`\n - Creating projects`)
+  for (const p of projectData) {
+    const project = await prisma.project.upsert({
+      where: { id: p.id },
+      update: {
+        title: p.title,
+        description: p.description,
+        space: p.space,
+        client: p.client,
+        lastModifiedBy: p.lastModifiedBy
+      },
+      create: {
+        id: p.id,
+        title: p.title,
+        description: p.description,
+        space: p.space,
+        client: p.client,
+        lastModifiedBy: p.lastModifiedBy
+      }
+    })
+    console.log(`Create or modify project: ${project.title}`)
+  }
+}
+
+
+async function upsertUsers() {
+  console.log(`\n - Creating users`)
   for (const u of userData) {
     const user = await prisma.user.upsert({
       where: { id: u.id }, //check if the alias exits
@@ -178,8 +470,10 @@ async function main() {
     })
     console.log(`Create or modified user: ${user.name}`)
   }
+}
 
-
+async function upsertSpaces() {
+  console.log(`\n- Create spaces`)
   for (const s of spaceData) {
     const space = await prisma.space.upsert({
       where: { id: s.id }, //check if the alias exits
@@ -203,6 +497,78 @@ async function main() {
     })
     console.log(`Created or modified space with alias: ${space.alias}`)
   }
+
+}
+
+async function upsertActions() {
+  console.log(`\n - Create actions`)
+  for (const a of actionData) {
+    const action = await prisma.action.upsert({
+      where: { id: a.id },
+      update: {
+        name: a.name,
+        description: a.description
+      },
+      create: {
+        id: a.id,
+        name: a.name,
+        description: a.description
+      }
+    })
+    console.log(`Created or modified action ${action.name}`)
+  }
+}
+
+async function upsertObject() {
+  console.log(`\n - Create objects`)
+  for (const o of objectData) {
+    const object = await prisma.object.upsert({
+      where: { id: o.id },
+      update: {
+        name: o.name
+      },
+      create: {
+        id: o.id,
+        name: o.name
+      }
+    })
+    console.log(`Created or modified object ${object.name}`)
+  }
+}
+
+
+async function upsertPointRule() {
+  console.log(`\n - Create point rules`)
+  for (const pr of pointRuleData) {
+    const pointRule = await prisma.pointRule.upsert({
+      where: { id: pr.id },
+      update: {
+        action: pr.action,
+        object: pr.object,
+        points: pr.points,
+        lastModifiedBy: pr.lastModifiedBy
+      },
+      create: {
+        id: pr.id,
+        action: pr.action,
+        object: pr.object,
+        points: pr.points,
+        lastModifiedBy: pr.lastModifiedBy
+      }
+    })
+    console.log(` Create point rule with "${pointRule.points}" points`)
+  }
+}
+
+async function main() {
+  console.log(`Start seeding...`)
+  await upsertUsers()
+  await upsertSpaces()
+  await upsertClients()
+  await upsertProjects()
+  await upsertActions()
+  await upsertObject()
+  await upsertPointRule()
   console.log(`Seeding finished 🌱`)
 }
 
