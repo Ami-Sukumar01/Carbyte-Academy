@@ -92,6 +92,7 @@ model User {
   clients       Client[]
   contributions Contribution[]
   projects      Project[]
+  pointRules    PointRule[]
 }
 
 model Client {
@@ -123,11 +124,13 @@ model Contribution {
 }
 
 model PointRule {
-  id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  type         String
-  description  String
-  points       Int
-  contribution Contribution[]
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  type             String
+  description      String
+  points           Int
+  contribution     Contribution[]
+  lastModifiedById String         @db.Uuid
+  lastModifiedBy   User           @relation(fields: [lastModifiedById], references: [id])
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 }
