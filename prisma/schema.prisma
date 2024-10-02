@@ -125,9 +125,9 @@ model Contribution {
 
 model PointRule {
   id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  objectId         Int
+  objectId         String         @db.Uuid
   object           Object         @relation(fields: [objectId], references: [id])
-  actionId         Int
+  actionId         String         @db.Uuid
   action           Action         @relation(fields: [actionId], references: [id])
   points           Int
   lastModifiedById String         @db.Uuid
@@ -138,13 +138,14 @@ model PointRule {
 }
 
 model Object {
-  id        Int         @id @default(autoincrement())
+  id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name      String      @unique
   pointRule PointRule[]
 }
 
 model Action {
-  id        Int         @id @default(autoincrement())
-  name      String      @unique
-  pointRule PointRule[]
+  id          String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String      @unique
+  description String      @db.VarChar(25)
+  pointRule   PointRule[]
 }
