@@ -35,7 +35,7 @@ model Space {
 model Resource {
   id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title            String         @db.VarChar(255)
-  slug             String         @unique
+  slug             String         @unique @db.VarChar(255)
   description      String
   spaceId          String         @db.Uuid
   space            Space          @relation(fields: [spaceId], references: [id])
@@ -83,7 +83,7 @@ model Profile {
 
 model User {
   id            String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email         String         @unique
+  email         String         @unique @db.VarChar(255)
   name          String
   profile       Profile?
   spaces        Space[]
@@ -97,7 +97,7 @@ model User {
 
 model Client {
   id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name             String
+  name             String    @db.VarChar(255)
   description      String
   url              String?
   projects         Project[]
@@ -121,6 +121,7 @@ model Contribution {
   project        Project?      @relation(fields: [projectId], references: [id])
   pointRuleId    String        @db.Uuid
   pointRule      PointRule     @relation(fields: [pointRuleId], references: [id])
+  createdAt      DateTime      @default(now())
 }
 
 model PointRule {
@@ -145,7 +146,9 @@ model Object {
 
 model Action {
   id          String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name        String      @unique
-  description String      @db.VarChar(25)
+  name        String      @unique @db.VarChar(32)
+  description String      @db.VarChar(32)
   pointRule   PointRule[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 }
