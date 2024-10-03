@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
+
 
 const config: Config = {
     darkMode: ["class"],
@@ -50,33 +52,70 @@ const config: Config = {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
   		},
-  		fontSize: {
-  			custom: '19.39px'
-  		},
-  		lineHeight: {
-  			custom: '23.47px'
-  		},
-  		spacing: {
-  			boxSize: '100px',
-  			smallBoxSize: '25px'
-  		},
-  		backgroundImage: {
-  			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-  			'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
-  		},
-  		fontFamily: {
-  			inter: ['Inter', 'sans-serif']
-  		},
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		}
-  	}
+      blue: {
+        100: 'var(--blue-100)',
+        300: 'var(--blue-300)',
+        500: 'var(--blue-500)',
+        700: 'var(--blue-700)',
+        900: 'var(--blue-900)',
+      },
+      grey: {
+        100: 'var(--grey-100)',
+        300: 'var(--grey-300)',
+        500: 'var(--grey-500)',
+        700: 'var(--grey-700)',
+        900: 'var(--grey-900)',
+      },
+      purple: {
+        100: 'var(--purple-100)',
+        300: 'var(--purple-300)',
+        500: 'var(--purple-500)',
+        700: 'var(--purple-700)',
+        900: 'var(--purple-900)',
+      },
+      red: {
+        100: 'var(--red-100)',
+        300: 'var(--red-300)',
+        500: 'var(--red-500)',
+        700: 'var(--red-700)',
+        900: 'var(--red-900)',
+      },
+      yellow: {
+        100: 'var(--yellow-100)',
+        300: 'var(--yellow-300)',
+        500: 'var(--yellow-500)',
+        700: 'var(--yellow-700)',
+        900: 'var(--yellow-900)',
+      },
+    },
+    fontSize: {
+      custom: '19.39px',
+    },
+    lineHeight: {
+      custom: '23.47px'
+    },
+    spacing: {
+      boxSize: '100px',
+      smallBoxSize: '25px',
+    },
+    backgroundImage: {
+      'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+    },
+    fontFamily: {
+      inter: ['Inter', 'sans-serif']
+    },
+    borderRadius: {
+      lg: 'var(--radius)',
+      xs: 'var(--radius-xs)',
+      sm: 'var(--radius-sm)',
+      md: 'var(--radius-md)',
+      xl: 'var(--radius-xl)',
+    },
   },
-  plugins: [require("tailwindcss-animate")],
+},
+plugins: [tailwindcssAnimate],
 };
 
 export default config;
