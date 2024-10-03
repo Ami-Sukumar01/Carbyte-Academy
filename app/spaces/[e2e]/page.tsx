@@ -80,6 +80,59 @@ function MainContent({ post }: { post: any }) {
           <Modal onClose={toggleModal} content={post.description} />
         )}
       </div>
+
+      {/* Layout: All cards stacked, and "add" buttons beside "Resources" and "Learning Paths" */}
+      <div className="flex flex-col mt-10 space-y-6">
+        {/* Introduction Card */}
+        <div
+          className="relative w-[519.75px] h-[93.75px] rounded-[3.75px] p-4 border border-black"
+          style={{ backgroundColor: "#FFFFF" }}
+        >
+          <h2 className="text-[18px] font-bold font-inter text-black">Introduction</h2>
+          <p className="text-[14px] font-inter text-gray-700">A fundamental learning path to explore the space content</p>
+          {/* Inner border with fill color */}
+          <div
+          />
+        </div>
+
+        {/* Resources and Add Resource */}
+        <div className="flex space-x-6">
+          <div
+            className="flex items-center justify-between w-[354px] h-[107.75px] rounded-[3.75px] p-4 border border-black"
+            style={{ backgroundColor: "#FFFFF" }}
+          >
+            <div>
+              <h2 className="text-[18px] font-bold font-inter text-black">Resources</h2>
+              <p className="text-[14px] font-inter text-gray-700">Materials on the topic added by the community</p>
+            </div>
+            {/* Badge with '12' inside the card */}
+            <span className="bg-red-500 text-white text-xs rounded-full w-8 h-8 flex items-center justify-center">12</span>
+          </div>
+
+          <button className="w-[120px] h-[107.75px] bg-[#FFE35E] text-black rounded-[3.75px] flex justify-center items-center border border-black transition-shadow duration-300 ease-in-out hover:shadow-[6px_6px_0_black] text-[13.5px]">
+            + Add Resource
+          </button>
+        </div>
+
+        {/* Learning Paths and Add Learning Path */}
+        <div className="flex space-x-6">
+          <div
+            className="flex items-center justify-between w-[354px] h-[107.75px] rounded-[3.75px] p-4 border border-black"
+            style={{ backgroundColor: "#FFFFF" }}
+          >
+            <div>
+              <h2 className="text-[18px] font-bold font-inter text-black">Learning Paths</h2>
+              <p className="text-[14px] font-inter text-gray-700">Interactive roadmaps for a comprehensive learning journey</p>
+            </div>
+            {/* Badge with '3' inside the card */}
+            <span className="bg-gray-500 text-white text-xs rounded-full w-8 h-8 flex items-center justify-center">3</span>
+          </div>
+
+          <button className="w-[120px] h-[107.75px] bg-[#D7B8FF] text-black rounded-[3.75px] flex justify-center items-center border border-black text-[13.5px]">
+            + Add Learning Path
+          </button>
+        </div>
+      </div>
     </main>
   );
 }
