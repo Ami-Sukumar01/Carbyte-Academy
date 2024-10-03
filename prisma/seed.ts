@@ -404,6 +404,176 @@ const pointRuleData: Prisma.PointRuleCreateInput[] = [
   }
 ]
 
+const resourceData: Prisma.ResourceCreateInput[] = [
+  {
+    id: "473d71ff-9fcc-4fb2-830c-7f52e0b34529",
+    title: "Introduction to End2End Solutions",
+    slug: "intro-end2end-solutions",
+    description: "A comprehensive guide to understanding end-to-end solution architecture.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "a7935ab7-c6a2-4b5b-9e50-eb6b0e8c5553",
+    title: "Advanced Microservices",
+    slug: "advanced-microservices",
+    description: "Explore the advanced concepts and practices in microservices architecture.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "7f4a58a7-efd6-4723-8187-00e7bc690b22",
+    title: "Cloud Integration Strategies",
+    slug: "cloud-integration-strategies",
+    description: "Learn how to effectively integrate cloud services into your architecture.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "5e095f9a-1da4-4195-bb1a-0d0719b7bb32",
+    title: "DevOps Best Practices",
+    slug: "devops-best-practices",
+    description: "A guide to implementing DevOps practices in your organization.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "0aedd227-d653-4bcd-8dee-b9e6099ec973",
+    title: "Security in End2End Solutions",
+    slug: "security-end2end-solutions",
+    description: "Understand the security challenges and solutions in end-to-end architectures.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "d195d8c0-3091-4a77-95c5-3d867f5e4c6f",
+    title: "Data Management Techniques",
+    slug: "data-management-techniques",
+    description: "Explore effective data management strategies in modern architectures.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "6db23c6c-6d2c-4aa5-a03e-96bb961873bd",
+    title: "API Design Principles",
+    slug: "api-design-principles",
+    description: "Learn the principles of designing robust and scalable APIs.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "6eae420b-a2f6-4db7-a1ea-dc8238d55397",
+    title: "Scalable Architecture Patterns",
+    slug: "scalable-architecture-patterns",
+    description: "Discover patterns for building scalable and resilient architectures.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "fdc63130-b897-4741-ad06-953317bd358a",
+    title: "Continuous Delivery Pipelines",
+    slug: "continuous-delivery-pipelines",
+    description: "Implement continuous delivery pipelines for faster and reliable deployments.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "bca11205-3eca-45df-b35b-e76b00868687",
+    title: "AI in Architecture",
+    slug: "ai-in-architecture",
+    description: "Explore how AI is transforming architectural practices and solutions.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  }
+]
+
+const learningPathData: Prisma.LearningPathCreateInput[] = [
+  {
+    id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74",
+    title: "Getting Started with End2End Solutions",
+    description: "An introductory learning path to familiarize with end-to-end solution architecture, covering foundational concepts, tools, and methodologies to kickstart your journey.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "ff1ccd1c-9080-4884-ab18-9ee4d5418f0f",
+    title: "Mastering Microservices",
+    description: "A comprehensive path to master microservices architecture, including design patterns, deployment strategies, and real-world case studies.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "3dd7e286-182e-438f-96cd-ace7e69ba6be",
+    title: "Cloud Architecture Essentials",
+    description: "Essential knowledge for designing cloud-based architectures, focusing on cloud-native design, scalability, and cost management.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "693576b8-b663-4c24-8acd-49361ee07e20",
+    title: "DevOps Integration",
+    description: "Learn how to integrate DevOps practices into your architecture, focusing on automation, continuous integration, and deployment pipelines.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "2868eb75-97d5-43b3-8597-d0dff368715b",
+    title: "Security in Architecture",
+    description: "A path focused on security practices within architectural design, covering threat modeling, secure coding, and compliance standards.",
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  }
+]
+
+async function upsertLearningPaths() {
+  console.log(`\n- Creating learning paths`)
+  for (const lp of learningPathData) {
+    const learningPath = await prisma.learningPath.upsert({
+      where: { id: lp.id },
+      update: {
+        title: lp.title,
+        description: lp.title,
+        space: lp.space,
+        lastModifiedBy: lp.lastModifiedBy
+      },
+      create: {
+        id: lp.id,
+        title: lp.title,
+        description: lp.title,
+        space: lp.space,
+        lastModifiedBy: lp.lastModifiedBy
+      }
+    })
+    console.log(`Created or modified Learning Path: "${learningPath.title}"`)
+  }
+}
+
+async function upsertResources() {
+  console.log(`\n- Creating resources`)
+  for (const r of resourceData) {
+    const resource = await prisma.resource.upsert({
+      where: { id: r.id },
+      update: {
+        title: r.title,
+        slug: r.slug,
+        description: r.description,
+        space: r.space,
+        lastModifiedBy: r.lastModifiedBy,
+      },
+      create: {
+        id: r.id,
+        title: r.title,
+        slug: r.slug,
+        description: r.description,
+        space: r.space,
+        lastModifiedBy: r.lastModifiedBy,
+      }
+    })
+    console.log(`Created or modified resource: "${resource.title}"`)
+  }
+}
+
+
 async function upsertClients() {
   console.log(`\n- Creating clients`)
   for (const c of clientData) {
@@ -569,6 +739,8 @@ async function main() {
   await upsertActions()
   await upsertObject()
   await upsertPointRule()
+  await upsertResources()
+  await upsertLearningPaths()
   console.log(`Seeding finished 🌱`)
 }
 
