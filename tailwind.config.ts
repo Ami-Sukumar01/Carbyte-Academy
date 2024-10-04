@@ -91,6 +91,12 @@ const config: Config = {
     },
     fontSize: {
       custom: '19.39px',
+      xs: 'var(--size-xs)', 
+      sm: 'var(--size-sm)',  
+      md: 'var(--size-md)',  
+      lg: 'var(--size-lg)',   
+      xl: 'var(--size-xl)',   
+      '2xl': 'var(--size-2xl)', 
     },
     lineHeight: {
       custom: '23.47px'
@@ -98,6 +104,14 @@ const config: Config = {
     spacing: {
       boxSize: '100px',
       smallBoxSize: '25px',
+      xs: 'var(--padding-xs)',   
+      sm: 'var(--padding-sm)',    
+      md: 'var(--padding-md)',    
+      lg: 'var(--padding-lg)',     
+      xl: 'var(--padding-xl)',    
+      '2xl': 'var(--padding-2xl)', 
+      '3xl': 'var(--padding-3xl)', 
+      '4xl': 'var(--padding-4xl)',
     },
     backgroundImage: {
       'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
