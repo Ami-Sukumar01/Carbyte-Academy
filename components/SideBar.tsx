@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { Button } from './ui/button'; // Adjust the import path for the Button component
+import { Button } from './ui/button';
 
 interface Space {
   space_id: string;
@@ -9,7 +9,6 @@ interface Space {
   alias: string;
 }
 
-// Accept className as a prop in the Sidebar component
 interface SidebarProps {
   className?: string;
 }
@@ -18,14 +17,12 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
   const [spaces, setSpaces] = useState<Space[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch spaces data from the API
   useEffect(() => {
     const fetchSpaces = async () => {
       try {
         const response = await fetch('/api/spaces');
         const data = await response.json();
 
-        // Filter the spaces that are needed based on the aliases
         const filteredSpaces = data.filter((space: Space) =>
           ['E2E SA', 'ADAS', 'New Tech', 'Web & Cloud Solutions'].includes(space.alias)
         );
@@ -42,19 +39,19 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Show loading while fetching data
+    return <div>Loading...</div>;
   }
 
   return (
-    <div className={`w-[251px] p-4 ${className}`}>
+    <div className={`p-4 ${className}`}>
       <div className="flex flex-col space-y-3 mt-6">
         {spaces.map((space) => (
           <Button
             key={space.space_id}
             variant="outline"
-            className="w-[251px] h-[58px] px-[16px] py-[18px] rounded-sm font-inter flex items-center justify-start border-gray-300 text-[20px]"
+            className="w-[251px] h-[58px] px-[16px] py-[18px] rounded-sm font-inter flex items-center"
           >
-            {space.alias} {/* Display the alias as the button text */}
+            {space.alias}
           </Button>
         ))}
       </div>
@@ -63,3 +60,4 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
 };
 
 export default Sidebar;
+
