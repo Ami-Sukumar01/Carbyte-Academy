@@ -1,5 +1,5 @@
 import { PrismaClient, Prisma } from "@prisma/client";
-import { connect } from "http2";
+import { clearDatabase } from "./cleardb";
 
 const prisma = new PrismaClient()
 
@@ -404,6 +404,27 @@ const pointRuleData: Prisma.PointRuleCreateInput[] = [
   }
 ]
 
+const audienceData: Prisma.AudienceCreateInput[] = [
+  {
+    id: "53c0db0a-011c-4c0d-9f61-5a613eb2a1a0",
+    name: "Beginner",
+    description: "Suitable for individuals who are new to the subject and require basic understanding.",
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "406f3663-1d68-4d76-b388-6a761b6b076e",
+    name: "Intermediate",
+    description: "Designed for those with some prior knowledge and looking to deepen their understanding.",
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+  },
+  {
+    id: "b23d685a-c552-485c-b364-20f120c661f3",
+    name: "Pro",
+    description: "Intended for experts seeking advanced insights and specialized knowledge.",
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } }
+  }
+]
+
 const resourceData: Prisma.ResourceCreateInput[] = [
   {
     id: "473d71ff-9fcc-4fb2-830c-7f52e0b34529",
@@ -412,6 +433,9 @@ const resourceData: Prisma.ResourceCreateInput[] = [
     description: "A comprehensive guide to understanding end-to-end solution architecture.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    resourceType: { connect: { id: "84b3675e-a214-42b0-a45d-e1975027c888" } },
+    url: "https://e2egame.vercel.app",
+    audience: { connect: { id: "53c0db0a-011c-4c0d-9f61-5a613eb2a1a0" } }
   },
   {
     id: "a7935ab7-c6a2-4b5b-9e50-eb6b0e8c5553",
@@ -420,6 +444,9 @@ const resourceData: Prisma.ResourceCreateInput[] = [
     description: "Explore the advanced concepts and practices in microservices architecture.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    resourceType: { connect: { id: "0d8dc255-3e2b-4d44-84bd-abb4bc88b8d7" } },
+    url: "https://www.youtube.com/watch?v=lL_j7ilk7rc",
+    audience: { connect: { id: "b23d685a-c552-485c-b364-20f120c661f3" } }
   },
   {
     id: "7f4a58a7-efd6-4723-8187-00e7bc690b22",
@@ -428,6 +455,9 @@ const resourceData: Prisma.ResourceCreateInput[] = [
     description: "Learn how to effectively integrate cloud services into your architecture.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    resourceType: { connect: { id: "84b3675e-a214-42b0-a45d-e1975027c888" } },
+    url: "https://miro.com/diagramming/cloud-architecture/",
+    audience: { connect: { id: "b23d685a-c552-485c-b364-20f120c661f3" } }
   },
   {
     id: "5e095f9a-1da4-4195-bb1a-0d0719b7bb32",
@@ -436,6 +466,9 @@ const resourceData: Prisma.ResourceCreateInput[] = [
     description: "A guide to implementing DevOps practices in your organization.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    resourceType: { connect: { id: "eec8bf06-f2c2-4fac-af1f-7fc06706c61c" } },
+    url: "https://www.dynatrace.com/monitoring/solutions/devops/?utm_source=google&utm_medium=cpc&utm_term=devops%20technologies&utm_campaign=dach-devops-devops&utm_content=none&utm_campaign_id=15350709006&gclsrc=aw.ds&gad_source=1&gbraid=0AAAAADk5-tV3sqGIyYYqNAWDhVXh5UaS1&gclid=EAIaIQobChMIoYuLjPz7iAMVlqloCR1RfD0SEAAYASAAEgJkMfD_BwE",
+    audience: { connect: { id: "b23d685a-c552-485c-b364-20f120c661f3" } }
   },
   {
     id: "0aedd227-d653-4bcd-8dee-b9e6099ec973",
@@ -444,6 +477,9 @@ const resourceData: Prisma.ResourceCreateInput[] = [
     description: "Understand the security challenges and solutions in end-to-end architectures.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    resourceType: { connect: { id: "b333fcd6-2ad3-49cc-a91e-d80e4542ea8c" } },
+    url: "https://end2enditsolutions.com",
+    audience: { connect: { id: "53c0db0a-011c-4c0d-9f61-5a613eb2a1a0" } }
   },
   {
     id: "d195d8c0-3091-4a77-95c5-3d867f5e4c6f",
@@ -452,6 +488,9 @@ const resourceData: Prisma.ResourceCreateInput[] = [
     description: "Explore effective data management strategies in modern architectures.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    resourceType: { connect: { id: "b333fcd6-2ad3-49cc-a91e-d80e4542ea8c" } },
+    url: "https://www.tableau.com/learn/articles/data-management-best-practices",
+    audience: { connect: { id: "53c0db0a-011c-4c0d-9f61-5a613eb2a1a0" } }
   },
   {
     id: "6db23c6c-6d2c-4aa5-a03e-96bb961873bd",
@@ -460,6 +499,9 @@ const resourceData: Prisma.ResourceCreateInput[] = [
     description: "Learn the principles of designing robust and scalable APIs.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    resourceType: { connect: { id: "b333fcd6-2ad3-49cc-a91e-d80e4542ea8c" } },
+    url: "https://www.mulesoft.com/api-university/four-principles-designing-effective-apis",
+    audience: { connect: { id: "53c0db0a-011c-4c0d-9f61-5a613eb2a1a0" } }
   },
   {
     id: "6eae420b-a2f6-4db7-a1ea-dc8238d55397",
@@ -468,6 +510,9 @@ const resourceData: Prisma.ResourceCreateInput[] = [
     description: "Discover patterns for building scalable and resilient architectures.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    resourceType: { connect: { id: "b333fcd6-2ad3-49cc-a91e-d80e4542ea8c" } },
+    url: "https://medium.com/@srinathperera/a-list-of-known-scalable-architecture-templates-a85c386cf6cb",
+    audience: { connect: { id: "406f3663-1d68-4d76-b388-6a761b6b076e" } },
   },
   {
     id: "fdc63130-b897-4741-ad06-953317bd358a",
@@ -476,6 +521,9 @@ const resourceData: Prisma.ResourceCreateInput[] = [
     description: "Implement continuous delivery pipelines for faster and reliable deployments.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    resourceType: { connect: { id: "ec6512c1-3af9-4dcd-a50a-f0a2001fd5e7" } },
+    url: "https://www.slidegeeks.com/isg-end-to-end-view-of-hyper-automation-hyper-automation-solutions-template-pdf",
+    audience: { connect: { id: "406f3663-1d68-4d76-b388-6a761b6b076e" } },
   },
   {
     id: "bca11205-3eca-45df-b35b-e76b00868687",
@@ -484,6 +532,9 @@ const resourceData: Prisma.ResourceCreateInput[] = [
     description: "Explore how AI is transforming architectural practices and solutions.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    resourceType: { connect: { id: "4723f6b7-c981-4dd2-8858-c358231e2b00" } },
+    url: "http://www.delta-info.com/wp-content/uploads/2023/03/DIS-Corporate-Overview-One-Pager-05_RevC_02232023.pdf",
+    audience: { connect: { id: "406f3663-1d68-4d76-b388-6a761b6b076e" } },
   }
 ]
 
@@ -711,9 +762,302 @@ const contributionData: Prisma.ContributionCreateInput[] = [
   },
 ]
 
+const resourceTypeData: Prisma.ResourceTypeCreateInput[] = [
+  {
+    id: "8eed1d9f-a1bd-4d34-b3e5-532d0c92416b",
+    name: "Book",
+    description: "A great book for in-depth learning",
+  },
+  {
+    id: "0d8dc255-3e2b-4d44-84bd-abb4bc88b8d7",
+    name: "Video",
+    description: "Comprehensive video on the topic",
+  },
+  {
+    id: "b333fcd6-2ad3-49cc-a91e-d80e4542ea8c",
+    name: "Article",
+    description: "An interesting article to spread your knowledge",
+  },
+  {
+    id: "84b3675e-a214-42b0-a45d-e1975027c888",
+    name: "Interactive content",
+    description: "Miro, FigJam, games, etc.",
+  },
+  {
+    id: "eec8bf06-f2c2-4fac-af1f-7fc06706c61c",
+    name: "Practical project",
+    description: "A project to train your skills",
+  },
+  {
+    id: "6a2635ff-8308-4d53-88d3-b7b5ccb31eec",
+    name: "Podcast",
+    description: "A helpful podcast episode",
+  },
+  {
+    id: "73cf0bac-cc29-4876-92f0-bc26bdb2a780",
+    name: "Online course",
+    description: "A structured online course",
+  },
+  {
+    id: "ec6512c1-3af9-4dcd-a50a-f0a2001fd5e7",
+    name: "Presentation",
+    description: "Informative slides",
+  },
+  {
+    id: "4723f6b7-c981-4dd2-8858-c358231e2b00",
+    name: "Document",
+    description: "PDF, Word, Excel",
+  },
+  {
+    id: "73b8639b-1fc2-4e3f-8426-2c92dacdaed6",
+    name: "Other",
+    description: "Different format",
+  },
+]
+
+const resourceUpvoteData: Prisma.ResourceUpvoteCreateInput[] = [
+  { resource: { connect: { id: "a7935ab7-c6a2-4b5b-9e50-eb6b0e8c5553" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "473d71ff-9fcc-4fb2-830c-7f52e0b34529" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "7f4a58a7-efd6-4723-8187-00e7bc690b22" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "5e095f9a-1da4-4195-bb1a-0d0719b7bb32" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "0aedd227-d653-4bcd-8dee-b9e6099ec973" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "d195d8c0-3091-4a77-95c5-3d867f5e4c6f" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "6db23c6c-6d2c-4aa5-a03e-96bb961873bd" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "6eae420b-a2f6-4db7-a1ea-dc8238d55397" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "fdc63130-b897-4741-ad06-953317bd358a" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "bca11205-3eca-45df-b35b-e76b00868687" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "473d71ff-9fcc-4fb2-830c-7f52e0b34529" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "a7935ab7-c6a2-4b5b-9e50-eb6b0e8c5553" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "7f4a58a7-efd6-4723-8187-00e7bc690b22" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "5e095f9a-1da4-4195-bb1a-0d0719b7bb32" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "0aedd227-d653-4bcd-8dee-b9e6099ec973" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "d195d8c0-3091-4a77-95c5-3d867f5e4c6f" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "6db23c6c-6d2c-4aa5-a03e-96bb961873bd" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "6eae420b-a2f6-4db7-a1ea-dc8238d55397" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "fdc63130-b897-4741-ad06-953317bd358a" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "bca11205-3eca-45df-b35b-e76b00868687" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+];
+
+const resourceViewData: Prisma.ResourceViewCreateInput[] = [
+  { resource: { connect: { id: "473d71ff-9fcc-4fb2-830c-7f52e0b34529" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "a7935ab7-c6a2-4b5b-9e50-eb6b0e8c5553" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "7f4a58a7-efd6-4723-8187-00e7bc690b22" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "5e095f9a-1da4-4195-bb1a-0d0719b7bb32" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "0aedd227-d653-4bcd-8dee-b9e6099ec973" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "d195d8c0-3091-4a77-95c5-3d867f5e4c6f" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "6db23c6c-6d2c-4aa5-a03e-96bb961873bd" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "6eae420b-a2f6-4db7-a1ea-dc8238d55397" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "fdc63130-b897-4741-ad06-953317bd358a" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "bca11205-3eca-45df-b35b-e76b00868687" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "473d71ff-9fcc-4fb2-830c-7f52e0b34529" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "a7935ab7-c6a2-4b5b-9e50-eb6b0e8c5553" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "7f4a58a7-efd6-4723-8187-00e7bc690b22" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "5e095f9a-1da4-4195-bb1a-0d0719b7bb32" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "0aedd227-d653-4bcd-8dee-b9e6099ec973" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "d195d8c0-3091-4a77-95c5-3d867f5e4c6f" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "6db23c6c-6d2c-4aa5-a03e-96bb961873bd" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "6eae420b-a2f6-4db7-a1ea-dc8238d55397" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "fdc63130-b897-4741-ad06-953317bd358a" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { resource: { connect: { id: "bca11205-3eca-45df-b35b-e76b00868687" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { resource: { connect: { id: "473d71ff-9fcc-4fb2-830c-7f52e0b34529" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { resource: { connect: { id: "a7935ab7-c6a2-4b5b-9e50-eb6b0e8c5553" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { resource: { connect: { id: "7f4a58a7-efd6-4723-8187-00e7bc690b22" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { resource: { connect: { id: "5e095f9a-1da4-4195-bb1a-0d0719b7bb32" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { resource: { connect: { id: "0aedd227-d653-4bcd-8dee-b9e6099ec973" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { resource: { connect: { id: "d195d8c0-3091-4a77-95c5-3d867f5e4c6f" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { resource: { connect: { id: "6db23c6c-6d2c-4aa5-a03e-96bb961873bd" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { resource: { connect: { id: "6eae420b-a2f6-4db7-a1ea-dc8238d55397" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { resource: { connect: { id: "fdc63130-b897-4741-ad06-953317bd358a" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { resource: { connect: { id: "bca11205-3eca-45df-b35b-e76b00868687" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+];
+
+const commentData: Prisma.CommentCreateInput[] = [
+  {
+    id: "e26393c0-2f4c-4c23-b7f1-cb0b35f5de1e",
+    content: "I learned a lot from this article.",
+    user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } },
+    resource: { connect: { id: "0aedd227-d653-4bcd-8dee-b9e6099ec973" } }
+  },
+  {
+    id: "6785b13c-d863-41c3-b6b2-19a7b89c0ad7",
+    content: "This was exactly what I needed to understand the topic.",
+    user: { connect: { id: "c381fb25-7be1-4f79-ae5c-50dc74ec2ec0" } },
+    resource: { connect: { id: "0aedd227-d653-4bcd-8dee-b9e6099ec973" } }
+  },
+  {
+    id: "89c0341b-554a-4585-8aed-94dc076dfe11",
+    content: "This was too advanced for beginners.",
+    user: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } },
+    resource: { connect: { id: "0aedd227-d653-4bcd-8dee-b9e6099ec973" } }
+  },
+  {
+    id: "18422072-2b66-418b-84d7-8e78560bcbfd",
+    content: "This resource was really helpful!",
+    user: { connect: { id: "55fc2914-20e2-41a9-9478-222896d2365a" } },
+    resource: { connect: { id: "0aedd227-d653-4bcd-8dee-b9e6099ec973" } }
+  },
+  {
+    id: "3acd2f82-33d9-44b8-9bc1-bd58cb9cf4c9",
+    content: "I found this topic a bit challenging.",
+    user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    resource: { connect: { id: "0aedd227-d653-4bcd-8dee-b9e6099ec973" } }
+  },
+  {
+    id: "df3215c6-4ecb-452c-9e1b-bbb81ea38edf",
+    content: "Great explanations and examples.",
+    user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } },
+    resource: { connect: { id: "a7935ab7-c6a2-4b5b-9e50-eb6b0e8c5553" } }
+  },
+  {
+    id: "cea96219-dc19-43c2-9158-4bdf6b692ecf",
+    content: "Could use more detailed information.",
+    user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    resource: { connect: { id: "a7935ab7-c6a2-4b5b-9e50-eb6b0e8c5553" } }
+  },
+  {
+    id: "5071119b-903c-4981-909f-2f520a2ff3af",
+    content: "Loved the interactive elements!",
+    user: { connect: { id: "c381fb25-7be1-4f79-ae5c-50dc74ec2ec0" } },
+    resource: { connect: { id: "a7935ab7-c6a2-4b5b-9e50-eb6b0e8c5553" } }
+  },
+
+]
+
+const CommentUpvoteData: Prisma.CommentUpvoteCreateInput[] = [
+  { comment: { connect: { id: "e26393c0-2f4c-4c23-b7f1-cb0b35f5de1e" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { comment: { connect: { id: "6785b13c-d863-41c3-b6b2-19a7b89c0ad7" } }, user: { connect: { id: "c381fb25-7be1-4f79-ae5c-50dc74ec2ec0" } } },
+  { comment: { connect: { id: "89c0341b-554a-4585-8aed-94dc076dfe11" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { comment: { connect: { id: "18422072-2b66-418b-84d7-8e78560bcbfd" } }, user: { connect: { id: "55fc2914-20e2-41a9-9478-222896d2365a" } } },
+  { comment: { connect: { id: "3acd2f82-33d9-44b8-9bc1-bd58cb9cf4c9" } }, user: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } } },
+  { comment: { connect: { id: "e26393c0-2f4c-4c23-b7f1-cb0b35f5de1e" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { comment: { connect: { id: "6785b13c-d863-41c3-b6b2-19a7b89c0ad7" } }, user: { connect: { id: "9bff594c-b735-421d-9370-2461c8e23e7b" } } },
+  { comment: { connect: { id: "89c0341b-554a-4585-8aed-94dc076dfe11" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { comment: { connect: { id: "18422072-2b66-418b-84d7-8e78560bcbfd" } }, user: { connect: { id: "c381fb25-7be1-4f79-ae5c-50dc74ec2ec0" } } },
+  { comment: { connect: { id: "3acd2f82-33d9-44b8-9bc1-bd58cb9cf4c9" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { comment: { connect: { id: "e26393c0-2f4c-4c23-b7f1-cb0b35f5de1e" } }, user: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } } },
+  { comment: { connect: { id: "6785b13c-d863-41c3-b6b2-19a7b89c0ad7" } }, user: { connect: { id: "55fc2914-20e2-41a9-9478-222896d2365a" } } },
+  { comment: { connect: { id: "89c0341b-554a-4585-8aed-94dc076dfe11" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { comment: { connect: { id: "18422072-2b66-418b-84d7-8e78560bcbfd" } }, user: { connect: { id: "9bff594c-b735-421d-9370-2461c8e23e7b" } } },
+  { comment: { connect: { id: "3acd2f82-33d9-44b8-9bc1-bd58cb9cf4c9" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { comment: { connect: { id: "e26393c0-2f4c-4c23-b7f1-cb0b35f5de1e" } }, user: { connect: { id: "c381fb25-7be1-4f79-ae5c-50dc74ec2ec0" } } },
+  { comment: { connect: { id: "6785b13c-d863-41c3-b6b2-19a7b89c0ad7" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { comment: { connect: { id: "89c0341b-554a-4585-8aed-94dc076dfe11" } }, user: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } } },
+  { comment: { connect: { id: "3acd2f82-33d9-44b8-9bc1-bd58cb9cf4c9" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { comment: { connect: { id: "e26393c0-2f4c-4c23-b7f1-cb0b35f5de1e" } }, user: { connect: { id: "9bff594c-b735-421d-9370-2461c8e23e7b" } } },
+  { comment: { connect: { id: "6785b13c-d863-41c3-b6b2-19a7b89c0ad7" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { comment: { connect: { id: "89c0341b-554a-4585-8aed-94dc076dfe11" } }, user: { connect: { id: "c381fb25-7be1-4f79-ae5c-50dc74ec2ec0" } } },
+  { comment: { connect: { id: "18422072-2b66-418b-84d7-8e78560bcbfd" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+]
+
+async function upsertAudiences() {
+  console.log(`\n- Creating audiences`)
+  for (const au of audienceData) {
+    const audience = await prisma.audience.upsert({
+      where: { id: au.id },
+      update: {
+        name: au.name,
+        description: au.description,
+        lastModifiedBy: au.lastModifiedBy
+      },
+      create: {
+        id: au.id,
+        name: au.name,
+        description: au.description,
+        lastModifiedBy: au.lastModifiedBy
+      }
+    })
+    console.log(`Created or modified audience: ${audience.name}`)
+  }
+}
+
+async function upsertComments() {
+  console.log(`\n- Creating resource comments`)
+  for (const cm of commentData) {
+    const comment = await prisma.comment.upsert({
+      where: { id: cm.id },
+      update: {
+        content: cm.content,
+        user: cm.user,
+        resource: cm.resource
+      },
+      create: {
+        id: cm.id,
+        content: cm.content,
+        user: cm.user,
+        resource: cm.resource
+      }
+    })
+    console.log(`Created or modified resource comment: "${comment.content}"`)
+  }
+}
+
+async function createCommentUpvotes() {
+  console.log(`\n- Creating comment upvotes`)
+  for (const cu of CommentUpvoteData) {
+    try {
+      await prisma.commentUpvote.create({
+        data: cu
+      })
+      console.log(`Created comment upvote: ${cu.comment.connect?.id}`)
+    } catch (error) {
+      const err = error as Error;
+      console.error(`Error creating comment upvote; ${err.message}`)
+    }
+  }
+}
+
+async function createResourceUpvotes() {
+  console.log(`\n- Creating resource upvotes`)
+  for (const ru of resourceUpvoteData) {
+    try {
+      await prisma.resourceUpvote.create({
+        data: ru,
+      })
+      console.log(`Created resource upvote: ${ru.resource.connect?.id}`)
+    } catch (error) {
+      const err = error as Error;
+      console.error(`Error creating resource upvote: ${err.message}`)
+    }
+  }
+}
+async function createResourceViews() {
+  console.log(`\n- Creating resource views`)
+  for (const rv of resourceViewData) {
+    try {
+      await prisma.resourceView.create({
+        data: rv,
+      })
+      console.log(`Created resource view for resource: ${rv.resource.connect?.id}`)
+    } catch (error) {
+      const err = error as Error;
+      console.error(`Error creating view: ${err.message}`)
+    }
+  }
+}
+
+async function upsertResourceTypes() {
+  console.log(`\n- Create resource types`)
+  for (const rt of resourceTypeData) {
+    const resourceType = await prisma.resourceType.upsert({
+      where: { id: rt.id },
+      update: {
+        name: rt.name,
+        description: rt.description
+      },
+      create: {
+        id: rt.id,
+        name: rt.name,
+        description: rt.description
+      }
+    })
+    console.log(`Created or modified resource type: "${resourceType.name}"`)
+  }
+}
+
 async function upsertContributions() {
   console.log(`\n- Creating contributions`)
   for (const co of contributionData) {
+    //Contribute to a resource
     if (co.resource) {
       const contribution = await prisma.contribution.upsert({
         where: { id: co.id },
@@ -735,6 +1079,7 @@ async function upsertContributions() {
       console.log(`Create or modified "resource contribution": ${contribution.resourceId}`)
 
     } else if (co.learningPath) {
+      //Contribute to a learning Path
       const contribution = await prisma.contribution.upsert({
         where: { id: co.id },
         update: {
@@ -754,6 +1099,7 @@ async function upsertContributions() {
       console.log(`Create or modified "learning path contribution": ${contribution.learningPathId}`)
 
     } else if (co.project) {
+      //Contribute to a Project
       const contribution = await prisma.contribution.upsert({
         where: { id: co.id },
         update: {
@@ -793,7 +1139,7 @@ async function upsertLearningPaths() {
       create: {
         id: lp.id,
         title: lp.title,
-        description: lp.title,
+        description: lp.description,
         space: lp.space,
         lastModifiedBy: lp.lastModifiedBy
       }
@@ -813,6 +1159,9 @@ async function upsertResources() {
         description: r.description,
         space: r.space,
         lastModifiedBy: r.lastModifiedBy,
+        resourceType: r.resourceType,
+        url: r.url,
+        audience: r.audience,
       },
       create: {
         id: r.id,
@@ -821,6 +1170,9 @@ async function upsertResources() {
         description: r.description,
         space: r.space,
         lastModifiedBy: r.lastModifiedBy,
+        resourceType: r.resourceType,
+        url: r.url,
+        audience: r.audience,
       }
     })
     console.log(`Created or modified resource: "${resource.title}"`)
@@ -939,7 +1291,7 @@ async function upsertActions() {
         description: a.description
       }
     })
-    console.log(`Created or modified action ${action.name}`)
+    console.log(`Created or modified action: ${action.name}`)
   }
 }
 
@@ -956,7 +1308,7 @@ async function upsertObject() {
         name: o.name
       }
     })
-    console.log(`Created or modified object ${object.name}`)
+    console.log(`Created or modified object: ${object.name}`)
   }
 }
 
@@ -984,18 +1336,26 @@ async function upsertPointRule() {
   }
 }
 
+
 async function main() {
-  console.log(`Start seeding...`)
+  console.log(`\nStart seeding...🌱🌱🌱`)
+  await clearDatabase()
   await upsertUsers()
+  await upsertResourceTypes()
   await upsertSpaces()
   await upsertClients()
   await upsertProjects()
   await upsertActions()
   await upsertObject()
   await upsertPointRule()
+  await upsertAudiences()
   await upsertResources()
   await upsertLearningPaths()
   await upsertContributions()
+  await createResourceUpvotes()
+  await createResourceViews()
+  await upsertComments()
+  await createCommentUpvotes()
   console.log(`Seeding finished 🌱`)
 }
 
