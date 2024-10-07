@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -23,4 +23,4 @@ export async function clearDatabase() {
   console.log(`Database cleared.`);
 }
 
-clearDatabase()
+// clearDatabase() //Comment out to delete data from db manually using: npx ts-node prisma/cleardb.ts
