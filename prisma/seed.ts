@@ -525,6 +525,260 @@ const learningPathData: Prisma.LearningPathCreateInput[] = [
   }
 ]
 
+const contributionData: Prisma.ContributionCreateInput[] = [
+  // Add resource
+  {
+    id: "997ff7d2-6981-427a-8dfc-68c706f5da5d",
+    contributor: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    resource: { connect: { id: "473d71ff-9fcc-4fb2-830c-7f52e0b34529" } },
+    pointRule: { connect: { id: "8b4684e2-7f4e-4111-a4b0-9629614742a2" } },
+  },
+  // Add resource
+  {
+    id: "b657e60f-0bf5-4191-96b6-ea33df650cff",
+    contributor: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    resource: { connect: { id: "a7935ab7-c6a2-4b5b-9e50-eb6b0e8c5553" } },
+    pointRule: { connect: { id: "8b4684e2-7f4e-4111-a4b0-9629614742a2" } },
+  },
+  // Add resource
+  {
+    id: "1d5d29d3-ffe6-4485-a582-1510d570d7f9",
+    contributor: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    resource: { connect: { id: "7f4a58a7-efd6-4723-8187-00e7bc690b22" } },
+    pointRule: { connect: { id: "8b4684e2-7f4e-4111-a4b0-9629614742a2" } },
+  },
+  // Add resource
+  {
+    id: "f5dc055d-6a30-41f4-b8da-a4cc952e202e",
+    contributor: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    resource: { connect: { id: "5e095f9a-1da4-4195-bb1a-0d0719b7bb32" } },
+    pointRule: { connect: { id: "8b4684e2-7f4e-4111-a4b0-9629614742a2" } },
+  },
+  // Add resource
+  {
+    id: "cbf3ae61-853f-455f-a37a-53c5729e6498",
+    contributor: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    resource: { connect: { id: "0aedd227-d653-4bcd-8dee-b9e6099ec973" } },
+    pointRule: { connect: { id: "8b4684e2-7f4e-4111-a4b0-9629614742a2" } },
+  },
+  // Add resource
+  {
+    id: "2fe17d08-1080-4183-a8fc-c309cd195660",
+    contributor: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    resource: { connect: { id: "d195d8c0-3091-4a77-95c5-3d867f5e4c6f" } },
+    pointRule: { connect: { id: "8b4684e2-7f4e-4111-a4b0-9629614742a2" } },
+  },
+  // Add resource
+  {
+    id: "6cab1973-672d-488a-b015-b06ae7ebeeb5",
+    contributor: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    resource: { connect: { id: "6db23c6c-6d2c-4aa5-a03e-96bb961873bd" } },
+    pointRule: { connect: { id: "8b4684e2-7f4e-4111-a4b0-9629614742a2" } },
+  },
+  // Add resource
+  {
+    id: "a5c93dfc-c9b8-4925-9e78-c90a67b01e1b",
+    contributor: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    resource: { connect: { id: "6eae420b-a2f6-4db7-a1ea-dc8238d55397" } },
+    pointRule: { connect: { id: "8b4684e2-7f4e-4111-a4b0-9629614742a2" } },
+  },
+  // Add resource
+  {
+    id: "75ec8ec0-5802-43a8-ae67-df4b92eb8362",
+    contributor: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    resource: { connect: { id: "fdc63130-b897-4741-ad06-953317bd358a" } },
+    pointRule: { connect: { id: "8b4684e2-7f4e-4111-a4b0-9629614742a2" } },
+  },
+  // Add resource
+  {
+    id: "5575c00c-6ede-463d-b052-994c96d18b5f",
+    contributor: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    resource: { connect: { id: "bca11205-3eca-45df-b35b-e76b00868687" } },
+    pointRule: { connect: { id: "8b4684e2-7f4e-4111-a4b0-9629614742a2" } },
+  },
+  // Add learning path
+  {
+    id: "1d3a2bc3-664f-420b-aefd-1589bced87dd",
+    contributor: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
+    pointRule: { connect: { id: "f4c786fa-2956-43ca-8b3d-823de835451f" } },
+  },
+
+  // Add learning path
+  {
+    id: "c89d8d85-f2ef-48c4-898e-8563ff009846",
+    contributor: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    learningPath: { connect: { id: "ff1ccd1c-9080-4884-ab18-9ee4d5418f0f" } },
+    pointRule: { connect: { id: "f4c786fa-2956-43ca-8b3d-823de835451f" } },
+  },
+  // Add learning path
+  {
+    id: "adaf42df-e2ca-4a3c-b4a6-391469d32af8",
+    contributor: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    learningPath: { connect: { id: "3dd7e286-182e-438f-96cd-ace7e69ba6be" } },
+    pointRule: { connect: { id: "f4c786fa-2956-43ca-8b3d-823de835451f" } },
+  },
+  // Add learning path
+  {
+    id: "afa5c935-7857-41f5-b116-3d503c31d084",
+    contributor: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    learningPath: { connect: { id: "693576b8-b663-4c24-8acd-49361ee07e20" } },
+    pointRule: { connect: { id: "f4c786fa-2956-43ca-8b3d-823de835451f" } },
+  },
+  // Add learning path
+  {
+    id: "c8037ce6-c8be-4e14-80ed-ff8678e3a62a",
+    contributor: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    learningPath: { connect: { id: "2868eb75-97d5-43b3-8597-d0dff368715b" } },
+    pointRule: { connect: { id: "f4c786fa-2956-43ca-8b3d-823de835451f" } },
+  },
+
+  //Add project
+  {
+    id: "eec80957-26c1-426a-a459-8ce9e7aaa163",
+    contributor: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    project: { connect: { id: "8406fa2a-2bc6-4c70-87bd-d3f1254d90f6" } },
+    pointRule: { connect: { id: "eba39987-2707-48b5-a0f8-cd4ba5ad6951" } },
+  },
+  //Add project
+  {
+    id: "b454a3ed-6e26-41c7-b288-8998e8f15eb2",
+    contributor: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    project: { connect: { id: "dc5ce998-13f0-4458-a88c-8fc678111666" } },
+    pointRule: { connect: { id: "eba39987-2707-48b5-a0f8-cd4ba5ad6951" } },
+  },
+  //Add project
+  {
+    id: "2984cc37-5e4a-448d-b31a-68c857957538",
+    contributor: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    project: { connect: { id: "b31db5f0-afd3-43fb-a34b-d1e8b32b711c" } },
+    pointRule: { connect: { id: "eba39987-2707-48b5-a0f8-cd4ba5ad6951" } },
+  },
+  //Add project
+  {
+    id: "00b0e118-4fa3-4ac8-a961-29573354cb33",
+    contributor: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    project: { connect: { id: "05d272bf-0fe0-4e67-ad3b-ad646b95525d" } },
+    pointRule: { connect: { id: "eba39987-2707-48b5-a0f8-cd4ba5ad6951" } },
+  },
+
+  // Comment a resource
+  {
+    id: "34c14703-51bf-4b98-b289-43de032af85c",
+    contributor: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    resource: { connect: { id: "fdc63130-b897-4741-ad06-953317bd358a" } },
+    pointRule: { connect: { id: "52c9b4f8-0c6e-4e40-856c-52be46ad023c" } },
+  },
+
+
+  // Flag an outdated resource
+  {
+    id: "3707824a-b74c-4d62-9d8a-cc72558993ad",
+    contributor: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    resource: { connect: { id: "fdc63130-b897-4741-ad06-953317bd358a" } },
+    pointRule: { connect: { id: "fa6aa502-ccca-46e6-a975-252ea7fe695d" } },
+  },
+
+
+  // Upvote a learning path
+  {
+    id: "03d41233-ea6f-46d8-994e-57d128a42f28",
+    contributor: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } },
+    space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
+    learningPath: { connect: { id: "2868eb75-97d5-43b3-8597-d0dff368715b" } },
+    pointRule: { connect: { id: "ab1e2439-4493-4905-a685-7ea1e690b8ce" } },
+  },
+]
+
+async function upsertContributions() {
+  console.log(`\n- Creating contributions`)
+  for (const co of contributionData) {
+    if (co.resource) {
+      const contribution = await prisma.contribution.upsert({
+        where: { id: co.id },
+        update: {
+          contributor: co.contributor,
+          space: co.space,
+          resource: co.resource,
+          pointRule: co.pointRule
+        },
+        create: {
+          id: co.id,
+          contributor: co.contributor,
+          space: co.space,
+          resource: co.resource,
+          pointRule: co.pointRule
+
+        }
+      })
+      console.log(`Create or modified "resource contribution": ${contribution.resourceId}`)
+
+    } else if (co.learningPath) {
+      const contribution = await prisma.contribution.upsert({
+        where: { id: co.id },
+        update: {
+          contributor: co.contributor,
+          space: co.space,
+          learningPath: co.learningPath,
+          pointRule: co.pointRule
+        },
+        create: {
+          id: co.id,
+          contributor: co.contributor,
+          space: co.space,
+          learningPath: co.learningPath,
+          pointRule: co.pointRule
+        }
+      })
+      console.log(`Create or modified "learning path contribution": ${contribution.learningPathId}`)
+
+    } else if (co.project) {
+      const contribution = await prisma.contribution.upsert({
+        where: { id: co.id },
+        update: {
+          contributor: co.contributor,
+          space: co.space,
+          project: co.project,
+          pointRule: co.pointRule
+        },
+        create: {
+          id: co.id,
+          contributor: co.contributor,
+          space: co.space,
+          project: co.project,
+          pointRule: co.pointRule
+        }
+      })
+      console.log(`Created or modified "project contribution": ${contribution.projectId}`)
+
+    } else {
+      console.log(`No data added to contributions`)
+    }
+
+  }
+}
+
 async function upsertLearningPaths() {
   console.log(`\n- Creating learning paths`)
   for (const lp of learningPathData) {
@@ -741,6 +995,7 @@ async function main() {
   await upsertPointRule()
   await upsertResources()
   await upsertLearningPaths()
+  await upsertContributions()
   console.log(`Seeding finished 🌱`)
 }
 
