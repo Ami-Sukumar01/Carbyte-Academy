@@ -17,9 +17,8 @@ datasource db {
 
 model Space {
   id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name             String         @db.VarChar(255)
-  slug             String         @unique
-  alias            String         @db.VarChar(20)
+  name             String         @unique @db.VarChar(255)
+  alias            String         @unique @db.VarChar(20)
   description      String
   isPublic         Boolean        @default(false)
   resources        Resource[]
@@ -34,8 +33,7 @@ model Space {
 
 model Resource {
   id               String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title            String           @db.VarChar(255)
-  slug             String           @unique @db.VarChar(255)
+  title            String           @unique @db.VarChar(255)
   description      String
   url              String           @unique @db.VarChar(2083) //Stores the a unquie resource URL
   audienceId       String           @db.Uuid
@@ -58,7 +56,7 @@ model Resource {
 
 model Audience {
   id               String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name             String     @unique
+  name             String     @unique @db.VarChar(255)
   description      String?
   resources        Resource[]
   lastModifiedById String     @db.Uuid
@@ -69,7 +67,7 @@ model Audience {
 
 model LearningPath {
   id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title            String         @db.VarChar(255)
+  title            String         @unique @db.VarChar(255)
   description      String
   spaceId          String         @db.Uuid
   space            Space          @relation(fields: [spaceId], references: [id])
@@ -83,7 +81,7 @@ model LearningPath {
 
 model Project {
   id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title            String         @db.VarChar(255)
+  title            String         @unique @db.VarChar(255)
   description      String
   spaceId          String         @db.Uuid
   space            Space          @relation(fields: [spaceId], references: [id])
@@ -124,7 +122,7 @@ model User {
 
 model Client {
   id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name             String    @db.VarChar(255)
+  name             String    @unique @db.VarChar(255)
   description      String
   url              String?   @unique @db.VarChar(2083)
   projects         Project[]
@@ -167,7 +165,7 @@ model PointRule {
 
 model Object {
   id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name      String      @unique
+  name      String      @unique @db.VarChar(255)
   pointRule PointRule[]
 }
 
@@ -182,7 +180,7 @@ model Action {
 
 model ResourceType {
   id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name        String     @unique
+  name        String     @unique @db.VarChar(255)
   description String?
   resources   Resource[]
 }
