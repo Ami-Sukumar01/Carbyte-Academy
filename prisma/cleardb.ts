@@ -19,6 +19,7 @@ export async function clearDatabase() {
   await prisma.object.deleteMany({});
   await prisma.resourceType.deleteMany({});
   await prisma.audience.deleteMany({})
+  await prisma.profile.deleteMany({})
   await prisma.user.deleteMany({});
   console.log(`Database cleared.`);
 }

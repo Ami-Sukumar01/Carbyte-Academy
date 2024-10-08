@@ -41,6 +41,44 @@ const userData: Prisma.UserCreateInput[] = [
   },
 ]
 
+const profileData: Prisma.ProfileCreateInput[] = [
+  {
+    bio: "Senior Solution Architect",
+    avatarUrl: "https://gravatar.com/avatar/fbd0c6da4a8e74e22acf5ec24949bd17?s=400&d=robohash&r=x",
+    user: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } }
+  },
+  {
+    bio: "Senior Project Manager",
+    avatarUrl: "",
+    user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } }
+  },
+  {
+    bio: "E2E Community Lead",
+    avatarUrl: "https://gravatar.com/avatar/06a6fbf4d975a863b26a8eb0dd507d91?s=400&d=robohash&r=x",
+    user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } }
+  },
+  {
+    bio: "E2E Intern",
+    avatarUrl: "",
+    user: { connect: { id: "c381fb25-7be1-4f79-ae5c-50dc74ec2ec0" } }
+  },
+  {
+    bio: "",
+    avatarUrl: "https://gravatar.com/avatar/a76cb98d2550dec2c39daa4e674e55e0?s=400&d=robohash&r=x",
+    user: { connect: { id: "55fc2914-20e2-41a9-9478-222896d2365a" } }
+  },
+  {
+    bio: "Frontend Engineer",
+    avatarUrl: "",
+    user: { connect: { id: "9bff594c-b735-421d-9370-2461c8e23e7b" } }
+  },
+  {
+    bio: "UX/UI Designer",
+    avatarUrl: "",
+    user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } }
+  },
+]
+
 const spaceData: Prisma.SpaceCreateInput[] = [
   {
     id: "1a2b3c4d-5678-90ab-cdef-1234567890ab",
@@ -926,6 +964,16 @@ const CommentUpvoteData: Prisma.CommentUpvoteCreateInput[] = [
   { comment: { connect: { id: "18422072-2b66-418b-84d7-8e78560bcbfd" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
 ]
 
+async function createProfiles() {
+  console.log(`\n- Creating profiles`)
+  for (const pf of profileData) {
+    const profile = await prisma.profile.create({
+      data: pf
+    })
+    console.log(`Created or modified profile bio: ${profile.bio} `)
+  }
+}
+
 async function upsertAudiences() {
   console.log(`\n- Creating audiences`)
   for (const au of audienceData) {
@@ -1314,6 +1362,7 @@ async function main() {
   console.log(`\nStart seeding...🌱🌱🌱`)
   await clearDatabase()
   await upsertUsers()
+  await createProfiles()
   await upsertResourceTypes()
   await upsertSpaces()
   await upsertClients()
