@@ -95,10 +95,11 @@ model Project {
 }
 
 model Profile {
-  id     String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId String  @unique @db.Uuid
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  bio       String? @db.VarChar(255)
+  avatarUrl String? @db.VarChar(2083)
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String  @unique @db.Uuid
 }
 
 model User {
