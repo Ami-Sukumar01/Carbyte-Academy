@@ -2,12 +2,8 @@ import { fetchSpaceAliases } from "@/lib/data";
 import Link from 'next/link'
 
 
-export default async function SpaceButton() {
+export default async function SpaceNavigation() {
   const spaces = await fetchSpaceAliases()
-
-
-
-  console.log(spaces)
   return (
     spaces.map(space =>
       <Link key={space.alias} href={`/spaces_ex/${space.alias}`}>
