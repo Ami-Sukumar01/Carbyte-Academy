@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { fetchResourceTypes } from "@/lib/data";
 
 
 const prisma = new PrismaClient()
@@ -10,6 +11,9 @@ interface ResourceQueryParams {
 }
 export async function GET(req: Request, { params, query = {} }: { params: { spaceAlias: string }, query?: ResourceQueryParams }) {
   const spaceAlias = decodeURIComponent(params.spaceAlias);
+  // Use URLSearchParams to parse query parameters
+  const resourceTypes = await fetchResourceTypes()
+  console.log(resourceTypes)
   const {
     types = [],
     sort = "updatedAt",
