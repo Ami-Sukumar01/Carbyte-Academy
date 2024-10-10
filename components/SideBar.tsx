@@ -49,13 +49,14 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
           <Button
             key={space.space_id}
             variant="outline"
-            className="w-[251px] h-[58px] px-[16px] py-[18px] rounded-sm font-inter flex items-center"
+            className="w-[251px] h-[58px] text-lg px-[16px] py-[18px] rounded-md font-inter flex items-center border border-gray-300 bg-white justify-start"
           >
             {space.alias}
           </Button>
         ))}
       </div>
     </div>
+
   );
 };
 
