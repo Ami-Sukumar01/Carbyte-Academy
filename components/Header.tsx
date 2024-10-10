@@ -1,3 +1,4 @@
+
 import React from "react";
 import Image from "next/image";
 import { MdOutlineDashboard, MdBookmarkBorder, MdOutlinePersonOutline } from "react-icons/md"; 
@@ -26,7 +27,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ className = "" }) => {
       </div>
 
       {/* Icons on top of the nav */}
-      <div className="absolute top-3 right-0 m-4 flex space-x-4 z-10">
+      <div className="absolute top-3 right-6 m-4 flex space-x-4 z-10">
         <IconBox icon={<MdOutlineDashboard size={24} />} />
         <IconBox icon={<FiHome size={24} />} />
         <IconBox icon={<FiSearch size={24} />} />
