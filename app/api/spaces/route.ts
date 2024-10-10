@@ -2,13 +2,14 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const spaces = [
     {
-      "space_id": "1a2b3c4d-5678-90ab-cdef-1234567890ab",
-      "name": "New Tech",
-      "alias": "New Tech",
-      "description": "Explore cutting-edge technologies with us. Our space fosters innovation and creativity, offering the latest tools and resources. Join workshops, collaborate with experts, and take your ideas to the next level. Be part of the future of technology.",
+      "space_id": "3c4d5e6f-7890-12cd-ef34-3456789012cd",
+      "name": "E2E Solution Architecture",
+      "alias": "E2E SA",
+      "description": "We bring in-depth software and product expertise to our customers' end-to-end IoT solutions. With our many years of experience in IoT projects, we provide targeted support in product development and integrate seamlessly into the product lifecycle management process.",
       "is_public": true,
-      "created_at": "2023-01-01T12:00:00.000Z",
-      "updated_at": "2023-06-01T12:00:00.000Z"
+      "created_at": "2023-03-10T09:45:00.000Z",
+      "updated_at": "2023-08-15T14:30:00.000Z"
+ 
     },
     {
       "space_id": "2b3c4d5e-6789-01bc-def2-2345678901bc",
@@ -20,13 +21,13 @@ export async function GET(request: Request) {
       "updated_at": "2023-07-20T10:00:00.000Z"
     },
     {
-      "space_id": "3c4d5e6f-7890-12cd-ef34-3456789012cd",
-      "name": "E2E Solution Architecture",
-      "alias": "E2E SA",
-      "description": "We bring in-depth software and product expertise to our customers' end-to-end IoT solutions. With our many years of experience in IoT projects, we provide targeted support in product development and integrate seamlessly into the product lifecycle management process.",
-      "is_public": true,
-      "created_at": "2023-03-10T09:45:00.000Z",
-      "updated_at": "2023-08-15T14:30:00.000Z"
+      "space_id": "5e6f7g8h-9012-34ef-g567-5678901234ef",
+      "name": "Advanced Driver Assistance Systems",
+      "alias": "ADAS",
+      "description": "Our ADAS space is dedicated to advancing driver safety and convenience. Engage with the latest technologies in autonomous driving and driver assistance. Collaborate with experts to develop solutions that enhance road safety and improve the driving experience.",
+      "is_public": false,
+      "created_at": "2023-05-12T14:20:00.000Z",
+      "updated_at": "2023-10-10T09:15:00.000Z"
     },
     {
       "space_id": "4d5e6f7g-8901-23de-f456-4567890123de",
@@ -38,13 +39,13 @@ export async function GET(request: Request) {
       "updated_at": "2023-09-01T17:00:00.000Z"
     },
     {
-      "space_id": "5e6f7g8h-9012-34ef-g567-5678901234ef",
-      "name": "Advanced Driver Assistance Systems",
-      "alias": "ADAS",
-      "description": "Our ADAS space is dedicated to advancing driver safety and convenience. Engage with the latest technologies in autonomous driving and driver assistance. Collaborate with experts to develop solutions that enhance road safety and improve the driving experience.",
-      "is_public": false,
-      "created_at": "2023-05-12T14:20:00.000Z",
-      "updated_at": "2023-10-10T09:15:00.000Z"
+      "space_id": "1a2b3c4d-5678-90ab-cdef-1234567890ab",
+      "name": "New Tech",
+      "alias": "New Tech",
+      "description": "Explore cutting-edge technologies with us. Our space fosters innovation and creativity, offering the latest tools and resources. Join workshops, collaborate with experts, and take your ideas to the next level. Be part of the future of technology.",
+      "is_public": true,
+      "created_at": "2023-01-01T12:00:00.000Z",
+      "updated_at": "2023-06-01T12:00:00.000Z"
     },
     {
       "space_id": "6f7g8h9i-0123-45fg-h678-6789012345fg",
