@@ -35,8 +35,8 @@ export default function SpacesLayout({
 
             {/* Scrollable white page below the navbar */}
             <div
-              className="flex-grow w-[1118px] ml-[51px] bg-white overflow-y-auto p-4 shadow-lg mt-[69px]"
-              style={{ maxHeight: "calc(100vh - 180px)" }} // Adjust height to allow scrolling only in this area
+              className="flex-grow w-[1118px] ml-[51px] bg-white overflow-y-auto p-4 pr-20 shadow-lg mt-[69px]"
+              style={{ maxHeight: "calc(100vh - 250px)" }} // Adjust height to allow scrolling only in this area
             >
               {children}
             </div>
