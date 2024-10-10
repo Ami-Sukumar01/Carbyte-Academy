@@ -1,62 +1,67 @@
 "use client"; // Ensures this is treated as a Client Component
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import ContributorCard from "@/components/ContributorCard"; // Adjust the path if needed
+import ProjectCard from "@/components/ProjectCard"; 
+import RecomendationCard from "@/components/RecomCard"; 
+import { LibraryBig, Route } from 'lucide-react';
+
 
 async function getPostById(spaceId: string) {
-  const response = await fetch(`http://localhost:3000/api/spaces/${spaceId}`, {
-    method: 'GET',
-  });
+ const response = await fetch(`http://localhost:3000/api/spaces/${spaceId}`, {
+   method: 'GET',
+ });
 
-  if (!response.ok) {
-    throw new Error(`Error fetching data: ${response.statusText}`);
-  }
+ if (!response.ok) {
+   throw new Error(`Error fetching data: ${response.statusText}`);
+ }
 
-  const data = await response.json();
-  return data.length > 0 ? data[0] : null;
+ const data = await response.json();
+ return data.length > 0 ? data[0] : null;
 }
 
 export default function PostID({ params }: any) {
-  const [post, setPost] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
+ const [post, setPost] = useState<any>(null);
+ const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const fetchedPost = await getPostById(params.spaceId);
-        setPost(fetchedPost);
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message); // Safe to access message
-        } else {
-          setError('An unknown error occurred'); // Handle unknown types
-        }
-      }
-    }
-    fetchData();
-  }, [params.spaceId]);
-  
+ useEffect(() => {
+   async function fetchData() {
+     try {
+       const fetchedPost = await getPostById(params.spaceId);
+       setPost(fetchedPost);
+     } catch (err) {
+       if (err instanceof Error) {
+         setError(err.message); // Safe to access message
+       } else {
+         setError('An unknown error occurred'); // Handle unknown types
+       }
+     }
+   }
+   fetchData();
+ }, [params.spaceId]);
 
-  if (error) {
-    return <main><p>Error: {error}</p></main>;
-  }
+ if (error) {
+   return <main><p>Error: {error}</p></main>;
+ }
 
-  if (!post) {
-    return <main><p>No data available</p></main>;
-  }
+ if (!post) {
+   return <main><p>No data available</p></main>;
+ }
 
-  return (
-    <div className="flex flex-col lg:flex-row w-full ml-[40px] mt-[60px] space-x-6">
-      <MainContent post={post} />
-      <AsideContent />
-    </div>
-  );
+ return (
+   <div className="flex flex-col lg:flex-row w-full ml-[40px] mt-[60px] space-x-6">
+     {/* MainContent and ContributorCard side by side */}
+     <MainContent post={post} />
+     <ContributorCard spaceId={params.spaceId} /> {/* Added beside MainContent */}
+   </div>
+ );
 }
 
 function MainContent({ post }: { post: any }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
+  const toggleExpand = () => {
+    setIsExpanded((prev) => !prev);
   };
 
   return (
@@ -67,144 +72,108 @@ function MainContent({ post }: { post: any }) {
         </h1>
 
         <p className="text-[16px] leading-[24px] font-sans">
-          {`${post.description.slice(0, post.description.lastIndexOf(' ', 250))}...`}
+          {isExpanded
+            ? post.description // Show full description if expanded
+            : `${post.description.slice(0, post.description.lastIndexOf(' ', 250))}...`}
           <span
             className="text-[#9846FF] cursor-pointer ml-1"
-            onClick={toggleModal}
+            onClick={toggleExpand}
           >
-            read more
+            {isExpanded ? 'read less' : 'read more'}
           </span>
         </p>
 
-        {isModalOpen && (
-          <Modal onClose={toggleModal} content={post.description} />
-        )}
-      </div>
-
-      {/* Layout: All cards stacked, and "add" buttons beside "Resources" and "Learning Paths" */}
-      <div className="flex flex-col mt-10 space-y-6">
-        {/* Introduction Card */}
-        <div
-          className="relative w-[519.75px] h-[93.75px] rounded-[3.75px] p-4 border border-black"
-          style={{ backgroundColor: "#FFFFF" }}
-        >
-          <h2 className="text-[18px] font-bold font-inter text-black">Introduction</h2>
-          <p className="text-[14px] font-inter text-gray-700">A fundamental learning path to explore the space content</p>
-          {/* Inner border with fill color */}
+        {/* Layout: All cards stacked, and "add" buttons beside "Resources" and "Learning Paths" */}
+        <div className="flex flex-col mt-10 space-y-6">
+          {/* Introduction Card */}
           <div
-          />
-        </div>
-
-        {/* Resources and Add Resource */}
-        <div className="flex space-x-6">
-          <div
-            className="flex items-center justify-between w-[354px] h-[107.75px] rounded-[3.75px] p-4 border border-black"
+            className="relative w-[519.75px] h-[93.75px] rounded-[3.75px] p-4 border border-black"
             style={{ backgroundColor: "#FFFFF" }}
           >
-            <div>
-              <h2 className="text-[18px] font-bold font-inter text-black">Resources</h2>
-              <p className="text-[14px] font-inter text-gray-700">Materials on the topic added by the community</p>
-            </div>
-            {/* Badge with '12' inside the card */}
-            <span className="bg-red-500 text-white text-xs rounded-full w-8 h-8 flex items-center justify-center">12</span>
+            <h2 className="text-[18px] font-bold font-inter text-black">Introduction</h2>
+            <p className="text-[14px] font-inter text-gray-700">A fundamental learning path to explore the space content</p>
           </div>
 
-          <button className="w-[120px] h-[107.75px] bg-[#FFE35E] text-black rounded-[3.75px] flex justify-center items-center border border-black transition-shadow duration-300 ease-in-out hover:shadow-[6px_6px_0_black] text-[13.5px]">
-            + Add Resource
-          </button>
-        </div>
-
-        {/* Learning Paths and Add Learning Path */}
-        <div className="flex space-x-6">
-          <div
-            className="flex items-center justify-between w-[354px] h-[107.75px] rounded-[3.75px] p-4 border border-black"
-            style={{ backgroundColor: "#FFFFF" }}
-          >
-            <div>
-              <h2 className="text-[18px] font-bold font-inter text-black">Learning Paths</h2>
-              <p className="text-[14px] font-inter text-gray-700">Interactive roadmaps for a comprehensive learning journey</p>
+          {/* Resources and Add Resource */}
+          <div className="flex space-x-6">
+            <div
+              className="flex items-center justify-between w-[354px] h-[107.75px] rounded-[3.75px] p-4 border bg-yellow-300 border-black"
+            >
+          {/* Icon */}
+          <div className="bg-purple-200 p-2 rounded-md mr-4"> 
+             <Route size={32} className="text-black" /> 
+          </div>          
+              <div>
+                <h2 className="text-[18px] font-bold font-inter text-black">Resources</h2>
+                <p className="text-[14px] font-inter text-gray-700">Materials on the topic added by the community</p>
+              </div>
+              <span className="bg-red-300 text-white text-md rounded-[16px] w-[36px] h-[22px] flex items-center justify-center">{post.resources_count}</span>
             </div>
-            {/* Badge with '3' inside the card */}
-            <span className="bg-gray-500 text-white text-xs rounded-full w-8 h-8 flex items-center justify-center">3</span>
+
+            <button className="w-[120px] h-[107.75px] bg-[#FFE35E] text-black rounded-[3.75px] flex justify-center items-center border border-black transition-shadow duration-300 ease-in-out hover:shadow-[6px_6px_0_black] text-[13.5px]">
+              + Add Resource
+            </button>
           </div>
 
-          <button className="w-[120px] h-[107.75px] bg-[#D7B8FF] text-black rounded-[3.75px] flex justify-center items-center border border-black text-[13.5px]">
-            + Add Learning Path
-          </button>
+          {/* Learning Paths and Add Learning Path */}
+          <div className="flex space-x-6">
+            <div
+              className="flex items-center justify-between w-[354px] h-[107.75px] rounded-[3.75px] p-4 border bg-purple-100 border-black"
+            >
+         {/* Icon */}
+         <div className="bg-yellow-200 p-2 rounded-md mr-4">
+           <LibraryBig size={32} className="text-black" /> 
+         </div>
+
+              <div>
+                <h2 className="text-[18px] font-bold font-inter text-black">Learning Paths</h2>
+                <p className="text-[14px] font-inter text-gray-500">Interactive roadmaps for a comprehensive learning journey</p>
+              </div>
+              <span className="bg-purple-900 text-white text-md rounded-[16px] w-[43px] h-[22px] flex items-center justify-center"> {post.learning_paths_count}</span>
+            </div>             
+
+            <button className="w-[120px] h-[107.75px] bg-[#D7B8FF] text-black rounded-[3.75px] flex justify-center items-center border border-black text-[13.5px]">
+              + Add Learning Path
+            </button>
+          </div>
+          <h1 className="text-[32px] mt-10 mb-6"> Projects</h1>
+          {/* Projects (displayed after learning paths) */}
+          <div className="flex mt-10 gap-16"> {/* Enable flex-wrap and gap */}
+            {post.projects.slice(0, 3).map((project: any) => (
+              <div className="flex-grow min-w-[250px] max-w-[300px]"> {/* Flex-grow and min/max width */}
+                <ProjectCard
+                  key={project.project_id}
+                  date={`2021-2022`}
+                  name={project.name}
+                  description={project.description}
+                  client={project.client}
+                />
+              </div>
+            ))}
+          </div>
+          {/* Added Recomendation Cards after Projects */}
+          <h1 className="text-[32px] mt-10 mb-6">Recommendations</h1>
+          <div className="flex mt-10 gap-16"> {/* Flex-wrap and gap */}
+            {post.recomended.slice(0, 3).map((recommendation: any) => (
+              <div className="flex-grow min-w-[250px] max-w-[300px]"> {/* Flex-grow and min/max width */}
+                <RecomendationCard
+                  key={recommendation.resource_id}
+                  title={recommendation.title}
+                  description={recommendation.description}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </main>
   );
 }
 
-function AsideContent() {
-  return (
-    <aside className="w-[358px] flex flex-col space-y-4" style={{ marginRight: '40px' }}>
-      {/* First Box, Top contributer : Adonis*/} 
-      <div
-        className="w-full h-[226px] rounded-[2px] border border-black"
-        style={{ backgroundColor: '#E3EAFF', marginLeft: '-40px' }}
-      >
-        <div
-          className="w-full h-[46px] rounded-t-[2px]"
-          style={{ backgroundColor: '#576595' }}
-        >
-<h2 className="text-white text-left leading-[46px] ml-4">Top contributors</h2>
 
-        </div>
-        <div className="p-4">
-          <p>Box 1 Content</p>
-        </div>
-      </div>
 
-      {/* Second Box */}
-      <div
-        className="w-full h-[277px] rounded-[2px] border border-black"
-        style={{ backgroundColor: '#FFFDF2', marginLeft: '-40px', marginTop: '30px', }}
-      >
-        <div className="p-4">
-          <p>Box 2, User update</p>
-        </div>
-      </div>
-    </aside>
-  );
-}
 
-function Modal({ onClose, content }: { onClose: () => void, content: string }) {
-  // Accessibility enhancements
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    };
 
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [onClose]);
 
-  return (
-    <div className="fixed inset-0 flex justify-center items-center z-50 pointer-events-none">
-      <div
-        className="p-4 rounded-[5px] shadow-xl border border-gray-300 pointer-events-auto relative"
-        style={{
-          backgroundColor: '#F5F9FF',
-          width: '361px',
-          height: '464px',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-        }}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-gray-600 hover:text-black"
-          aria-label="Close modal"
-        >
-          ✕
-        </button>
-        <div className="overflow-auto h-full">
-          <p className="text-[16px] leading-[24px] font-sans">{content}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
+
+
