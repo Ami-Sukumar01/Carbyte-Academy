@@ -9,7 +9,7 @@ export async function GET(request: Request) {
       "is_public": true,
       "created_at": "2023-03-10T09:45:00.000Z",
       "updated_at": "2023-08-15T14:30:00.000Z"
- 
+
     },
     {
       "space_id": "2b3c4d5e-6789-01bc-def2-2345678901bc",
@@ -120,31 +120,31 @@ export async function GET(request: Request) {
       "updated_at": "2024-06-10T15:50:00.000Z"
     }
   ];
-
-
-const prisma = new PrismaClient()
-
-export async function GET(req: Request) {
-  try {
-    const spaces = await prisma.space.findMany({
-      where: {
-        isPublic: true
-      },
-      orderBy: {
-        alias: 'asc'
-      },
-      select: {
-        id: true,
-        name: true,
-        alias: true,
-        description: true,
-      }
-    });
-    return NextResponse.json(spaces, { status: 200 })
-  } catch (error) {
-    return NextResponse.json({ error: "Error fetching spaces" }, { status: 500 })
-  }
 }
+
+// const prisma = new PrismaClient()
+
+// export async function GET(req: Request) {
+//   try {
+//     const spaces = await prisma.space.findMany({
+//       where: {
+//         isPublic: true
+//       },
+//       orderBy: {
+//         alias: 'asc'
+//       },
+//       select: {
+//         id: true,
+//         name: true,
+//         alias: true,
+//         description: true,
+//       }
+//     });
+//     return NextResponse.json(spaces, { status: 200 })
+//   } catch (error) {
+//     return NextResponse.json({ error: "Error fetching spaces" }, { status: 500 })
+//   }
+// }
 
 // export async function GET(request: Request) {
 //   const spaces = [
