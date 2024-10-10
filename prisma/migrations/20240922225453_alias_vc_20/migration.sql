@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Space" ALTER COLUMN "alias" SET DATA TYPE VARCHAR(20);
