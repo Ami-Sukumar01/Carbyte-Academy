@@ -11,7 +11,7 @@ async function getPostById(spaceId: string) {
 }
 
 // AsideContent Component
-export default function AsideContent({ spaceId }: { spaceId: string }) {
+export default function ContributorCard({ spaceId }: { spaceId: string }) {
   const [post, setPost] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -48,7 +48,7 @@ export default function AsideContent({ spaceId }: { spaceId: string }) {
         <div
           className="w-full h-[46px] rounded-t-xs bg-blue-900"
         >
-          <h2 className="text-white text-left leading-[46px]">Top contributors</h2>
+          <h2 className="text-white text-left ml-[10px] leading-[46px]">Top contributors</h2>
         </div>
         <div className="p-4 space-y-3">
           {post.contributors.slice(0, 3).map((contributor: any) => (
