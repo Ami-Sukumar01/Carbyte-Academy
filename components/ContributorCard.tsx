@@ -1,0 +1,87 @@
+"use client"; // Ensures this is treated as a Client Component
+
+import React, { useState, useEffect } from 'react';
+import { LibraryBig, Route } from 'lucide-react';
+
+// Function to fetch data by spaceId
+async function getPostById(spaceId: string) {
+  const response = await fetch(`/api/spaces/${spaceId}`);
+  const data = await response.json();
+  return data.length > 0 ? data[0] : null;
+}
+
+// AsideContent Component
+export default function ContributorCard({ spaceId }: { spaceId: string }) {
+  const [post, setPost] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const fetchedPost = await getPostById(spaceId);
+        setPost(fetchedPost);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('An unknown error occurred');
+        }
+      }
+    }
+
+    fetchData();
+  }, [spaceId]);
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  if (!post || !post.contributors) {
+    return <p>No data available</p>;
+  }
+
+  return (
+    <aside className="w-[358px] h-[326] flex flex-col space-y-4 ">
+      <div
+        className="w-[358] h-auto rounded-sm border border-black bg-blue-300"
+      >
+        <div
+          className="w-full h-[46px] rounded-t-xs bg-blue-900"
+        >
+          <h2 className="text-white text-left ml-[10px] leading-[46px]">Top contributors</h2>
+        </div>
+        <div className="p-4 space-y-3">
+          {post.contributors.slice(0, 3).map((contributor: any) => (
+            <div
+              key={contributor.contributor_user_id}
+              className="flex items-center p-2 rounded-md"
+            >
+              {/* Avatar */}
+              <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-black text-xs">
+                {contributor.avatar_url}
+              </div>
+
+              {/* Name and Icons/Stats with underline */}
+              <div className="flex-1">
+                <div className="w-[260.5px] border-b border-black pb-1 flex justify-between items-center mx-auto">
+                  {/* Contributor Name */}
+                  <p className="font-medium text-black text-md font-inter">{contributor.name}</p>
+
+                  {/* Icons and Stats */}
+                  <div className="flex items-center space-x-4 text-black text-sm">
+                    <div className="flex items-center space-x-1">
+                      <LibraryBig size={16}/> <span>{contributor.resources_total}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Route  size={16}/> <span>{contributor.learning_paths_total}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </aside>
+  );
+}
