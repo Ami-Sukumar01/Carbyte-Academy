@@ -137,6 +137,22 @@ function MainContent({ post, spaceAlias }: { post: any, spaceAlias: string }) {
               + Add Learning Path
             </button>
           </div>
+          <h1 className="text-[32px] mt-10 mb-6"> Projects</h1>
+          {/* Projects (displayed after learning paths) */}
+          <div className="flex mt-10 gap-16"> {/* Enable flex-wrap and gap */}
+            {post.projects.slice(0, 3).map((project: any) => (
+              <div key={project.projectId} className="flex-grow min-w-[250px] max-w-[300px]"> {/* Flex-grow and min/max width */}
+                <ProjectCard
+                  key={project.projectId}
+                  // Data is HARDCODED
+                  date={`2021-2022`}
+                  title={project.title}
+                  description={project.description}
+                  client={project.client}
+                />
+              </div>
+            ))}
+          </div>
 
         </div>
       </div>

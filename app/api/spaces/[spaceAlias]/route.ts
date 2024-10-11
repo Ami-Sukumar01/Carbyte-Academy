@@ -18,6 +18,15 @@ export async function GET(req: Request, { params }: { params: { spaceAlias: stri
               }
             }
           }
+        },
+        projects: {
+          include: {
+            client: {
+              select: {
+                name: true
+              }
+            }
+          }
         }
       }
 
@@ -54,9 +63,17 @@ export async function GET(req: Request, { params }: { params: { spaceAlias: stri
       ORDER BY "pointTotal" DESC;;`;
 
 
+    // Transform the projects to include client name as a string
+    const projects = space.projects.map(project => ({
+      ...project,
+      client: project.client.name
+    }));
+
+
     // Construct the response without the resources and learning paths arrays
     const data = {
       ...space,
+      projects,
       resourceCount,
       learningPathCount,
       contributors
