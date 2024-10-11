@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import { fetchResourceTypes } from "@/lib/data";
+import prisma from "@/lib/prisma";
 
 
-const prisma = new PrismaClient()
 interface ResourceQueryParams {
   types?: string[]; //Accept an array of types
   sort?: string
