@@ -11,34 +11,35 @@ async function getPostById(spaceId: string) {
 }
 
 // AsideContent Component
-export default function ContributorCard({ spaceId }: { spaceId: string }) {
-  const [post, setPost] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
+//TO DO: ADD TYPE TO POST
+export default function ContributorCard({ post }: { post: any }) {
+  // const [post, setPost] = useState<any>(null);
+  // const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const fetchedPost = await getPostById(spaceId);
-        setPost(fetchedPost);
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('An unknown error occurred');
-        }
-      }
-    }
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const fetchedPost = await getPostById(spaceId);
+  //       setPost(fetchedPost);
+  //     } catch (err) {
+  //       if (err instanceof Error) {
+  //         setError(err.message);
+  //       } else {
+  //         setError('An unknown error occurred');
+  //       }
+  //     }
+  //   }
 
-    fetchData();
-  }, [spaceId]);
+  //   fetchData();
+  // }, [spaceId]);
 
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
+  // if (error) {
+  //   return <p>Error: {error}</p>;
+  // }
 
-  if (!post || !post.contributors) {
-    return <p>No data available</p>;
-  }
+  // if (!post || !post.contributors) {
+  //   return <p>No data available</p>;
+  // }
 
   return (
     <aside className="w-[358px] h-[326] flex flex-col space-y-4 ">
@@ -53,12 +54,12 @@ export default function ContributorCard({ spaceId }: { spaceId: string }) {
         <div className="p-4 space-y-3">
           {post.contributors.slice(0, 3).map((contributor: any) => (
             <div
-              key={contributor.contributor_user_id}
+              key={contributor.contributorId}
               className="flex items-center p-2 rounded-md"
             >
-              {/* Avatar */}
+              {/* TO DO: REPLACE Avatar for Shadcn: https://ui.shadcn.com/docs/components/avatar */}
               <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-black text-xs">
-                {contributor.avatar_url}
+                {/* {contributor.avatarUrl} */}
               </div>
 
               {/* Name and Icons/Stats with underline */}
@@ -70,10 +71,10 @@ export default function ContributorCard({ spaceId }: { spaceId: string }) {
                   {/* Icons and Stats */}
                   <div className="flex items-center space-x-4 text-black text-sm">
                     <div className="flex items-center space-x-1">
-                      <LibraryBig size={16}/> <span>{contributor.resources_total}</span>
+                      <LibraryBig size={16} /> <span>{contributor.resourcesTotal}</span>
                     </div>
                     <div className="flex items-center space-x-1">
-                      <Route  size={16}/> <span>{contributor.learning_paths_total}</span>
+                      <Route size={16} /> <span>{contributor.learningPathsTotal}</span>
                     </div>
                   </div>
                 </div>

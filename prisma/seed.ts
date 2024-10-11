@@ -1,7 +1,6 @@
-import { PrismaClient, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { clearDatabase } from "./cleardb";
-
-const prisma = new PrismaClient()
+import prisma from "../lib/prisma"
 
 const userData: Prisma.UserCreateInput[] = [
   {

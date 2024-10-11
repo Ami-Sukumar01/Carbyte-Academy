@@ -3,12 +3,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 
 interface ProjectCardProps {
   date: string;
-  name: string;
+  title: string;
   description: string;
   client: string;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ date, name, description, client }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ date, title, description, client }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpand = () => {
@@ -19,14 +19,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ date, name, description, clie
   const truncatedDescription = description.length > 200 ? `${description.slice(0, 150)}...` : description;
 
   return (
-    <Card 
-      onClick={toggleExpand} 
+    <Card
+      onClick={toggleExpand}
       className={`w-[300px] border-2 border-black transition-all flex flex-col justify-between cursor-pointer px-0 ${isExpanded ? 'h-auto' : 'h-[250px]'}`} // Removed padding from the card
     >
       {/* Card Header - Title Section */}
       <CardHeader className="p-0"> {/* Ensure no padding */}
         <CardTitle className="text-xs text-gray-500">{date}</CardTitle> {/* Smaller, subtle date */}
-        <CardDescription className="text-lg bg-gray-200 w-full font-semibold p-2 hover:bg-purple-700 hover:text-white ">{name}</CardDescription> {/* Project name with emphasis, full width */}
+        <CardDescription className="text-lg bg-gray-200 w-full font-semibold p-2 hover:bg-purple-700 hover:text-white ">{title}</CardDescription> {/* Project name with emphasis, full width */}
       </CardHeader>
 
       {/* Card Content - Description Section */}

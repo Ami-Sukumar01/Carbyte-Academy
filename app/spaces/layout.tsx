@@ -1,5 +1,3 @@
-"use client";
-
 import PageHeader from "@/components/Header";
 import Navbar from "../../components/NavBar";
 import SideBar from "../../components/SideBar";
