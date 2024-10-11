@@ -36,12 +36,22 @@ export async function GET(req: Request, { params }: { params: { spaceAlias: stri
 
     //Aggregate points by contributorId
     const contributors = await prisma.$queryRaw`
-      SELECT c."contributorId", u.name, CAST(SUM(pr.points) AS TEXT) AS "pointTotal"
+      SELECT 
+        c."contributorId", 
+        u.name, 
+        COALESCE(p."avatarUrl", '') AS "avatarUrl",
+        CAST(SUM(pr.points) AS INTEGER) AS "pointTotal",
+        CAST(COUNT(DISTINCT r.id) AS INTEGER) AS "resourcesTotal",
+        CAST(COUNT(DISTINCT lp.id) AS INTEGER) AS "learningPathsTotal"
       FROM "Contribution" c
       JOIN "PointRule" pr ON c."pointRuleId" = pr.id
       JOIN "User" u ON c."contributorId" = u.id
+      LEFT JOIN "Profile" p ON u.id = p."userId"
+      LEFT JOIN "Resource" r ON c."resourceId" = r.id
+      LEFT JOIN "LearningPath" lp ON c."learningPathId" = lp.id
       WHERE c."spaceId" = ${space.id}::uuid
-      GROUP BY c."contributorId", u.name;`
+      GROUP BY c."contributorId", u.name, p."avatarUrl"
+      ORDER BY "pointTotal" DESC;;`;
 
 
     // Construct the response without the resources and learning paths arrays
