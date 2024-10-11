@@ -109,9 +109,11 @@ function MainContent({ post, spaceAlias }: { post: any, spaceAlias: string }) {
               </div>
             </Link>
 
-            <button className="w-[120px] h-[107.75px] bg-[#FFE35E] text-black rounded-[3.75px] flex justify-center items-center border border-black transition-shadow duration-300 ease-in-out hover:shadow-[6px_6px_0_black] text-[13.5px]">
-              + Add Resource
-            </button>
+            <Link href={`/spaces/${spaceAlias}/r/add`}>
+              <button className="w-[120px] h-[107.75px] bg-[#FFE35E] text-black rounded-[3.75px] flex justify-center items-center border border-black transition-shadow duration-300 ease-in-out hover:shadow-[6px_6px_0_black] text-[13.5px]">
+                + Add Resource
+              </button>
+            </Link>
           </div>
 
           {/* Learning Paths and Add Learning Path */}
@@ -133,9 +135,11 @@ function MainContent({ post, spaceAlias }: { post: any, spaceAlias: string }) {
               </div>
             </Link>
 
-            <button className="w-[120px] h-[107.75px] bg-[#D7B8FF] text-black rounded-[3.75px] flex justify-center items-center border border-black text-[13.5px]">
-              + Add Learning Path
-            </button>
+            <Link href={`/spaces/${spaceAlias}/lp/add`}>
+              <button className="w-[120px] h-[107.75px] bg-[#D7B8FF] text-black rounded-[3.75px] flex justify-center items-center border border-black text-[13.5px]">
+                + Add Learning Path
+              </button>
+            </Link>
           </div>
           <h1 className="text-[32px] mt-10 mb-6"> Projects</h1>
           {/* Projects (displayed after learning paths) */}
@@ -149,6 +153,19 @@ function MainContent({ post, spaceAlias }: { post: any, spaceAlias: string }) {
                   title={project.title}
                   description={project.description}
                   client={project.client}
+                />
+              </div>
+            ))}
+          </div>
+          {/* Added Recomendation Cards after Projects */}
+          <h1 className="text-[32px] mt-10 mb-6">Recommendations</h1>
+          <div className="flex mt-10 gap-16"> {/* Flex-wrap and gap */}
+            {post.recommended.slice(0, 3).map((recommendation: any) => (
+              <div key={recommendation.id} className="flex-grow min-w-[250px] max-w-[300px]"> {/* Flex-grow and min/max width */}
+                <RecomendationCard
+                  title={recommendation.title}
+                  description={recommendation.description}
+                  spaceAlias={spaceAlias}
                 />
               </div>
             ))}

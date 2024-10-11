@@ -62,6 +62,22 @@ export async function GET(req: Request, { params }: { params: { spaceAlias: stri
       GROUP BY c."contributorId", u.name, p."avatarUrl"
       ORDER BY "pointTotal" DESC;;`;
 
+    // Fetch the top 3 most upvoted resources
+
+    const recommended = await prisma.resource.findMany({
+      where: { spaceId: space.id },
+      orderBy: {
+        upvotes: {
+          _count: 'desc'
+        }
+      },
+      take: 3,
+      select: {
+        id: true,
+        title: true,
+        description: true,
+      }
+    });
 
     // Transform the projects to include client name as a string
     const projects = space.projects.map(project => ({
@@ -76,7 +92,8 @@ export async function GET(req: Request, { params }: { params: { spaceAlias: stri
       projects,
       resourceCount,
       learningPathCount,
-      contributors
+      contributors,
+      recommended
 
     }
 
