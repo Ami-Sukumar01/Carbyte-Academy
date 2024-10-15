@@ -68,17 +68,17 @@ function MainContent({ post, spaceAlias }: { post: any, spaceAlias: string }) {
           {post.alias}
         </h1>
 
-        <p className="text-[16px] leading-[24px] font-sans">
-          {isExpanded
-            ? post.description // Show full description if expanded
-            : `${post.description.slice(0, post.description.lastIndexOf(' ', 250))}...`}
-          <span
-            className="text-[#9846FF] cursor-pointer ml-1"
-            onClick={toggleExpand}
-          >
-            {isExpanded ? 'read less' : 'read more'}
-          </span>
-        </p>
+<p className="text-[16px] leading-[24px] font-sans">
+  {isExpanded
+    ? post.description || "No description available" // Show full description if expanded
+    : `${post.description?.slice(0, post.description?.lastIndexOf(' ', 250))}...`}
+  <span
+    className="text-[#9846FF] cursor-pointer ml-1"
+    onClick={toggleExpand}
+  >
+    {isExpanded ? 'read less' : 'read more'}
+  </span>
+</p>
 
         {/* Layout: All cards stacked, and "add" buttons beside "Resources" and "Learning Paths" */}
         <div className="flex flex-col mt-10 space-y-6">
@@ -143,33 +143,44 @@ function MainContent({ post, spaceAlias }: { post: any, spaceAlias: string }) {
           </div>
           <h1 className="text-[32px] mt-10 mb-6"> Projects</h1>
           {/* Projects (displayed after learning paths) */}
-          <div className="flex mt-10 gap-16"> {/* Enable flex-wrap and gap */}
-            {post.projects.slice(0, 3).map((project: any) => (
-              <div key={project.projectId} className="flex-grow min-w-[250px] max-w-[300px]"> {/* Flex-grow and min/max width */}
-                <ProjectCard
-                  key={project.projectId}
-                  // Data is HARDCODED
-                  date={`2021-2022`}
-                  title={project.title}
-                  description={project.description}
-                  client={project.client}
-                />
-              </div>
-            ))}
-          </div>
+          <div className="flex mt-10 gap-16">
+  {/* Check if post.projects is defined and is an array */}
+  {Array.isArray(post.projects) && post.projects.length > 0 ? (
+    post.projects.slice(0, 3).map((project: any) => (
+      <div key={project.projectId} className="flex-grow min-w-[250px] max-w-[300px]">
+        <ProjectCard
+          key={project.projectId}
+          // Data is HARDCODED
+          date={`2021-2022`}
+          title={project.title}
+          description={project.description}
+          client={project.client}
+        />
+      </div>
+    ))
+  ) : (
+    <div>No projects available</div>
+  )}
+</div>
+
           {/* Added Recomendation Cards after Projects */}
           <h1 className="text-[32px] mt-10 mb-6">Recommendations</h1>
-          <div className="flex mt-10 gap-16"> {/* Flex-wrap and gap */}
-            {post.recommended.slice(0, 3).map((recommendation: any) => (
-              <div key={recommendation.id} className="flex-grow min-w-[250px] max-w-[300px]"> {/* Flex-grow and min/max width */}
-                <RecomendationCard
-                  title={recommendation.title}
-                  description={recommendation.description}
-                  spaceAlias={spaceAlias}
-                />
-              </div>
-            ))}
-          </div>
+<div className="flex mt-10 gap-16">
+  {/* Check if post.recommended is defined and is an array */}
+  {Array.isArray(post.recommended) && post.recommended.length > 0 ? (
+    post.recommended.slice(0, 3).map((recommendation: any) => (
+      <div key={recommendation.id} className="flex-grow min-w-[250px] max-w-[300px]">
+        <RecomendationCard
+          title={recommendation.title}
+          description={recommendation.description}
+          spaceAlias={spaceAlias}
+        />
+      </div>
+    ))
+  ) : (
+    <div>No recommendations available</div>
+  )}
+</div>
 
         </div>
       </div>
