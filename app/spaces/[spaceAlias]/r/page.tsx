@@ -21,23 +21,6 @@ export default async function ResourcesPage({ params }: { params: { spaceAlias: 
           </button>
         </div>
 
-        {/* Filter Section */}
-        <div className="flex items-center space-x-4 mb-6">
-          {/* Recently Added Switch (Black) */}
-          <div className="flex items-center">
-            <Switch id="recently-added" className="mr-2 bg-black" />
-            <label htmlFor="recently-added" className="text-gray-700">Recently added</label>
-          </div>
-
-          {/* Most Upvoted Switch (Grey) */}
-          <div className="flex items-center">
-            <Switch id="most-upvoted" className="mr-2 bg-gray-400" />
-            <label htmlFor="most-upvoted" className="text-gray-700">Most upvoted</label>
-          </div>
-
-          {/* Filter Button with Popover */}
-          <FilterPopover />
-        </div>
 
         {/* Resource Card */}
         <ResourceCard spaceAlias={spaceAlias} />
