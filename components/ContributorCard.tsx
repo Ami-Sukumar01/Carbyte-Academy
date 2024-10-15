@@ -1,20 +1,28 @@
 "use client"; // Ensures this is treated as a Client Component
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { LibraryBig, Route } from 'lucide-react';
 
 // Function to fetch data by spaceId
-async function getPostById(spaceId: string) {
-  const response = await fetch(`/api/spaces/${spaceId}`);
-  const data = await response.json();
-  return data.length > 0 ? data[0] : null;
-}
+// async function getPostById(spaceId: string) {
+//   const response = await fetch(`/api/spaces/${spaceId}`);
+//   const data = await response.json();
+//   return data.length > 0 ? data[0] : null;
+// }
 
 // AsideContent Component
 //TO DO: ADD TYPE TO POST
 export default function ContributorCard({ post }: { post: any }) {
   // const [post, setPost] = useState<any>(null);
   // const [error, setError] = useState<string | null>(null);
+
+  // Check if post or post.contributors is undefined or not an array
+  if (!post || !Array.isArray(post.contributors)) {
+    return <p>No contributors available</p>; // Fallback message when there's no data
+  }
+
+
+
 
   // useEffect(() => {
   //   async function fetchData() {
