@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface RecomendationCardProps {
@@ -8,32 +7,25 @@ interface RecomendationCardProps {
   spaceAlias: string;
 }
 
-
 const RecomendationCard: React.FC<RecomendationCardProps> = ({ title, description, spaceAlias }) => {
-  console.log("Alias from recomended;", spaceAlias)
-  const [isExpanded, setIsExpanded] = useState(false);
+  console.log("Alias from recommended:", spaceAlias);
 
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  // Limit content to first 150 characters in collapsed mode
+  // Limit content to first 150 characters
   const truncatedDescription = description?.length > 150 ? `${description?.slice(0, 150)}...` : description;
 
   return (
     <Link href={`/spaces/${spaceAlias}/r/${encodeURIComponent(title)}`}>
       <Card
-        onClick={toggleExpand}
-        className={`w-[265px] border border-black justify-between cursor-pointer pt-xl pr-2xl pb-3xl pl-2xl rounded-sm ${isExpanded ? 'h-auto' : 'h-[250px]'}`}
+        className="w-[265px] h-[265px] border border-black cursor-pointer pt-sm pr-2xl pb-3xl pl-2xl rounded-sm " // Add horizontal margin
       >
         {/* Card Header - Title Section */}
         <CardTitle className="text-lg font-inter">{title}</CardTitle>
 
         {/* Line after title */}
-        <hr className="my-2 border-t border-black" /> {/* Or custom styling */}
+        <hr className="my-2 border-t border-black" />
 
         <CardDescription className="text-sm mt-[20px]">
-          {isExpanded ? description : truncatedDescription}
+          {truncatedDescription}
         </CardDescription>
       </Card>
     </Link>
@@ -41,4 +33,3 @@ const RecomendationCard: React.FC<RecomendationCardProps> = ({ title, descriptio
 };
 
 export default RecomendationCard;
-
