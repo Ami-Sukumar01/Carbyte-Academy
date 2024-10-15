@@ -4,20 +4,16 @@ import * as React from "react";
 import * as Popover from "@radix-ui/react-popover";
 import { Filter, BookOpen } from "lucide-react"; // Import BookOpen
 
-export function FilterPopover() {
-  const filters = [
-    "Book",
-    "Video",
-    "Article",
-    "Interactive",
-    "Practical",
-    "Podcast",
-    "Online course",
-    "Presentation",
-    "Document",
-    "Other",
-  ];
-
+// FilterPopover now accepts filters and onFilterChange props
+export function FilterPopover({
+  filters,
+  selectedFilter,
+  onFilterChange,
+}: {
+  filters: string[]; // Filters will come from resourceTypeName
+  selectedFilter: string | null; // The currently selected filter
+  onFilterChange: (selected: string) => void; // Function to handle filter changes
+}) {
   return (
     <Popover.Root>
       {/* Trigger Button */}
@@ -40,13 +36,16 @@ export function FilterPopover() {
           <h3 className="text-sm font-inter mb-6">Add Filter</h3>
           <div className="grid grid-cols-2 gap-2">
             {filters.map((type) => (
-                <button
-  key={type}
-  className="flex flex-col items-center justify-between w-[84px] h-[80px] border border-black rounded-sm p-4 bg-purple-100 hover:bg-purple-200"
->
-  <BookOpen className="h-6 w-6 mb-auto mt-2" /> {/* Push the icon further up with mb-auto and mt-2 */}
-  <span className="mt-auto text-xs">{type}</span> {/* Ensures the text is placed at the bottom */}
-</button>
+              <button
+                key={type}
+                onClick={() => onFilterChange(type)} // Handle filter selection
+                className={`flex flex-col items-center justify-between w-[84px] h-[90px] border border-black rounded-sm p-4 ${
+                  selectedFilter === type ? "bg-purple-300" : "bg-purple-100"
+                } hover:bg-purple-200`}
+              >
+                <BookOpen className="h-6 w-6 mt-2" />
+                <span className=" text-xs">{type}</span>
+              </button>
             ))}
           </div>
           <Popover.Arrow className="fill-white" /> {/* Add an arrow to point to the button */}
