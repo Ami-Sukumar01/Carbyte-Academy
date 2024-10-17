@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import { Switch } from "@/components/ui/switch";
 import { FilterPopover } from "@/components/ResourcePage/PopOver";
-import { Video, ChartLine, Files, Podcast, ChartPie, SquareLibrary, Newspaper, BookOpen, BrainCircuit, Wrench} from "lucide-react"; // Importing the Video and Presentation icons
+import { Video, ChartLine, Files, Podcast, ChartPie, SquareLibrary, Newspaper, BookOpen, BrainCircuit, Wrench } from "lucide-react"; // Importing the Video and Presentation icons
 import { Eye, ArrowUp, Edit, Trash, Bookmark, SquareCheckBig } from "lucide-react"; // Icons for views and upvotes
-
+import Link from "next/link";
 // Type definition for the resources
 type ExtendedResource = {
   id: string;
@@ -15,13 +15,6 @@ type ExtendedResource = {
   resourceTypeName: string;
   createdBy: string;
 };
-
-// Async function for the Resources Page
-export default async function ResourcesPage({ params }: { params: { spaceAlias: string } }) {
-  const spaceAlias = decodeURIComponent(params.spaceAlias);
-
-  return <ResourceCard spaceAlias={spaceAlias} />;
-}
 
 // ResourceCard component
 export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
@@ -39,7 +32,7 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/spaces/${encodeURIComponent(spaceAlias)}/r`
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/spaces/${spaceAlias}/r`
         );
         if (!res.ok) {
           throw new Error("Failed to fetch resources");
@@ -206,7 +199,11 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
                   >
                     {/* Resource Title with Icons to the right */}
                     <div className="flex-1 flex space-x-2">
-                      <p className="ml-6">{resource.title}</p>
+                      <Link
+                        key={resource.id}
+                        href={`/spaces/${spaceAlias}/r/${encodeURIComponent(resource.title)}`}>
+                        <p className="ml-6">{resource.title}</p>
+                      </Link>
                       {/* Views and Upvotes aligned to the right of the title */}
                       <div className="flex items-center space-x-2 text-gray-400">
                         <div className="flex items-center space-x-1">
