@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Switch } from "@/components/ui/switch";
 import { FilterPopover } from "@/components/ResourcePage/PopOver";
 import { Video, Presentation } from "lucide-react"; // Importing the Video and Presentation icons
-import { Eye, ArrowUp } from "lucide-react"; // Icons for views and upvotes
+import { Eye, ArrowUp, Edit, Trash, Bookmark, SquareCheckBig } from "lucide-react"; // Icons for views and upvotes
 
 // Type definition for the resources
 type ExtendedResource = {
@@ -13,6 +13,7 @@ type ExtendedResource = {
   views: number;
   upvotes: number;
   resourceTypeName: string;
+  createdBy: string;
 };
 
 // Async function for the Resources Page
@@ -28,6 +29,11 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState<string | null>(null); // Error state
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null); // State for selected filter
+  const currentUserId = "currentUserId";
+  const [hoveredResource, setHoveredResource] = useState<string | null>(null); // State for hovered resource
+  const [bookmarkedResources, setBookmarkedResources] = useState<string[]>([]); // State to track bookmarked resources
+  const [popoverMessage, setPopoverMessage] = useState<string | null>(null); // State for popover message
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +62,34 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
   if (error) {
     return <div>{error}</div>;
   }
+
+  // Handle bookmark toggle
+  const handleBookmarkToggle = (resourceId: string) => {
+    const isBookmarked = bookmarkedResources.includes(resourceId);
+
+    if (isBookmarked) {
+      setBookmarkedResources(bookmarkedResources.filter((id) => id !== resourceId)); // Remove from bookmarked
+      setPopoverMessage("Unbookmarked"); // Set popover message for unbookmarked
+    } else {
+      setBookmarkedResources([...bookmarkedResources, resourceId]); // Add to bookmarked
+      setPopoverMessage("Bookmarked"); // Set popover message for bookmarked
+    }
+
+    // Show the popover message for a short duration
+    setTimeout(() => {
+      setPopoverMessage(null);
+    }, 2000); // Popover message disappears after 2 seconds
+  };
+
+  if (loading) {
+    return <div>Loading resources...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+
 
   // Group resources by resourceTypeName
   const groupedResources = resources.reduce(
@@ -91,6 +125,25 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
     }
   };
 
+  // Function to render action icons (edit, delete, save) only on hover
+  const renderActionIcons = (resourceId: string, createdBy: string) => {
+    const isBookmarked = bookmarkedResources.includes(resourceId); // Check if the resource is bookmarked
+    if (hoveredResource === resourceId) {
+      return (
+        <div className="flex items-center space-x-2">
+          <Edit size={16} className="text-black" />
+          <Bookmark
+            size={16}
+            className={isBookmarked ? "text-purple-600" : "text-black"} // Toggle color based on bookmark state
+            onClick={() => handleBookmarkToggle(resourceId)} // Toggle bookmark on click
+          />
+          <Trash size={16} className="text-black" />
+        </div>
+      );
+    }
+    return null; // Don't render icons if not hovered
+  };
+
   return (
     <div>
       <div className="max-w-4xl mx-auto p-6">
@@ -120,9 +173,6 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
           />
         </div>
 
-        {/* <h1>
-          Resource Page of The Space <strong>{spaceAlias}</strong>
-        </h1> */}
         <div>
           {Object.keys(filteredResources).length > 0 ? (
             Object.keys(filteredResources).map((type) => (
@@ -132,30 +182,61 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
                   {type}
                 </h2>
                 {filteredResources[type].map((resource) => (
-  <div key={resource.id} className="flex items-center h-[25px] border-l-[1px] border-black mb-2">
-    {/* Resource Title with Icons to the right */}
-    <div className="flex-1 flex items-center space-x-2">
-      <p className="ml-2">{resource.title}</p>
-      {/* Views and Upvotes aligned to the right of the title */}
-      <div className="flex items-center space-x-2 text-gray-400">
-        <div className="flex items-center space-x-1">
-          <Eye size={16} className="text-black" />
-          <span>{resource.views}</span>
-        </div>
-        <div className="flex items-center space-x-1">
-          <ArrowUp size={16} className="text-black" />
-          <span>{resource.upvotes}</span>
-        </div>
-      </div>
-    </div>
-  </div>
-))}
+                  <div
+                    key={resource.id}
+                    className="flex items-center h-[25px] border-l-[1px] border-black mb-2"
+                    onMouseEnter={() => setHoveredResource(resource.id)} // Set hover state on mouse enter
+                    onMouseLeave={() => setHoveredResource(null)} // Remove hover state on mouse leave
+                  >
+                    {/* Resource Title with Icons to the right */}
+                    <div className="flex-1 flex items-center space-x-2">
+                      <p className="ml-2">{resource.title}</p>
+                      {/* Views and Upvotes aligned to the right of the title */}
+                      <div className="flex items-center space-x-2 text-gray-400">
+                        <div className="flex items-center space-x-1">
+                          <Eye size={16} className="text-black" />
+                          <span>{resource.views}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <ArrowUp size={16} className="text-black" />
+                          <span>{resource.upvotes}</span>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Action icons (Edit/Delete or Save) aligned to the right */}
+                    {renderActionIcons(resource.id, resource.createdBy)}
+                  </div>
+                ))}
               </div>
             ))
           ) : (
             <p>No resources available</p>
           )}
         </div>
+        {/* Popover message at the bottom of the screen */}
+        {popoverMessage && (
+  <div
+    className={`fixed bottom-4 right-4 transform -translate-x-1/2 bg-success-100 border border-success-700 text-green-700 py-3 px-4 rounded-md shadow-lg flex items-center space-x-2 ${
+      popoverMessage === "Bookmarked" ? "w-[312px] h-[64px]" : "w-[315px] h-[44px]"
+    }`}
+  >
+    {/* Checkmark Icon */}
+    <SquareCheckBig className="h-6 w-6 text-success-700" />
+
+    {/* Dynamic Text Content */}
+    <div>
+      {popoverMessage === "Bookmarked" ? (
+        <>
+          <p className="font-semibold text-black text-sm">Resource saved</p>
+          <p className="text-sm text-gray-500">You can see it in your saved collection</p>
+        </>
+      ) : (
+        <p className="font-inter text-black text-sm">Resource removed from the collection</p>
+      )}
+    </div>
+  </div>
+)}
+
       </div>
     </div>
   );
