@@ -19,6 +19,7 @@ export async function GET(req: Request, { params }: { params: { spaceAlias: stri
         url: true,
         audienceId: true,
         isOutdated: true,
+        lastModifiedById: true,
         resourceTypeId: true,
         _count: {
           select: {
@@ -62,11 +63,6 @@ export async function GET(req: Request, { params }: { params: { spaceAlias: stri
       upvotes: _count.upvotes,
       comments: transformedComments
     }
-
-
-
-
-
     return NextResponse.json(data)
 
   } catch (error) {
