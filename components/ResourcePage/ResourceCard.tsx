@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Switch } from "@/components/ui/switch";
 import { FilterPopover } from "@/components/ResourcePage/PopOver";
-import { Video, Presentation } from "lucide-react"; // Importing the Video and Presentation icons
+import { Video, ChartLine, Files, Podcast, ChartPie, SquareLibrary, Newspaper, BookOpen, BrainCircuit, Wrench} from "lucide-react"; // Importing the Video and Presentation icons
 import { Eye, ArrowUp, Edit, Trash, Bookmark, SquareCheckBig } from "lucide-react"; // Icons for views and upvotes
 
 // Type definition for the resources
@@ -117,11 +117,27 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
   const renderIcon = (resourceTypeName: string) => {
     switch (resourceTypeName.toLowerCase()) {
       case "video":
-        return <Video className="mr-2" />; // Video icon from lucide
+        return <Video className="mr-2" />; // Video icon
       case "presentation":
-        return <Presentation className="mr-2" />; // Presentation icon from lucide
+        return <ChartPie className="mr-2" />; // Presentation icon
+      case "article":
+        return <Newspaper className="mr-2" />; // Article icon
+      case "book":
+        return <BookOpen className="mr-2" />; // Book icon
+      case "online course":
+        return <ChartLine className="mr-2" />; // Online course icon
+      case "document":
+        return <Files className="mr-2" />; // Document icon
+      case "podcast":
+        return <Podcast className="mr-2" />; // Podcast icon
+      case "interactive content":
+        return <BrainCircuit className="mr-2" />; // Others icon  
+      case "practical project":
+        return <Wrench className="mr-2" />; // Others icon     
+      case "others":
+        return <SquareLibrary className="mr-2" />; // Others icon
       default:
-        return null; // No icon for other types (you can add more cases if needed)
+        return null; // No icon for other types
     }
   };
 
@@ -176,11 +192,11 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
         <div>
           {Object.keys(filteredResources).length > 0 ? (
             Object.keys(filteredResources).map((type) => (
-              <div key={type} className="resource-group mb-10">
-                <h2 className="flex items-center mb-4">
+              <div key={type} className="resource-group mb-10 ">
+                <strong className="flex items-center mb-4 text-lg mt-[40px]">
                   {renderIcon(type)} {/* Render the icon based on resourceTypeName */}
                   {type}
-                </h2>
+                </strong>
                 {filteredResources[type].map((resource) => (
                   <div
                     key={resource.id}
@@ -189,8 +205,8 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
                     onMouseLeave={() => setHoveredResource(null)} // Remove hover state on mouse leave
                   >
                     {/* Resource Title with Icons to the right */}
-                    <div className="flex-1 flex items-center space-x-2">
-                      <p className="ml-2">{resource.title}</p>
+                    <div className="flex-1 flex space-x-2">
+                      <p className="ml-6">{resource.title}</p>
                       {/* Views and Upvotes aligned to the right of the title */}
                       <div className="flex items-center space-x-2 text-gray-400">
                         <div className="flex items-center space-x-1">
@@ -215,27 +231,26 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
         </div>
         {/* Popover message at the bottom of the screen */}
         {popoverMessage && (
-  <div
-    className={`fixed bottom-4 right-4 transform -translate-x-1/2 bg-success-100 border border-success-700 text-green-700 py-3 px-4 rounded-md shadow-lg flex items-center space-x-2 ${
-      popoverMessage === "Bookmarked" ? "w-[312px] h-[64px]" : "w-[315px] h-[44px]"
-    }`}
-  >
-    {/* Checkmark Icon */}
-    <SquareCheckBig className="h-6 w-6 text-success-700" />
+          <div
+            className={`fixed bottom-4 right-4 transform -translate-x-1/2 bg-success-100 border border-success-700 text-green-700 py-3 px-4 rounded-md shadow-lg flex items-center space-x-2 ${popoverMessage === "Bookmarked" ? "w-[312px] h-[64px]" : "w-[315px] h-[44px]"
+              }`}
+          >
+            {/* Checkmark Icon */}
+            <SquareCheckBig className="h-6 w-6 text-success-700" />
 
-    {/* Dynamic Text Content */}
-    <div>
-      {popoverMessage === "Bookmarked" ? (
-        <>
-          <p className="font-semibold text-black text-sm">Resource saved</p>
-          <p className="text-sm text-gray-500">You can see it in your saved collection</p>
-        </>
-      ) : (
-        <p className="font-inter text-black text-sm">Resource removed from the collection</p>
-      )}
-    </div>
-  </div>
-)}
+            {/* Dynamic Text Content */}
+            <div>
+              {popoverMessage === "Bookmarked" ? (
+                <>
+                  <p className="font-semibold text-black text-sm">Resource saved</p>
+                  <p className="text-sm text-gray-500">You can see it in your saved collection</p>
+                </>
+              ) : (
+                <p className="font-inter text-black text-sm">Resource removed from the collection</p>
+              )}
+            </div>
+          </div>
+        )}
 
       </div>
     </div>
