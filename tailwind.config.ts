@@ -81,6 +81,13 @@ const config: Config = {
         700: 'var(--red-700)',
         900: 'var(--red-900)',
       },
+      success: {
+        100: 'var(--success-100)',
+        300: 'var(--success-300)',
+        500: 'var(--success-500)',
+        700: 'var(--success-700)',
+        900: 'var(--success-900)',
+      },
       yellow: {
         100: 'var(--yellow-100)',
         300: 'var(--yellow-300)',

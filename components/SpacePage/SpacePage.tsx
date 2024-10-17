@@ -68,49 +68,56 @@ function MainContent({ post, spaceAlias }: { post: any, spaceAlias: string }) {
           {post.alias}
         </h1>
 
-        <p className="text-[16px] leading-[24px] font-sans">
-          {isExpanded
-            ? post.description // Show full description if expanded
-            : `${post.description.slice(0, post.description.lastIndexOf(' ', 250))}...`}
-          <span
-            className="text-[#9846FF] cursor-pointer ml-1"
-            onClick={toggleExpand}
-          >
-            {isExpanded ? 'read less' : 'read more'}
-          </span>
-        </p>
+<p className="text-[16px] leading-[24px] font-sans">
+  {isExpanded
+    ? post.description || "No description available" // Show full description if expanded
+    : `${post.description?.slice(0, post.description?.lastIndexOf(' ', 250))}...`}
+  <span
+    className="text-[#9846FF] cursor-pointer ml-1"
+    onClick={toggleExpand}
+  >
+    {isExpanded ? 'read less' : 'read more'}
+  </span>
+</p>
 
         {/* Layout: All cards stacked, and "add" buttons beside "Resources" and "Learning Paths" */}
         <div className="flex flex-col mt-10 space-y-6">
           {/* Introduction Card */}
-          <div
-            className="relative w-[519.75px] h-[93.75px] rounded-[3.75px] p-4 border border-black"
-            style={{ backgroundColor: "#FFFFF" }}
-          >
-            <h2 className="text-[18px] font-bold font-inter text-black">Introduction</h2>
-            <p className="text-[14px] font-inter text-gray-700">A fundamental learning path to explore the space content</p>
-          </div>
+          <div className="relative w-[519.75px] h-[93.75px] rounded-[3.75px] p-4 border border-black bg-white hover:bg-blue-300">
+         <div className="flex items-center space-x-4">
+         {/* Icon */}
+         <div className="bg-blue-500 p-2 rounded-md mr-4">
+         <Route size={26} className="text-black" />
+         </div>
+         <div>
+         <h2 className="text-[18px] font-bold font-inter text-black">Introduction</h2>
+         <p className="text-[14px] font-inter text-gray-400">
+         A fundamental learning path to explore the space content
+         </p>
+         </div>
+        </div>
+       </div>
 
           {/* Resources and Add Resource */}
           <div className="flex space-x-6 ">
             <Link href={`/spaces/${spaceAlias}/r`}>
               <div
-                className="flex items-center justify-between w-[354px] h-[107.75px] rounded-[3.75px] p-4 border bg-yellow-300 border-black"
+                className="flex items-center justify-between w-[354px] h-[107.75px] rounded-[3.75px] p-4 border bg-white border-black hover:bg-yellow-300"
               >
                 {/* Icon */}
-                <div className="bg-purple-200 p-2 rounded-md mr-4">
-                  <Route size={32} className="text-black" />
+                <div className="bg-yellow-500 p-2 rounded-md mr-4">
+                  < LibraryBig size={26} className="text-black" />
                 </div>
                 <div>
                   <h2 className="text-[18px] font-bold font-inter text-black">Resources</h2>
-                  <p className="text-[14px] font-inter text-gray-700">Materials on the topic added by the community</p>
+                  <p className="text-[14px] font-inter text-gray-400">Materials on the topic added by the community</p>
                 </div>
                 <span className="bg-red-300 text-white text-md rounded-[16px] w-[36px] h-[22px] flex items-center justify-center">{post.resourceCount}</span>
               </div>
             </Link>
 
             <Link href={`/spaces/${spaceAlias}/r/add`}>
-              <button className="w-[120px] h-[107.75px] bg-[#FFE35E] text-black rounded-[3.75px] flex justify-center items-center border border-black transition-shadow duration-300 ease-in-out hover:shadow-[6px_6px_0_black] text-[13.5px]">
+              <button className="w-[120px] h-[107.75px] bg-[#FFE35E] text-black rounded-[3.75px] flex justify-center items-center border border-black transition-shadow duration-300 ease-in-out hover:shadow-[6px_6px_0_black] text-[13.5px] hover:bg-purple-700 hover:text-white">
                 + Add Resource
               </button>
             </Link>
@@ -120,56 +127,68 @@ function MainContent({ post, spaceAlias }: { post: any, spaceAlias: string }) {
           <div className="flex space-x-6">
             <Link href={`/spaces/${spaceAlias}/lp`}>
               <div
-                className="flex items-center justify-between w-[354px] h-[107.75px] rounded-[3.75px] p-4 border bg-purple-100 border-black"
+                className="flex items-center justify-between w-[354px] h-[107.75px] rounded-[3.75px] p-4 border bg-white border-black hover:bg-purple-100"
               >
                 {/* Icon */}
-                <div className="bg-yellow-200 p-2 rounded-md mr-4">
-                  <LibraryBig size={32} className="text-black" />
+                <div className="bg-purple-300 p-2 rounded-md mr-4">
+                  < Route size={26} className="text-black" />
                 </div>
 
                 <div>
                   <h2 className="text-[18px] font-bold font-inter text-black">Learning Paths</h2>
-                  <p className="text-[14px] font-inter text-gray-500">Interactive roadmaps for a comprehensive learning journey</p>
+                  <p className="text-[14px] font-inter text-gray-400">Interactive roadmaps for a comprehensive learning journey</p>
                 </div>
                 <span className="bg-purple-900 text-white text-md rounded-[16px] w-[43px] h-[22px] flex items-center justify-center"> {post.learningPathCount}</span>
               </div>
             </Link>
 
             <Link href={`/spaces/${spaceAlias}/lp/add`}>
-              <button className="w-[120px] h-[107.75px] bg-[#D7B8FF] text-black rounded-[3.75px] flex justify-center items-center border border-black text-[13.5px]">
+              <button className="w-[120px] h-[107.75px] bg-[#D7B8FF] text-black rounded-[3.75px] flex justify-center items-center border border-black text-[13.5px] transition-shadow duration-300 ease-in-out hover:shadow-[6px_6px_0_black] hover:bg-purple-700 hover:text-white ">
                 + Add Learning Path
               </button>
             </Link>
           </div>
-          <h1 className="text-[32px] mt-10 mb-6"> Projects</h1>
+          <h1 className="text-[32px] !mt-20"> Projects</h1>
           {/* Projects (displayed after learning paths) */}
-          <div className="flex mt-10 gap-16"> {/* Enable flex-wrap and gap */}
-            {post.projects.slice(0, 3).map((project: any) => (
-              <div key={project.projectId} className="flex-grow min-w-[250px] max-w-[300px]"> {/* Flex-grow and min/max width */}
-                <ProjectCard
-                  key={project.projectId}
-                  // Data is HARDCODED
-                  date={`2021-2022`}
-                  title={project.title}
-                  description={project.description}
-                  client={project.client}
-                />
-              </div>
-            ))}
-          </div>
+          <div className="flex mt-16 gap-16">
+  {/* Check if post.projects is defined and is an array */}
+  {Array.isArray(post.projects) && post.projects.length > 0 ? (
+    post.projects.slice(0, 3).map((project: any) => (
+      <div key={project.projectId} className="flex-grow min-w-[250px] max-w-[300px]">
+        <ProjectCard
+          key={project.projectId}
+          // Data is HARDCODED
+          date={`2021-2022`}
+          title={project.title}
+          description={project.description}
+          client={project.client}
+        />
+      </div>
+    ))
+  ) : (
+    <div>No projects available</div>
+  )}
+</div>
+
           {/* Added Recomendation Cards after Projects */}
-          <h1 className="text-[32px] mt-10 mb-6">Recommendations</h1>
-          <div className="flex mt-10 gap-16"> {/* Flex-wrap and gap */}
-            {post.recommended.slice(0, 3).map((recommendation: any) => (
-              <div key={recommendation.id} className="flex-grow min-w-[250px] max-w-[300px]"> {/* Flex-grow and min/max width */}
-                <RecomendationCard
-                  title={recommendation.title}
-                  description={recommendation.description}
-                  spaceAlias={spaceAlias}
-                />
-              </div>
-            ))}
-          </div>
+          <h1 className="text-[28px] font-bold !mt-20 !mb-0">Recommended</h1> {/* Slightly reduced font size and added bold style */}
+          <h3 className="text-gray-500 !mt-0 text-[14px]">Resources recommended by <br/> the community</h3> {/* Grey text and smaller font */}
+<div className="flex mt-10 gap-8">
+  {/* Check if post.recommended is defined and is an array */}
+  {Array.isArray(post.recommended) && post.recommended.length > 0 ? (
+    post.recommended.slice(0, 3).map((recommendation: any) => (
+      <div key={recommendation.id} className="flex-grow min-w-[250px] max-w-[300px]">
+        <RecomendationCard
+          title={recommendation.title}
+          description={recommendation.description}
+          spaceAlias={spaceAlias}
+        />
+      </div>
+    ))
+  ) : (
+    <div>No recommendations available</div>
+  )}
+</div>
 
         </div>
       </div>
