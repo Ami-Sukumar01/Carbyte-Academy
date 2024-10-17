@@ -12,7 +12,7 @@ export async function GET(req: Request, { params, query = {} }: { params: { spac
   const spaceAlias = decodeURIComponent(params.spaceAlias);
   // Use URLSearchParams to parse query parameters
   const resourceTypes = await fetchResourceTypes()
-  console.log(resourceTypes)
+  // console.log(resourceTypes)
   const {
     types = [],
     sort = "updatedAt",
@@ -56,7 +56,7 @@ export async function GET(req: Request, { params, query = {} }: { params: { spac
 
 
     // Fetch all resource types
-    const resourceTypes = await prisma.resourceType.findMany();
+    // const resourceTypes = await prisma.resourceType.findMany();
 
     // Map type names to IDs for filtering
     const typeIds = resourceTypes
