@@ -67,6 +67,26 @@ export async function GET(req: Request, { params }: { params: { spaceAlias: stri
     if (!resource) {
       return NextResponse.json({ error: "Resource not found", status: 404 })
     }
+    // Fetch recommended resources: 2 Most upvoted similar level (audience) resources, not not the same resource. 
+    const recommended = await prisma.resource.findMany({
+      where: {
+        audience: resource.audience,
+        id: { not: resource.id } //exclude the current resource
+      },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+      },
+      orderBy: {
+        upvotes: {
+          _count: 'desc'
+        }
+      },
+      take: 2 //Limit to 2 resources
+    })
+    console.log(recommended)
+
     // Format commentupvotes
     const transformedComments = resource.comments?.map(comment => {
       const { _count, ...rest } = comment
@@ -82,7 +102,8 @@ export async function GET(req: Request, { params }: { params: { spaceAlias: stri
       ...restResource,
       views: _count.views,
       upvotes: _count.upvotes,
-      comments: transformedComments
+      comments: transformedComments,
+      recommended
     }
     return NextResponse.json(data)
 

@@ -14,6 +14,13 @@ interface TransformedComment extends Pick<Comment, 'id' | 'content' | 'createdAt
   }
 }
 
+// Type for Recommended Resources
+interface Recommended {
+  id: string,
+  title: string,
+  description: string
+}
+
 //Type for Resource
 interface TransformedResource extends Pick<Resource, 'id' | 'title' | 'description' | 'url' | 'isOutdated'> {
   audience: {
@@ -28,6 +35,7 @@ interface TransformedResource extends Pick<Resource, 'id' | 'title' | 'descripti
   views: number,
   upvotes: number,
   comments: TransformedComment[],
+  recommend: Recommended[]
 }
 
 
