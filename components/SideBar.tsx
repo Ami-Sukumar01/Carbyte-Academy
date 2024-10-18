@@ -1,31 +1,14 @@
+// Sidebar.tsx (Server Component)
 import { fetchSpaceAliases } from '@/lib/data';
-import Link from 'next/link'
-import { Button } from './ui/button';
-
+import SidebarClient from './SidebarClient';
 
 interface SidebarProps {
   className?: string;
 }
 
-
 export default async function Sidebar({ className }: SidebarProps) {
-  const spaces = await fetchSpaceAliases()
-  return (
-    <div className={`p-4 ${className}`}>
-      <div className="flex flex-col space-y-3 mt-6">
-        {spaces.map((space) => (
-          <Link key={space.alias} href={`/spaces/${space.alias}`}>
-            <Button
-              variant="outline"
-              className="w-[251px] h-[58px] text-lg px-[16px] py-[18px] rounded-md font-inter flex items-center border border-gray-300 bg-white justify-start"
-            >
-              {space.alias}
-            </Button>
-          </Link>
-        ))}
-      </div>
-    </div>
-  )
+  const spaces = await fetchSpaceAliases();
+  return <SidebarClient spaces={spaces} className={className} />;
 }
 
 
