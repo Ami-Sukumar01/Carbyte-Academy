@@ -1,6 +1,8 @@
 import { ResourceCard } from "@/components/ResourcePage/ResourceCard";
 import { Switch } from "@/components/ui/switch";
 import { FilterPopover } from "@/components/ResourcePage/PopOver"; // Import the popover
+import Link from "next/link";
+
 
 export default async function ResourcesPage({ params }: { params: { spaceAlias: string } }) {
   const spaceAlias = decodeURIComponent(params.spaceAlias);
@@ -16,9 +18,12 @@ export default async function ResourcesPage({ params }: { params: { spaceAlias: 
               The space resources aim to cover the following topics: ...
             </p>
           </div>
-          <button className="bg-yellow-500 w-[218px] h-[46px] border border-black text-black py-2 px-4 rounded hover:bg-yellow-500 transition flex justify-center mb-[30px] items-center">
-            <span className="text-[1.5rem] mr-1 mb-[4px]">+</span> Add resource
-          </button>
+          <Link href={`/spaces/${spaceAlias}/add`}>
+            <button className="bg-yellow-500 w-[218px] h-[46px] border border-black text-black py-2 px-4 rounded hover:bg-yellow-500 transition flex justify-center mb-[30px] items-center">
+              <span className="text-[1.5rem] mr-1 mb-[4px]">+</span> Add resource
+            </button>
+          </Link>
+
         </div>
 
 
