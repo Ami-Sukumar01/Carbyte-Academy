@@ -24,17 +24,16 @@ export default function SpacesLayout({
         {/* Flex container for SideBar and Navbar */}
         <div className="flex flex-1 overflow-hidden">
           {/* Sidebar on the left */}
-          <SideBar className="w-[251px] ml-[20px] fixed top-[140px] h-[calc(100vh-111px)]" /> {/* Fixed sidebar */}
+          <SideBar className="w-[251px] ml-[0px] top-[140px] h-[calc(100vh-111px)]" />
 
           {/* Navbar and Content on the right */}
-          <div className="flex-grow flex flex-col ml-[271px]">
+          <div className="flex-grow flex flex-col ml-[10px]">
             {/* Navbar */}
             <Navbar className="w-full fixed top-[70px] ml-[50px] z-20 h-[69px]" />
 
             {/* Scrollable white page below the navbar */}
             <div
-              className="flex-grow w-[1118px] ml-[51px] bg-white overflow-y-auto p-4 pr-20 shadow-lg mt-[69px]"
-              style={{ maxHeight: "calc(100vh - 250px)" }} // Adjust height to allow scrolling only in this area
+              className="flex-grow w-[1118px] ml-[51px] bg-white overflow-y-auto p-4 pr-20 shadow-lg mt-[69px] max-h-[calc(100vh-250px)]"
             >
               {children}
             </div>
