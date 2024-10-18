@@ -17,10 +17,22 @@ export async function GET(req: Request, { params }: { params: { spaceAlias: stri
         title: true,
         description: true,
         url: true,
-        audienceId: true,
+        audience: {
+          select: {
+            name: true
+          }
+        },
         isOutdated: true,
-        lastModifiedById: true,
-        resourceTypeId: true,
+        lastModifiedBy: {
+          select: {
+            name: true
+          }
+        },
+        resourceType: {
+          select: {
+            name: true
+          }
+        },
         _count: {
           select: {
             views: true,
@@ -31,9 +43,18 @@ export async function GET(req: Request, { params }: { params: { spaceAlias: stri
           select: {
             id: true,
             content: true,
-            userId: true,
+            user: {
+              select: {
+                name: true,
+                profile: {
+                  select: {
+                    avatarUrl: true
+                  }
+                }
+
+              }
+            },
             createdAt: true,
-            commentUpvotes: true,
             _count: {
               select: {
                 commentUpvotes: true

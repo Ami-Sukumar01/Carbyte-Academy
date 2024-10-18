@@ -3,14 +3,31 @@ import { useState, useEffect } from "react";
 import { Resource } from "@prisma/client";
 import { Comment } from "@prisma/client";
 
-interface TransformedComment extends Omit<Comment, '_count'> {
+// Type for Resource Comment
+interface TransformedComment extends Pick<Comment, 'id' | 'content' | 'createdAt'> {
   commentUpvotes: number,
+  user: {
+    name: string,
+    profile: {
+      avatarUrl: string
+    }
+  }
 }
 
-interface TransformedResource extends Omit<Resource, '_count' | 'commments'> {
+//Type for Resource
+interface TransformedResource extends Pick<Resource, 'id' | 'title' | 'description' | 'url' | 'isOutdated'> {
+  audience: {
+    name: string
+  },
+  lastModifiedBy: {
+    name: string
+  },
+  resourceType: {
+    name: string
+  },
   views: number,
   upvotes: number,
-  comments: TransformedComment[]
+  comments: TransformedComment[],
 }
 
 
@@ -52,9 +69,8 @@ export function ResourceDetail({ spaceAlias, resourceTitle }: { spaceAlias: stri
       <p>Resource Details:</p>
       <p>{resourceData.title}</p>
       <p>{resourceData.description}</p>
-      {/* Create a Contributor Component that takes "lastModifiedById" and returns the contributor name */}
-      {/* Create a Resource Type component that takes resourceTypeId as prop */}
-      {/* Create a Resource Level component that takes resourceTypeId as prop */}
+      {/* Check postman to see the request structure: http://localhost:3000/api/spaces/E2E/r/Security%20in%20End2End%20Solutions */}
+      {/* You have to map over comment ;) */}
 
     </>
   )
