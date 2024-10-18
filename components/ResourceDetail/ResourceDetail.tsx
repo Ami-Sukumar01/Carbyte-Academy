@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Resource } from "@prisma/client";
 import { Comment } from "@prisma/client";
+import UpvoteButton from "./UpvoteButton";
 
 // Type for Resource Comment
 interface TransformedComment extends Pick<Comment, 'id' | 'content' | 'createdAt'> {
@@ -77,6 +78,8 @@ export function ResourceDetail({ spaceAlias, resourceTitle }: { spaceAlias: stri
       <p>Resource Details:</p>
       <p>{resourceData.title}</p>
       <p>{resourceData.description}</p>
+
+      <UpvoteButton resourceId={resourceData.id} userId={"uuuid"} />
       {/* Check postman to see the request structure: http://localhost:3000/api/spaces/E2E/r/Security%20in%20End2End%20Solutions */}
       {/* You have to map over comment ;) */}
 
