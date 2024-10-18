@@ -13,7 +13,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ className = "" }) => {
   const router = useRouter();
   return (
-    <nav className={`flex justify-between items-center w-full max-w-[1118px] h-[69px] bg-blue-700 p-4 rounded-tl-[3px] relative z-20 ${className}`}>
+    <nav className={`flex mr-[90px] justify-between items-center w-full max-w-[1118px] h-[69px] bg-blue-700 p-4 rounded-tl-[3px] relative z-20 ${className}`}>
       <Button onClick={() => router.back()}
         variant="outline"
         className="flex rounded-xs items-center w-[151px] h-[46px] space-x-2 bg-white text-md font-inter hover:bg-white hover:shadow-[3px_3px_0_black]"
@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarProps> = ({ className = "" }) => {
       {/* Request a Topic Button */}
       <Button
         variant="outline"
-        className="bg-white w-[198px] h-[46px] rounded-xs hover:bg-white hover:shadow-[3px_3px_0_black] text-md font-inter"
+        className="bg-white ml-auto w-[198px] h-[46px] rounded-xs hover:bg-white hover:shadow-[3px_3px_0_black] text-md font-inter"
       >
         Request a topic
       </Button>
@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ className = "" }) => {
       {/* Popover Help Icon */}
       <Popover.Root>
         <Popover.Trigger asChild>
-          <CircleHelp className="w-5 h-5 text-black cursor-pointer" />
+          <CircleHelp className="w-5 mr-[25px] ml-[25px] h-5 text-black cursor-pointer" />
         </Popover.Trigger>
         <Popover.Content
           side="top"
