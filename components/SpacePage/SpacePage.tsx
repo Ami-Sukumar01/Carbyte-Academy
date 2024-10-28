@@ -7,7 +7,6 @@ import ContributorCard from "@/components/ContributorCard"; // Adjust the path i
 import ProjectCard from "@/components/ProjectCard";
 import RecomendationCard from "@/components/RecomCard";
 
-
 export function SpaceContent({ spaceAlias }: { spaceAlias: string }) {
   console.log('Alias: ', spaceAlias)
   //Have to fix the type
@@ -68,35 +67,37 @@ function MainContent({ post, spaceAlias }: { post: any, spaceAlias: string }) {
           {post.alias}
         </h1>
 
-<p className="text-[16px] leading-[24px] font-sans">
-  {isExpanded
-    ? post.description || "No description available" // Show full description if expanded
-    : `${post.description?.slice(0, post.description?.lastIndexOf(' ', 250))}...`}
-  <span
-    className="text-[#9846FF] cursor-pointer ml-1"
-    onClick={toggleExpand}
-  >
-    {isExpanded ? 'read less' : 'read more'}
-  </span>
-</p>
+        <p className="text-[16px] leading-[24px] font-sans">
+          {isExpanded
+            ? post.description || "No description available" // Show full description if expanded
+            : `${post.description?.slice(0, post.description?.lastIndexOf(' ', 250))}...`}
+          <span
+            className="text-[#9846FF] cursor-pointer ml-1"
+            onClick={toggleExpand}
+          >
+            {isExpanded ? 'read less' : 'read more'}
+          </span>
+        </p>
 
         {/* Layout: All cards stacked, and "add" buttons beside "Resources" and "Learning Paths" */}
         <div className="flex flex-col mt-10 space-y-6">
           {/* Introduction Card */}
-          <div className="relative w-[519.75px] h-[93.75px] rounded-[3.75px] p-4 border border-black bg-white hover:bg-blue-300">
-         <div className="flex items-center space-x-4">
-         {/* Icon */}
-         <div className="bg-blue-500 p-2 rounded-md mr-4">
-         <Route size={26} className="text-black" />
-         </div>
-         <div>
-         <h2 className="text-[18px] font-bold font-inter text-black">Introduction</h2>
-         <p className="text-[14px] font-inter text-gray-400">
-         A fundamental learning path to explore the space content
-         </p>
-         </div>
-        </div>
-       </div>
+          <Link href={`/spaces/${spaceAlias}/lp/${encodeURIComponent(post.fundamentalLearningPathTitle)}`}>
+            <div className="relative w-[519.75px] h-[93.75px] rounded-[3.75px] p-4 border border-black bg-white hover:bg-blue-300">
+              <div className="flex items-center space-x-4">
+                {/* Icon */}
+                <div className="bg-blue-500 p-2 rounded-md mr-4">
+                  <Route size={26} className="text-black" />
+                </div>
+                <div>
+                  <h2 className="text-[18px] font-bold font-inter text-black">Introduction</h2>
+                  <p className="text-[14px] font-inter text-gray-400">
+                    A fundamental learning path to explore the space content
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Link>
 
           {/* Resources and Add Resource */}
           <div className="flex space-x-6 ">
@@ -151,44 +152,44 @@ function MainContent({ post, spaceAlias }: { post: any, spaceAlias: string }) {
           <h1 className="text-[32px] !mt-20"> Projects</h1>
           {/* Projects (displayed after learning paths) */}
           <div className="flex mt-16 gap-16">
-  {/* Check if post.projects is defined and is an array */}
-  {Array.isArray(post.projects) && post.projects.length > 0 ? (
-    post.projects.slice(0, 3).map((project: any) => (
-      <div key={project.projectId} className="flex-grow min-w-[250px] max-w-[300px]">
-        <ProjectCard
-          key={project.projectId}
-          // Data is HARDCODED
-          date={`2021-2022`}
-          title={project.title}
-          description={project.description}
-          client={project.client}
-        />
-      </div>
-    ))
-  ) : (
-    <div>No projects available</div>
-  )}
-</div>
+            {/* Check if post.projects is defined and is an array */}
+            {Array.isArray(post.projects) && post.projects.length > 0 ? (
+              post.projects.slice(0, 3).map((project: any) => (
+                <div key={project.projectId} className="flex-grow min-w-[250px] max-w-[300px]">
+                  <ProjectCard
+                    key={project.projectId}
+                    // Data is HARDCODED
+                    date={`2021-2022`}
+                    title={project.title}
+                    description={project.description}
+                    client={project.client}
+                  />
+                </div>
+              ))
+            ) : (
+              <div>No projects available</div>
+            )}
+          </div>
 
           {/* Added Recomendation Cards after Projects */}
           <h1 className="text-[28px] font-bold !mt-20 !mb-0">Recommended</h1> {/* Slightly reduced font size and added bold style */}
-          <h3 className="text-gray-500 !mt-0 text-[14px]">Resources recommended by <br/> the community</h3> {/* Grey text and smaller font */}
-<div className="flex mt-10 gap-8">
-  {/* Check if post.recommended is defined and is an array */}
-  {Array.isArray(post.recommended) && post.recommended.length > 0 ? (
-    post.recommended.slice(0, 3).map((recommendation: any) => (
-      <div key={recommendation.id} className="flex-grow min-w-[250px] max-w-[300px]">
-        <RecomendationCard
-          title={recommendation.title}
-          description={recommendation.description}
-          spaceAlias={spaceAlias}
-        />
-      </div>
-    ))
-  ) : (
-    <div>No recommendations available</div>
-  )}
-</div>
+          <h3 className="text-gray-500 !mt-0 text-[14px]">Resources recommended by <br /> the community</h3> {/* Grey text and smaller font */}
+          <div className="flex mt-10 gap-8">
+            {/* Check if post.recommended is defined and is an array */}
+            {Array.isArray(post.recommended) && post.recommended.length > 0 ? (
+              post.recommended.slice(0, 3).map((recommendation: any) => (
+                <div key={recommendation.id} className="flex-grow min-w-[250px] max-w-[300px]">
+                  <RecomendationCard
+                    title={recommendation.title}
+                    description={recommendation.description}
+                    spaceAlias={spaceAlias}
+                  />
+                </div>
+              ))
+            ) : (
+              <div>No recommendations available</div>
+            )}
+          </div>
 
         </div>
       </div>
