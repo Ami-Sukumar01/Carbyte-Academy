@@ -102,7 +102,8 @@ const spaceData: Prisma.SpaceCreateInput[] = [
     alias: "E2E",
     description: "We bring in-depth software and product expertise to our customers' end-to-end IoT solutions. With our many years of experience in IoT projects, we provide targeted support in product development and integrate seamlessly into the product lifecycle management process.",
     isPublic: true,
-    lastModifiedBy: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } }
+    lastModifiedBy: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } },
+    fundamentalLearningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } } //Only use after having created Spaces First, Then Learning Paths
   },
   {
     id: "4d5e6f7f-8901-23de-f456-4567890123de",
@@ -1359,7 +1360,7 @@ async function upsertSpaces() {
         alias: s.alias,
         description: s.description,
         isPublic: s.isPublic,
-        lastModifiedBy: s.lastModifiedBy
+        lastModifiedBy: s.lastModifiedBy,
       },
       create: { // Create new record if it doesn't exist
         id: s.id,
@@ -1367,12 +1368,27 @@ async function upsertSpaces() {
         alias: s.alias,
         description: s.description,
         isPublic: s.isPublic,
-        lastModifiedBy: s.lastModifiedBy
+        lastModifiedBy: s.lastModifiedBy,
       }
     })
     console.log(`Created or modified space with alias: ${space.alias}`)
   }
 
+}
+async function updateSpacesWithFundamentalLearningPath() {
+  console.log(`\n- Add fundamental learning paths to spaces`)
+  for (const s of spaceData) {
+    if (s.fundamentalLearningPath) {
+      await prisma.space.update({
+        where: { id: s.id },
+        data: {
+          fundamentalLearningPath: s.fundamentalLearningPath
+        }
+      })
+      console.log(`Updated space: ${s.alias} with fundamental learning path "${s.fundamentalLearningPath.connect?.id}"`)
+    }
+
+  }
 }
 
 async function upsertActions() {
@@ -1458,6 +1474,7 @@ async function main() {
   await createCommentUpvotes()
   await createLearningPathUpvotes()
   await createLearningPathViews()
+  await updateSpacesWithFundamentalLearningPath()
   console.log(`Seeding finished 🌱`)
 }
 
