@@ -2,6 +2,7 @@ import { Prisma } from "@prisma/client";
 import { clearDatabase } from "./cleardb";
 import prisma from "../lib/prisma"
 
+
 const userData: Prisma.UserCreateInput[] = [
   {
     id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43",
@@ -559,6 +560,9 @@ const learningPathData: Prisma.LearningPathCreateInput[] = [
     description: "An introductory learning path to familiarize with end-to-end solution architecture, covering foundational concepts, tools, and methodologies to kickstart your journey.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    estimatedTime: 20,
+    audience: { connect: { id: "53c0db0a-011c-4c0d-9f61-5a613eb2a1a0" } },
+    isPublic: true
   },
   {
     id: "ff1ccd1c-9080-4884-ab18-9ee4d5418f0f",
@@ -566,6 +570,9 @@ const learningPathData: Prisma.LearningPathCreateInput[] = [
     description: "A comprehensive path to master microservices architecture, including design patterns, deployment strategies, and real-world case studies.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    estimatedTime: 40,
+    audience: { connect: { id: "406f3663-1d68-4d76-b388-6a761b6b076e" } },
+    isPublic: true
   },
   {
     id: "3dd7e286-182e-438f-96cd-ace7e69ba6be",
@@ -573,6 +580,9 @@ const learningPathData: Prisma.LearningPathCreateInput[] = [
     description: "Essential knowledge for designing cloud-based architectures, focusing on cloud-native design, scalability, and cost management.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    estimatedTime: 30,
+    audience: { connect: { id: "53c0db0a-011c-4c0d-9f61-5a613eb2a1a0" } },
+    isPublic: true
   },
   {
     id: "693576b8-b663-4c24-8acd-49361ee07e20",
@@ -580,6 +590,9 @@ const learningPathData: Prisma.LearningPathCreateInput[] = [
     description: "Learn how to integrate DevOps practices into your architecture, focusing on automation, continuous integration, and deployment pipelines.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    estimatedTime: 45,
+    audience: { connect: { id: "b23d685a-c552-485c-b364-20f120c661f3" } },
+    isPublic: true
   },
   {
     id: "2868eb75-97d5-43b3-8597-d0dff368715b",
@@ -587,6 +600,9 @@ const learningPathData: Prisma.LearningPathCreateInput[] = [
     description: "A path focused on security practices within architectural design, covering threat modeling, secure coding, and compliance standards.",
     space: { connect: { id: "3c4d5e6f-7890-12cd-ef34-3456789012cd" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    estimatedTime: 35,
+    audience: { connect: { id: "406f3663-1d68-4d76-b388-6a761b6b076e" } },
+    isPublic: false
   }
 ]
 
@@ -885,6 +901,33 @@ const resourceViewData: Prisma.ResourceViewCreateInput[] = [
   { resource: { connect: { id: "bca11205-3eca-45df-b35b-e76b00868687" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
 ];
 
+const learningPathUpvoteData: Prisma.LearningPathUpvoteCreateInput[] = [
+  { learningPath: { connect: { id: "693576b8-b663-4c24-8acd-49361ee07e20" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { learningPath: { connect: { id: "693576b8-b663-4c24-8acd-49361ee07e20" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { learningPath: { connect: { id: "693576b8-b663-4c24-8acd-49361ee07e20" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { learningPath: { connect: { id: "3dd7e286-182e-438f-96cd-ace7e69ba6be" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { learningPath: { connect: { id: "3dd7e286-182e-438f-96cd-ace7e69ba6be" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } }, user: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } } },
+]
+
+const learningPathViewData: Prisma.LearningPathViewCreateInput[] = [
+  { learningPath: { connect: { id: "693576b8-b663-4c24-8acd-49361ee07e20" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { learningPath: { connect: { id: "693576b8-b663-4c24-8acd-49361ee07e20" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { learningPath: { connect: { id: "693576b8-b663-4c24-8acd-49361ee07e20" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { learningPath: { connect: { id: "693576b8-b663-4c24-8acd-49361ee07e20" } }, user: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } } },
+  { learningPath: { connect: { id: "3dd7e286-182e-438f-96cd-ace7e69ba6be" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { learningPath: { connect: { id: "3dd7e286-182e-438f-96cd-ace7e69ba6be" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { learningPath: { connect: { id: "3dd7e286-182e-438f-96cd-ace7e69ba6be" } }, user: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } } },
+  { learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } }, user: { connect: { id: "d742390f-1c8b-4d6d-8e6e-1bddacd2bc1d" } } },
+  { learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
+  { learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } }, user: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } } },
+  { learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } }, user: { connect: { id: "a61086d4-d0ae-4afb-b8d1-57affe2b8c82" } } },
+]
+
+
 const commentData: Prisma.CommentCreateInput[] = [
   {
     id: "e26393c0-2f4c-4c23-b7f1-cb0b35f5de1e",
@@ -962,6 +1005,36 @@ const CommentUpvoteData: Prisma.CommentUpvoteCreateInput[] = [
   { comment: { connect: { id: "89c0341b-554a-4585-8aed-94dc076dfe11" } }, user: { connect: { id: "c381fb25-7be1-4f79-ae5c-50dc74ec2ec0" } } },
   { comment: { connect: { id: "18422072-2b66-418b-84d7-8e78560bcbfd" } }, user: { connect: { id: "e08c377d-fa1f-4643-8db8-2a25dfc93383" } } },
 ]
+
+async function createLearningPathUpvotes() {
+  console.log(`\n- Creating learning path upvotes`)
+  for (const lpu of learningPathUpvoteData) {
+    try {
+      await prisma.learningPathUpvote.create({
+        data: lpu
+      })
+      console.log(`Created learning path upvote: ${lpu.learningPath.connect?.id}`)
+    } catch (error) {
+      const err = error as Error;
+      console.log(`Error creating learning path upvote: ${err.message}`)
+    }
+  }
+}
+
+async function createLearningPathViews() {
+  console.log(`\n- Creating learning path views`)
+  for (const lpv of learningPathViewData) {
+    try {
+      await prisma.learningPathView.create({
+        data: lpv
+      })
+      console.log(`Created learning path view: ${lpv.learningPath.connect?.id}`)
+    } catch (error) {
+      const err = error as Error
+      console.log(`Error creating learning path view: ${err.message}`)
+    }
+  }
+}
 
 async function createProfiles() {
   console.log(`\n- Creating profiles`)
@@ -1158,14 +1231,20 @@ async function upsertLearningPaths() {
         title: lp.title,
         description: lp.title,
         space: lp.space,
-        lastModifiedBy: lp.lastModifiedBy
+        lastModifiedBy: lp.lastModifiedBy,
+        estimatedTime: lp.estimatedTime,
+        audience: lp.audience,
+        isPublic: lp.isPublic
       },
       create: {
         id: lp.id,
         title: lp.title,
         description: lp.description,
         space: lp.space,
-        lastModifiedBy: lp.lastModifiedBy
+        lastModifiedBy: lp.lastModifiedBy,
+        estimatedTime: lp.estimatedTime,
+        audience: lp.audience,
+        isPublic: lp.isPublic
       }
     })
     console.log(`Created or modified Learning Path: "${learningPath.title}"`)
@@ -1377,6 +1456,8 @@ async function main() {
   await createResourceViews()
   await upsertComments()
   await createCommentUpvotes()
+  await createLearningPathUpvotes()
+  await createLearningPathViews()
   console.log(`Seeding finished 🌱`)
 }
 
