@@ -32,51 +32,60 @@ model Space {
 }
 
 model Resource {
-  id               String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title            String           @unique @db.VarChar(255)
+  id               String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title            String            @unique @db.VarChar(255)
   description      String
-  url              String           @unique @db.VarChar(2083) //Stores the a unquie resource URL
-  audienceId       String           @db.Uuid
-  audience         Audience         @relation(fields: [audienceId], references: [id])
-  isOutdated       Boolean          @default(false)
-  isPrivat         Boolean          @default(false) // Default to false, meaning public
-  spaceId          String           @db.Uuid
-  space            Space            @relation(fields: [spaceId], references: [id])
-  lastModifiedById String           @db.Uuid
-  lastModifiedBy   User             @relation(fields: [lastModifiedById], references: [id])
-  resourceTypeId   String           @db.Uuid
-  resourceType     ResourceType     @relation(fields: [resourceTypeId], references: [id])
+  url              String            @unique @db.VarChar(2083) //Stores a unique resource URL
+  audienceId       String            @db.Uuid
+  audience         Audience          @relation(fields: [audienceId], references: [id])
+  isOutdated       Boolean           @default(false)
+  isPrivat         Boolean           @default(false) // Default to false, meaning public. Change to isPublic
+  spaceId          String            @db.Uuid
+  space            Space             @relation(fields: [spaceId], references: [id])
+  lastModifiedById String            @db.Uuid
+  lastModifiedBy   User              @relation(fields: [lastModifiedById], references: [id])
+  resourceTypeId   String            @db.Uuid
+  resourceType     ResourceType      @relation(fields: [resourceTypeId], references: [id])
   upvotes          ResourceUpvote[]
   views            ResourceView[]
   contributions    Contribution[]
-  createdAt        DateTime         @default(now())
-  updatedAt        DateTime         @updatedAt
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
   comments         Comment[]
+  resourceSections ResourceSection[]
 }
 
 model Audience {
-  id               String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name             String     @unique @db.VarChar(255)
+  id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name             String         @unique @db.VarChar(255)
   description      String?
   resources        Resource[]
-  lastModifiedById String     @db.Uuid
-  lastModifiedBy   User       @relation(fields: [lastModifiedById], references: [id])
-  createdAt        DateTime   @default(now())
-  updatedAt        DateTime   @updatedAt
+  learningPaths    LearningPath[]
+  lastModifiedById String         @db.Uuid
+  lastModifiedBy   User           @relation(fields: [lastModifiedById], references: [id])
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 }
 
 model LearningPath {
-  id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title            String         @unique @db.VarChar(255)
+  id               String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title            String               @unique @db.VarChar(255)
   description      String
-  spaceId          String         @db.Uuid
-  space            Space          @relation(fields: [spaceId], references: [id])
-  lastModifiedById String         @db.Uuid
-  lastModifiedBy   User           @relation(fields: [lastModifiedById], references: [id])
+  spaceId          String               @db.Uuid
+  space            Space                @relation(fields: [spaceId], references: [id])
+  lastModifiedById String               @db.Uuid
+  lastModifiedBy   User                 @relation(fields: [lastModifiedById], references: [id])
+  audienceId       String               @db.Uuid //Audience
+  audience         Audience             @relation(fields: [audienceId], references: [id])
+  isPublic         Boolean              @default(false) //Public
+  estimatedTime    Int //Time to complete a LearningPath stored in minutes
+  upvotes          LearningPathUpvote[] //Upvotes
+  views            LearningPathView[] //Views
   contributions    Contribution[]
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
   comments         Comment[]
+  sections         Section[]
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
 }
 
 model Project {
@@ -103,22 +112,26 @@ model Profile {
 }
 
 model User {
-  id              String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email           String           @unique @db.VarChar(255)
-  name            String
-  profile         Profile?
-  spaces          Space[]
-  resources       Resource[]
-  learningPaths   LearningPath[]
-  clients         Client[]
-  contributions   Contribution[]
-  projects        Project[]
-  pointRules      PointRule[]
-  resourceViews   ResourceView[]
-  resourceUpvotes ResourceUpvote[]
-  comments        Comment[]
-  commentUpvotes  CommentUpvote[]
-  audiences       Audience[]
+  id                  String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email               String               @unique @db.VarChar(255)
+  name                String
+  profile             Profile?
+  spaces              Space[]
+  resources           Resource[]
+  learningPaths       LearningPath[]
+  clients             Client[]
+  contributions       Contribution[]
+  projects            Project[]
+  pointRules          PointRule[]
+  resourceViews       ResourceView[]
+  resourceUpvotes     ResourceUpvote[]
+  comments            Comment[]
+  commentUpvotes      CommentUpvote[]
+  audiences           Audience[]
+  learningPathUpvotes LearningPathUpvote[]
+  learningPathViews   LearningPathView[]
+  resourceSections    ResourceSection[]
+  sections            Section[]
 }
 
 model Client {
@@ -234,4 +247,51 @@ model CommentUpvote {
   createdAt DateTime @default(now())
 
   @@unique([userId, commentId]) //Ensures a user can upvote a comment once
+}
+
+model Section {
+  id               String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title            String            @db.VarChar(255)
+  description      String            @db.VarChar(255)
+  learningPathId   String            @db.Uuid
+  learningPath     LearningPath      @relation(fields: [learningPathId], references: [id])
+  resourceSections ResourceSection[]
+  parentId         String?           @db.Uuid
+  parent           Section?          @relation("Subsections", fields: [parentId], references: [id])
+  lastModifiedById String            @db.Uuid
+  lastModifiedBy   User              @relation(fields: [lastModifiedById], references: [id])
+  subsections      Section[]         @relation("Subsections")
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+}
+
+model ResourceSection {
+  resourceId       String   @db.Uuid
+  resource         Resource @relation(fields: [resourceId], references: [id])
+  sectionId        String   @db.Uuid
+  section          Section  @relation(fields: [sectionId], references: [id])
+  lastModifiedById String   @db.Uuid
+  lastModifiedBy   User     @relation(fields: [lastModifiedById], references: [id])
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@id([resourceId, sectionId])
+}
+
+model LearningPathUpvote {
+  id             String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  learningPathId String       @db.Uuid
+  learningPath   LearningPath @relation(fields: [learningPathId], references: [id])
+  userId         String       @db.Uuid
+  user           User         @relation(fields: [userId], references: [id])
+  createdAt      DateTime     @default(now())
+}
+
+model LearningPathView {
+  id             String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  learningPathId String       @db.Uuid
+  learningPath   LearningPath @relation(fields: [learningPathId], references: [id])
+  userId         String       @db.Uuid
+  user           User         @relation(fields: [userId], references: [id])
+  createdAt      DateTime     @default(now())
 }

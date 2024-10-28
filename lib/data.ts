@@ -28,3 +28,19 @@ export async function fetchSpaceAliases() {
     throw new Error("Failed to fetch space aliases.")
   }
 }
+
+export async function fetchAudiences() {
+  try {
+    const audiences = await prisma.audience.findMany({
+      select: {
+        id: true,
+        name: true,
+        description: true
+      }
+    })
+    return NextResponse.json(audiences, { status: 200 })
+  } catch (error) {
+    console.error("Database errror", error)
+    throw new Error("Failed to fetch audiences")
+  }
+}
