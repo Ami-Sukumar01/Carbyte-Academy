@@ -6,7 +6,10 @@ import { Prisma } from "@prisma/client";
 export async function POST(req: Request, { params }: { params: { spaceAlias: string } }) {
   const spaceAlias = decodeURIComponent(params.spaceAlias)
   try {
-    const resource = await req.json() as Prisma.ResourceCreateInput //Add Resource type for expected response
+
+    const resource: Prisma.ResourceCreateInput = await req.json()  //Add Resource type for expected response
+    //if else, weenn type comparison nicht gut, dann.. error code. Implement with zod.
+
     const space = await prisma.space.findUnique({
       where: { alias: spaceAlias },
       select: {
@@ -14,7 +17,7 @@ export async function POST(req: Request, { params }: { params: { spaceAlias: str
       }
     })
     if (!space) {
-      return NextResponse.json({ message: "No space found" }, { status: 400 })
+      return NextResponse.json({ message: "No space found" }, { status: 404 })
     }
 
     console.log(resource)
