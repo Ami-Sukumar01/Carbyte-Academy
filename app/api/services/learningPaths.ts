@@ -1,6 +1,8 @@
 export async function fetchLearningPath(learningPathTitle: string) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/learningPaths/${learningPathTitle}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/learningPaths/${learningPathTitle}`, {
+      cache: 'no-store'
+    })
     if (!res.ok) {
       throw new Error('Failed to fetch learning path')
     }
