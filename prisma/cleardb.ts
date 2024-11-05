@@ -9,6 +9,7 @@ export async function clearDatabase() {
   await prisma.contribution.deleteMany({})
   await prisma.learningPathUpvote.deleteMany({})
   await prisma.learningPathView.deleteMany({})
+  await prisma.section.deleteMany({})
   await prisma.learningPath.deleteMany({})
   await prisma.resource.deleteMany({})
   await prisma.project.deleteMany({})
