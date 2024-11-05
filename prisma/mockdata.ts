@@ -80,3 +80,87 @@ export const sectionData: Prisma.SectionCreateInput[] = [
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } }
   }
 ]
+
+export const subsectionData: Prisma.SectionCreateInput[] = [
+  //Subsections for Section "Introduction",
+  {
+    title: "Basics concepts",
+    description: "What you need to know",
+    learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    parent: { connect: { id: "9a011948-5ca7-4374-8661-695e444b0c44" } }
+  },
+  {
+    title: "E2E Overview",
+    description: "An overview of End-to-End solutions and their importance.",
+    learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    parent: { connect: { id: "9a011948-5ca7-4374-8661-695e444b0c44" } }
+  },
+  {
+    title: "Skills Development",
+    description: "Skills you can develop through E2E solutions.",
+    learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    parent: { connect: { id: "9a011948-5ca7-4374-8661-695e444b0c44" } }
+  },
+  {
+    title: "Project Examples",
+    description: "Examples of projects that utilize E2E solutions.",
+    learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    parent: { connect: { id: "9a011948-5ca7-4374-8661-695e444b0c44" } }
+  },
+  {
+    title: "Challenges and Solutions",
+    description: "Common challenges in E2E and how to address them.",
+    learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    parent: { connect: { id: "9a011948-5ca7-4374-8661-695e444b0c44" } }
+  },
+  {
+    title: "Future Trends",
+    description: "Exploring future trends in End-to-End solutions.",
+    learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    parent: { connect: { id: "9a011948-5ca7-4374-8661-695e444b0c44" } }
+  },
+
+  // Subsections for Section "Quality Management"
+  {
+    title: "Quality Assurance Processes",
+    description: "Overview of processes to ensure quality in projects.",
+    learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    parent: { connect: { id: "2d9807a6-1f60-48de-89a3-0939d81ead2a" } }
+  },
+  {
+    title: "Tools for Quality Management",
+    description: "Explore tools used in managing quality effectively.",
+    learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    parent: { connect: { id: "2d9807a6-1f60-48de-89a3-0939d81ead2a" } }
+  },
+  {
+    title: "Continuous Improvement",
+    description: "Strategies for continuous improvement in quality.",
+    learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    parent: { connect: { id: "2d9807a6-1f60-48de-89a3-0939d81ead2a" } }
+  },
+  //Subsections for Section "Lyfecycle & release management"
+  {
+    title: "Release Planning",
+    description: "Planning releases effectively to meet project goals.",
+    learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    parent: { connect: { id: "14348f54-2670-4e53-8cc2-c7a323f94b94" } }
+  },
+  {
+    title: "Lifecycle Management Strategies",
+    description: "Effective strategies for managing the project lifecycle.",
+    learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
+    parent: { connect: { id: "14348f54-2670-4e53-8cc2-c7a323f94b94" } }
+  }
+]

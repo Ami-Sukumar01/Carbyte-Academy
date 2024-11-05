@@ -10,7 +10,6 @@ export async function GET(req: Request, { params }: { params: { learningPathTitl
         id: true,
         title: true,
         description: true,
-        lastModifiedById: true,
         lastModifiedBy: {
           select: {
             name: true
@@ -43,11 +42,18 @@ export async function GET(req: Request, { params }: { params: { learningPathTitl
           }
         },
         sections: {
+          where: { parentId: null },
           select: {
             id: true,
             title: true,
             description: true,
-            subsections: true
+            subsections: {
+              select: {
+                id: true,
+                title: true,
+                description: true,
+              }
+            }
           }
         }
 

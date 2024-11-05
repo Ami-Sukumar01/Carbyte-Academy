@@ -2,7 +2,10 @@ import { Prisma } from "@prisma/client";
 import { clearDatabase } from "./cleardb";
 import prisma from "../lib/prisma"
 
-import { createLearningPathSection } from "./createFunction";
+import {
+  createLearningPathSections,
+  createLearningPathSubsections
+} from "./createFunction";
 
 const userData: Prisma.UserCreateInput[] = [
   {
@@ -1476,7 +1479,8 @@ async function main() {
   await createLearningPathUpvotes()
   await createLearningPathViews()
   await updateSpacesWithFundamentalLearningPath()
-  await createLearningPathSection()
+  await createLearningPathSections()
+  await createLearningPathSubsections()
   console.log(`Seeding finished 🌱`)
 }
 
