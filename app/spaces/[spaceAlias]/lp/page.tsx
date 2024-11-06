@@ -4,7 +4,7 @@ export default async function LearningPathsPage({ params }: { params: { spaceAli
 
   return (
     <>
-      <div>Leaerning Paths Overview</div>
+      <div></div>
       <LearningPathSection spaceAlias={params.spaceAlias} />
     </>
   )
