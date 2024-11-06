@@ -47,11 +47,35 @@ export async function GET(req: Request, { params }: { params: { learningPathTitl
             id: true,
             title: true,
             description: true,
+            resourceSections: {
+              select: {
+                sectionId: true,
+                resource: {
+                  select: {
+                    id: true,
+                    title: true,
+                    url: true
+                  }
+                }
+              }
+            },
             subsections: {
               select: {
                 id: true,
                 title: true,
                 description: true,
+                resourceSections: {
+                  select: {
+                    sectionId: true,
+                    resource: {
+                      select: {
+                        id: true,
+                        title: true,
+                        url: true
+                      }
+                    }
+                  }
+                },
               }
             }
           }
