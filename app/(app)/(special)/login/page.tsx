@@ -1,6 +1,7 @@
 "use client"
-import { Header } from "../../components/LoginHeader";
-import HeaderMain from "../../components/LoginBody";
+import HeaderMain from "@/components/LoginBody"
+import { Header } from "@/components/LoginHeader"
+
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from 'next/navigation'
 
@@ -12,7 +13,7 @@ export default function LoginPage() {
 
   const router = useRouter()
   const redirectHome = () => {
-    router.push('/home')
+    router.push('/spaces')
   }
 
   //If user sesssion redirect to /home (will be available in the future)

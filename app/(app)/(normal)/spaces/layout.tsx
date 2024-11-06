@@ -1,6 +1,6 @@
 import PageHeader from "@/components/Header";
-import Navbar from "../../components/NavBar";
-import SideBar from "../../components/SideBar";
+import Navbar from "@/components/NavBar";
+import Sidebar from "@/components/SideBar";
 
 export default function SpacesLayout({
   children,
@@ -23,8 +23,8 @@ export default function SpacesLayout({
 
         {/* Flex container for SideBar and Navbar */}
         <div className="flex flex-1 overflow-hidden">
-          {/* Sidebar on the left
-          <SideBar className="w-[251px] ml-[0px] top-[140px] h-[calc(100vh-111px)]" /> */}
+          {/* Sidebar on the left */}
+          <Sidebar className="w-[251px] ml-[0px] top-[140px] h-[calc(100vh-111px)]" />
 
           {/* Navbar and Content on the right */}
           <div className="flex-grow flex flex-col ml-[10px]">

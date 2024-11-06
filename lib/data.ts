@@ -1,4 +1,4 @@
-import prisma from "./prisma";
+import prisma from "@/lib/prisma"
 import { NextResponse } from "next/server";
 
 
@@ -44,3 +44,22 @@ export async function fetchAudiences() {
     throw new Error("Failed to fetch audiences")
   }
 }
+export async function fetchSpaceId(spaceAlias: string): Promise<string | null> {
+  const decodedSpaceAlias = decodeURIComponent(spaceAlias)
+  try {
+    const space = await prisma.space.findUnique({
+      where: { alias: decodedSpaceAlias },
+      select: { id: true }
+    })
+    if (!space) {
+      console.error('Space not found')
+      throw new Error("Space not found!")
+    }
+    return space.id
+  } catch (error) {
+    console.error("Error fetching spaceId", error)
+    return null
+  }
+}
+
+//TODO: fetchUserId
