@@ -12,7 +12,7 @@ export default function SpecificLearningPath({ spaceAlias, learningPathData }: {
       <p className="text-xl">Sections</p>
       <ul>{learningPathData.sections.map((section: SectionProps) =>
       (
-        <>
+        <div key={section.id}>
           <li key={section.id} className="border text-xl hover:bg-gray-500">{section.title}</li>
           <p className="bg-yellow-200">Section Details - Popover</p>
           <SecctionDetails spaceAlias={spaceAlias} section={section}></SecctionDetails>
@@ -30,7 +30,7 @@ export default function SpecificLearningPath({ spaceAlias, learningPathData }: {
               </li>
             ))}
           </ul>
-        </>
+        </div>
 
       )
       )}</ul>
