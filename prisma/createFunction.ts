@@ -1,6 +1,8 @@
-import { sectionData } from "./mockdata"
-import { subsectionData } from "./mockdata"
-
+import {
+  resourceSectionData,
+  sectionData,
+  subsectionData
+} from "./mockdata"
 import prisma from "../lib/prisma"
 
 
@@ -21,5 +23,15 @@ export async function createLearningPathSubsections() {
       data: lpss
     })
     console.log(`Created subsection: ${subsection.title}`)
+  }
+}
+
+export async function createSectionResources() {
+  console.log(`\n- Create section resources`)
+  for (const rs of resourceSectionData) {
+    const sectionResource = await prisma.resourceSection.create({
+      data: rs
+    })
+    console.log(`Added resource: ${sectionResource.resourceId} to section ${sectionResource.sectionId}`)
   }
 }

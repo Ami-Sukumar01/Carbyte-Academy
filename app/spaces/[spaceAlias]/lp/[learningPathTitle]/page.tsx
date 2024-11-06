@@ -39,7 +39,7 @@ export default async function LearningPathPage({ params }: { params: { spaceAlia
         Learning Path
       </p>
       {learningPathData ? (
-        <SpecificLearningPath learningPathData={learningPathData} />
+        <SpecificLearningPath spaceAlias={params.spaceAlias} learningPathData={learningPathData} />
       ) : (
         <p>No learning path available</p>
       )}
