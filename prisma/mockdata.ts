@@ -84,6 +84,7 @@ export const sectionData: Prisma.SectionCreateInput[] = [
 export const subsectionData: Prisma.SectionCreateInput[] = [
   //Subsections for Section "Introduction",
   {
+    id: "b6a11fd7-244b-4b21-9e3a-4c666c7ee2fa",
     title: "Basics concepts",
     description: "What you need to know",
     learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
@@ -91,6 +92,7 @@ export const subsectionData: Prisma.SectionCreateInput[] = [
     parent: { connect: { id: "9a011948-5ca7-4374-8661-695e444b0c44" } }
   },
   {
+    id: "11756eb7-ad87-4a51-941c-7624f9ab85ce",
     title: "E2E Overview",
     description: "An overview of End-to-End solutions and their importance.",
     learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
@@ -98,6 +100,7 @@ export const subsectionData: Prisma.SectionCreateInput[] = [
     parent: { connect: { id: "9a011948-5ca7-4374-8661-695e444b0c44" } }
   },
   {
+    id: "49729c7d-e9e3-41d4-a146-b3f9c5ab2c6f",
     title: "Skills Development",
     description: "Skills you can develop through E2E solutions.",
     learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
@@ -105,6 +108,7 @@ export const subsectionData: Prisma.SectionCreateInput[] = [
     parent: { connect: { id: "9a011948-5ca7-4374-8661-695e444b0c44" } }
   },
   {
+    id: "a729d490-e60e-4e54-8461-78f9e60d3547",
     title: "Project Examples",
     description: "Examples of projects that utilize E2E solutions.",
     learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
@@ -112,6 +116,7 @@ export const subsectionData: Prisma.SectionCreateInput[] = [
     parent: { connect: { id: "9a011948-5ca7-4374-8661-695e444b0c44" } }
   },
   {
+    id: "bd96f584-e3dd-455a-b45c-e380e64c8fdc",
     title: "Challenges and Solutions",
     description: "Common challenges in E2E and how to address them.",
     learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
@@ -119,6 +124,7 @@ export const subsectionData: Prisma.SectionCreateInput[] = [
     parent: { connect: { id: "9a011948-5ca7-4374-8661-695e444b0c44" } }
   },
   {
+    id: "d19fdd80-d65e-4963-89da-10e9746a1dca",
     title: "Future Trends",
     description: "Exploring future trends in End-to-End solutions.",
     learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
@@ -128,6 +134,7 @@ export const subsectionData: Prisma.SectionCreateInput[] = [
 
   // Subsections for Section "Quality Management"
   {
+    id: "6dd92bf2-cb28-4353-bd2c-7de3e182a089",
     title: "Quality Assurance Processes",
     description: "Overview of processes to ensure quality in projects.",
     learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
@@ -135,6 +142,7 @@ export const subsectionData: Prisma.SectionCreateInput[] = [
     parent: { connect: { id: "2d9807a6-1f60-48de-89a3-0939d81ead2a" } }
   },
   {
+    id: "cecc3f51-df88-4cd3-b3dc-d511bb833561",
     title: "Tools for Quality Management",
     description: "Explore tools used in managing quality effectively.",
     learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
@@ -142,6 +150,7 @@ export const subsectionData: Prisma.SectionCreateInput[] = [
     parent: { connect: { id: "2d9807a6-1f60-48de-89a3-0939d81ead2a" } }
   },
   {
+    id: "d345540e-d2b3-4a0d-a4c2-2245834183c6",
     title: "Continuous Improvement",
     description: "Strategies for continuous improvement in quality.",
     learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
@@ -150,6 +159,7 @@ export const subsectionData: Prisma.SectionCreateInput[] = [
   },
   //Subsections for Section "Lyfecycle & release management"
   {
+    id: "a747dc97-6898-4782-b17a-a524f164b117",
     title: "Release Planning",
     description: "Planning releases effectively to meet project goals.",
     learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
@@ -157,10 +167,56 @@ export const subsectionData: Prisma.SectionCreateInput[] = [
     parent: { connect: { id: "14348f54-2670-4e53-8cc2-c7a323f94b94" } }
   },
   {
+    id: "eddc0858-9566-4e4f-aa76-cbc2b5f7a63b",
     title: "Lifecycle Management Strategies",
     description: "Effective strategies for managing the project lifecycle.",
     learningPath: { connect: { id: "e8c5e44f-60f4-40c0-99e3-f611c40a3b74" } },
     lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } },
     parent: { connect: { id: "14348f54-2670-4e53-8cc2-c7a323f94b94" } }
   }
+]
+
+export const resourceSectionData: Prisma.ResourceSectionCreateInput[] = [
+  //Add resources to Introduction Section
+  {
+    resource: { connect: { id: "473d71ff-9fcc-4fb2-830c-7f52e0b34529" } },
+    section: { connect: { id: "9a011948-5ca7-4374-8661-695e444b0c44" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } }
+  },
+  {
+    resource: { connect: { id: "0aedd227-d653-4bcd-8dee-b9e6099ec973" } },
+    section: { connect: { id: "9a011948-5ca7-4374-8661-695e444b0c44" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } }
+  },
+  //Add resources to "Basics concepts" //Resource dont make sense
+  {
+    resource: { connect: { id: "bca11205-3eca-45df-b35b-e76b00868687" } },
+    section: { connect: { id: "b6a11fd7-244b-4b21-9e3a-4c666c7ee2fa" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } }
+  },
+  {
+    resource: { connect: { id: "fdc63130-b897-4741-ad06-953317bd358a" } },
+    section: { connect: { id: "b6a11fd7-244b-4b21-9e3a-4c666c7ee2fa" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } }
+  },
+  {
+    resource: { connect: { id: "6eae420b-a2f6-4db7-a1ea-dc8238d55397" } },
+    section: { connect: { id: "b6a11fd7-244b-4b21-9e3a-4c666c7ee2fa" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } }
+  },
+  {
+    resource: { connect: { id: "6db23c6c-6d2c-4aa5-a03e-96bb961873bd" } },
+    section: { connect: { id: "b6a11fd7-244b-4b21-9e3a-4c666c7ee2fa" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } }
+  },
+  {
+    resource: { connect: { id: "d195d8c0-3091-4a77-95c5-3d867f5e4c6f" } },
+    section: { connect: { id: "b6a11fd7-244b-4b21-9e3a-4c666c7ee2fa" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } }
+  },
+  {
+    resource: { connect: { id: "0aedd227-d653-4bcd-8dee-b9e6099ec973" } },
+    section: { connect: { id: "b6a11fd7-244b-4b21-9e3a-4c666c7ee2fa" } },
+    lastModifiedBy: { connect: { id: "78fbde93-9a73-43d6-9e8f-1d4f3ebe2c43" } }
+  },
 ]
