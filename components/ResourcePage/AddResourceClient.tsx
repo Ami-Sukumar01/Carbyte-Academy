@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import { Popover, PopoverTrigger, PopoverContent} from "@/components/ui/popover";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { BookOpen, Video, Newspaper, SquareLibrary, Podcast, ChartPie, MousePointerClick, ChartLine, Files, Wrench } from 'lucide-react'; // Import icons from Lucide
 import { useRouter } from "next/navigation";
 import { Card, CardTitle, CardDescription } from "@/components/ui/card";
@@ -22,31 +22,31 @@ interface ResourceType {
 
 // Mapping resource names to icons
 const getIconForResource = (resourceName: string, isSelected: boolean) => {
-    const iconColor = isSelected ? "text-white" : "text-black"; // Conditionally apply white or black
-  
-    switch (resourceName.toLowerCase()) {
-      case "book":
-        return <BookOpen size={32} className={`${iconColor}`} />;
-      case "video":
-        return <Video size={32} className={`${iconColor}`} />;
-      case "article":
-        return <Newspaper size={32} className={`${iconColor}`} />;
-      case "interactive content":
-        return <MousePointerClick size={32} className={`${iconColor}`} />;
-      case "practical project":
-        return <Wrench size={32} className={`${iconColor}`} />;
-      case "podcast":
-        return <Podcast size={32} className={`${iconColor}`} />;
-      case "online course":
-        return <ChartLine size={32} className={`${iconColor}`} />;
-      case "presentation":
-        return <ChartPie size={32} className={`${iconColor}`} />;
-      case "document":
-        return <Files size={32} className={`${iconColor}`} />;
-      default:
-        return <SquareLibrary size={32} className={`${iconColor}`} />;
-    }
-  };
+  const iconColor = isSelected ? "text-white" : "text-black"; // Conditionally apply white or black
+
+  switch (resourceName.toLowerCase()) {
+    case "book":
+      return <BookOpen size={32} className={`${iconColor}`} />;
+    case "video":
+      return <Video size={32} className={`${iconColor}`} />;
+    case "article":
+      return <Newspaper size={32} className={`${iconColor}`} />;
+    case "interactive content":
+      return <MousePointerClick size={32} className={`${iconColor}`} />;
+    case "practical project":
+      return <Wrench size={32} className={`${iconColor}`} />;
+    case "podcast":
+      return <Podcast size={32} className={`${iconColor}`} />;
+    case "online course":
+      return <ChartLine size={32} className={`${iconColor}`} />;
+    case "presentation":
+      return <ChartPie size={32} className={`${iconColor}`} />;
+    case "document":
+      return <Files size={32} className={`${iconColor}`} />;
+    default:
+      return <SquareLibrary size={32} className={`${iconColor}`} />;
+  }
+};
 
 interface AddResourceClientProps {
   resourceTypes: ResourceType[];
@@ -101,7 +101,7 @@ export default function AddResourceClient({ resourceTypes, spaceAlias }: AddReso
     } else if (!selectedLevel) {
       setPopoverMessage("Please select a resource level.");
     } else if (isAuthor === null) {
-        setPopoverMessage("Please confirm if you are the author.");
+      setPopoverMessage("Please confirm if you are the author.");
     } else {
       setShowDialog(true); // Show confirmation dialog instead of setting the popover message
     }
@@ -121,7 +121,7 @@ export default function AddResourceClient({ resourceTypes, spaceAlias }: AddReso
   const handleFinalSubmission = () => {
     // Trigger the CombinedModal here
     setShowCombinedModal(true); // Assuming you have state for CombinedModal visibility
-  
+
     // You can also include any additional logic, like form submission or API calls
   };
 
@@ -164,116 +164,112 @@ export default function AddResourceClient({ resourceTypes, spaceAlias }: AddReso
           placeholder="Original resource URL"
           className="mt-1 w-[684px] h-[48px]"
         />
-        <p className="text-sm text-gray-500 mb-[40px]">Ensure it's a valid URL</p>
+        <p className="text-sm text-gray-500 mb-[40px]">Ensure it&apos;s a valid URL</p>
       </div>
 
-             {/* Upload a file section */}
-             <div className="mb-4">
-         <Label htmlFor="file-upload">Upload a file (Optional)</Label>
-         <div className="flex items-center">
-           <input
-             type="file"
-             accept=".pdf,.jpeg,.png,.mp4,.pptx"
-             className="hidden"
-             id="file-upload"
-             onChange={handleFileChange}
-           />
-           <label htmlFor="file-upload" className="cursor-pointer">
-             <div className="flex items-center justify-center w-[164px] h-[46px] bg-white text-black border border-black cursor-pointer">
-               <Plus className="mr-2" />
-               Upload
-             </div>
-           </label>
-         </div>
-         <p className="text-sm text-gray-500 mt-2 mb-[40px]">
-           PDF, JPEG, PNG, MP4, PPTX
-         </p>
-       </div>
+      {/* Upload a file section */}
+      <div className="mb-4">
+        <Label htmlFor="file-upload">Upload a file (Optional)</Label>
+        <div className="flex items-center">
+          <input
+            type="file"
+            accept=".pdf,.jpeg,.png,.mp4,.pptx"
+            className="hidden"
+            id="file-upload"
+            onChange={handleFileChange}
+          />
+          <label htmlFor="file-upload" className="cursor-pointer">
+            <div className="flex items-center justify-center w-[164px] h-[46px] bg-white text-black border border-black cursor-pointer">
+              <Plus className="mr-2" />
+              Upload
+            </div>
+          </label>
+        </div>
+        <p className="text-sm text-gray-500 mt-2 mb-[40px]">
+          PDF, JPEG, PNG, MP4, PPTX
+        </p>
+      </div>
 
       {/* Resource Type Selection */}
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2">
-  {resourceTypes.map((type) => (
-    <button
-      key={type.id}
-      className={`w-[330px] h-[130px] border border-black rounded-sm flex items-center px-4 ${
-        selectedResourceType === type.name ? "bg-black text-white" : "bg-white text-black"
-      }`}
-      onClick={() => handleResourceTypeSelect(type.name)}
-      type="button"
-    >
-      {/* Icon on the left side, with dynamic color */}
-      {getIconForResource(type.name, selectedResourceType === type.name)}
+        {resourceTypes.map((type) => (
+          <button
+            key={type.id}
+            className={`w-[330px] h-[130px] border border-black rounded-sm flex items-center px-4 ${selectedResourceType === type.name ? "bg-black text-white" : "bg-white text-black"
+              }`}
+            onClick={() => handleResourceTypeSelect(type.name)}
+            type="button"
+          >
+            {/* Icon on the left side, with dynamic color */}
+            {getIconForResource(type.name, selectedResourceType === type.name)}
 
-      <div className="flex flex-col justify-center text-left ml-4">
-        <div className="text-lg font-semibold">{type.name}</div>
-        <div className="text-gray-500 mt-1">
-          {type.description || "No description available"}
+            <div className="flex flex-col justify-center text-left ml-4">
+              <div className="text-lg font-semibold">{type.name}</div>
+              <div className="text-gray-500 mt-1">
+                {type.description || "No description available"}
+              </div>
+            </div>
+          </button>
+        ))}
+      </div>
+
+
+
+      {/* Level Selection */}
+      <div className="mb-4">
+        <Label className="text-xl">Level</Label>
+        <div className="flex space-x-2 gap-7 mt-2">
+          {["Basic", "Intermediate", "Advanced"].map((level) => (
+            <Button
+              key={level}
+              className={`w-[164px] h-[46px] border text-black rounded-xs border-black hover hover:bg-black hover:text-white ${selectedLevel === level ? "bg-black text-white" : "bg-white"
+                }`}
+              onClick={() => handleLevelSelect(level)}
+              type="button"
+            >
+              {level}
+            </Button>
+          ))}
         </div>
       </div>
-    </button>
-  ))}
-</div>
 
 
-
-       {/* Level Selection */}
-       <div className="mb-4">
-         <Label className="text-xl">Level</Label>
-         <div className="flex space-x-2 gap-7 mt-2">
-           {["Basic", "Intermediate", "Advanced"].map((level) => (
-             <Button
-               key={level}
-               className={`w-[164px] h-[46px] border text-black rounded-xs border-black hover hover:bg-black hover:text-white ${
-                 selectedLevel === level ? "bg-black text-white" : "bg-white"
-               }`}
-               onClick={() => handleLevelSelect(level)}
-               type="button"
-             >
-               {level}
-             </Button>
-           ))}
-         </div>
-       </div>
-
-
-       {/* Author Confirmation */}
-       <div className="mb-6">
-         <Label className="text-xl" >Are you the author?</Label>
-         <div className="flex space-x-2 mt-2 mb-[35px]">
-            <div className="mt-[20px]">
-           <Button
-             className={`w-[95px] h-[46px] border border-black text-black rounded-xs mr-[30px] hover hover:bg-black hover:text-white  ${
-               isAuthor === true ? "bg-black text-white" : "bg-white"
-             }`}
-             onClick={() => handleAuthorSelect(true)}
-             type="button"
-           >
-             Yes
-           </Button>
-           <Button
-             className={`w-[95px] h-[46px] border border-black text-black rounded-xs ${
-               isAuthor === false ? "bg-black text-white" : "bg-white"
-             }`}
-             onClick={() => handleAuthorSelect(false)}
-             type="button"
-           >
-             No
-           </Button>
-           </div>
-         </div>
-       </div>
+      {/* Author Confirmation */}
+      <div className="mb-6">
+        <Label className="text-xl" >Are you the author?</Label>
+        <div className="flex space-x-2 mt-2 mb-[35px]">
+          <div className="mt-[20px]">
+            <Button
+              className={`w-[95px] h-[46px] border border-black text-black rounded-xs mr-[30px] hover hover:bg-black hover:text-white  ${isAuthor === true ? "bg-black text-white" : "bg-white"
+                }`}
+              onClick={() => handleAuthorSelect(true)}
+              type="button"
+            >
+              Yes
+            </Button>
+            <Button
+              className={`w-[95px] h-[46px] border border-black text-black rounded-xs ${isAuthor === false ? "bg-black text-white" : "bg-white"
+                }`}
+              onClick={() => handleAuthorSelect(false)}
+              type="button"
+            >
+              No
+            </Button>
+          </div>
+        </div>
+      </div>
 
 
-       {/* Popover for confirmation */}
-       <Popover open={showPopover} onOpenChange={setShowPopover}>
-         <PopoverTrigger asChild>
-           <Button
-             variant="outline"
-             type="submit"
-             className="bg-white w-[264px] h-[46px] text-black border border-black rounded-xs transition-shadow duration-300 ease-in-out hover:bg-white hover:shadow-[3px_3px_0_black] mr-[30px]"
-           >
-             Add resource to the path
-             </Button>
+      {/* Popover for confirmation */}
+      <Popover open={showPopover} onOpenChange={setShowPopover}>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            type="submit"
+            className="bg-white w-[264px] h-[46px] text-black border border-black rounded-xs transition-shadow duration-300 ease-in-out hover:bg-white hover:shadow-[3px_3px_0_black] mr-[30px]"
+          >
+            Add resource to the path
+          </Button>
         </PopoverTrigger>
         <PopoverContent className="p-4">
           <p>{popoverMessage}</p>
@@ -314,23 +310,23 @@ export default function AddResourceClient({ resourceTypes, spaceAlias }: AddReso
 
 
 
-{/* Save space*/}
-<Button
-         variant="outline"
-         className="bg-white w-[164px] h-[46px] text-black border border-black rounded-xs mt-4 transition-shadow duration-300 ease-in-out hover:bg-white hover:shadow-[3px_3px_0_black] mr-[30px]"
-       >
-         Save in a space
-       </Button>
+      {/* Save space*/}
+      <Button
+        variant="outline"
+        className="bg-white w-[164px] h-[46px] text-black border border-black rounded-xs mt-4 transition-shadow duration-300 ease-in-out hover:bg-white hover:shadow-[3px_3px_0_black] mr-[30px]"
+      >
+        Save in a space
+      </Button>
 
 
-       {/* Cancel Button */}
-       <Button
-         variant="outline"
-         className="bg-white w-[164px] h-[46px] text-black border border-black rounded-xs mt-4 transition-shadow duration-300 ease-in-out hover:bg-white hover:shadow-[3px_3px_0_black]"
-         onClick={() => router.back()}
-       >
-         Cancel
-       </Button>
-     </form>
- );
+      {/* Cancel Button */}
+      <Button
+        variant="outline"
+        className="bg-white w-[164px] h-[46px] text-black border border-black rounded-xs mt-4 transition-shadow duration-300 ease-in-out hover:bg-white hover:shadow-[3px_3px_0_black]"
+        onClick={() => router.back()}
+      >
+        Cancel
+      </Button>
+    </form>
+  );
 }
