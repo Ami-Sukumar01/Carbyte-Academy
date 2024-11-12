@@ -13,7 +13,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "ci-deploy": "npm ci && npm run build --if-present && npm prune --production"
+    "migrate": "npx prisma migrate deploy",
+    "ci-deploy": "npm ci && npm run migrate && npm run build --if-present && npm prune --production"
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",
