@@ -1,0 +1,48 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - 1657
+  tags: 
+    include: 
+    - dev.build.*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+- group: app-academy-dev
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSource: 'spec'
+      versionSpec: '20.x'
+    displayName: 'Install Node.js'
+
+  - task: Npm@1
+    displayName: "Install npm packages and build",
+    inputs:
+      command: "custom"
+      customCommand: "run ci-deploy"
+
+  - task: ArchiveFiles@2
+       inputs:
+         rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+         includeRootFolder: false
+         archiveType: 'zip'
+         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+         replaceExistingArchive: true
+
+  - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+       artifact: Popscle-Dev-Build
+       displayName: 'Publish Build'
+
+  - task: AzureRmWebAppDeployment@4
+    displayName: 'Deploy Azure App Service'
+    inputs:
+      azureSubscription: '$(ConnectedServiceName)'
+      appType: '$(WebAppKind)'
+      WebAppName: '$(WebAppName)'
+      packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      StartupCommand: 'npm run start'
