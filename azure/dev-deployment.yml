@@ -21,7 +21,7 @@ steps:
     displayName: 'Install Node.js'
 
   - task: Npm@1
-    displayName: "Install npm packages and build",
+    displayName: "Install npm packages and build"
     inputs:
       command: "custom"
       customCommand: "run ci-deploy"
@@ -35,14 +35,7 @@ steps:
       replaceExistingArchive: true
 
   - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-    artifact: Academy-Dev-Build
+    artifact: Popscle-Dev-Build
     displayName: 'Publish Build'
 
-  - task: AzureRmWebAppDeployment@4
-    displayName: 'Deploy Azure App Service'
-    inputs:
-      azureSubscription: '$(ConnectedServiceName)'
-      appType: '$(WebAppKind)'
-      WebAppName: '$(WebAppName)'
-      packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-      StartupCommand: 'npm run start'
+
