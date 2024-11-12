@@ -27,16 +27,16 @@ steps:
       customCommand: "run ci-deploy"
 
   - task: ArchiveFiles@2
-       inputs:
-         rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
-         includeRootFolder: false
-         archiveType: 'zip'
-         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-         replaceExistingArchive: true
+    inputs:
+      rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+      includeRootFolder: false
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      replaceExistingArchive: true
 
   - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-       artifact: Popscle-Dev-Build
-       displayName: 'Publish Build'
+    artifact: Popscle-Dev-Build
+    displayName: 'Publish Build'
 
   - task: AzureRmWebAppDeployment@4
     displayName: 'Deploy Azure App Service'
