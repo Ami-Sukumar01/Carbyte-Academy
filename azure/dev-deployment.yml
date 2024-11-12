@@ -11,7 +11,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-- group: app-academy-dev
+- group: academy-dev
 
 steps:
   - task: NodeTool@0
@@ -35,7 +35,7 @@ steps:
       replaceExistingArchive: true
 
   - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-    artifact: Popscle-Dev-Build
+    artifact: Academy-Dev-Build
     displayName: 'Publish Build'
 
   - task: AzureRmWebAppDeployment@4
