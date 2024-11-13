@@ -45,6 +45,6 @@ steps:
       appType: '$(WebAppKind)'
       WebAppName: '$(WebAppName)'
       packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-      StartupCommand: 'npm run start'
+      StartupCommand: 'npm run start-prod'
 
 
