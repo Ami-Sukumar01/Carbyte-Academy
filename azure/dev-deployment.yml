@@ -37,5 +37,14 @@ steps:
   - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
     artifact: Popscle-Dev-Build
     displayName: 'Publish Build'
+  
+  - task: AzureRmWebAppDeployment@4
+    displayName: 'Deploy Azure App Service'
+    inputs:
+      azureSubscription: '$(ConnectedServiceName)'
+      appType: '$(WebAppKind)'
+      WebAppName: '$(WebAppName)'
+      packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      StartupCommand: 'npm run start'
 
 
