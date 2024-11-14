@@ -13,9 +13,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "dev:seed": " tsc prisma/seed.ts --outDir prisma/dist && node prisma/dist/prisma/seed.js && rm -rf prisma/dist",
     "migrate": "npx prisma migrate deploy",
+    "dev:db:setup": "npm run migrate && npm run dev:seed",
     "start-prod": "node_modules/next/dist/bin/next start",
-    "ci-deploy": "npm ci && npm run migrate && npm run build --if-present && npm prune --production"
+    "build:clean": "npm run build --if-present && npm prune --production"
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",

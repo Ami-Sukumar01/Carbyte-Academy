@@ -21,10 +21,21 @@ steps:
     displayName: 'Install Node.js'
 
   - task: Npm@1
-    displayName: "Install npm packages and build"
+    displayName: "Clean Install npm packages"
+    inputs:
+      command: "ci"
+
+  - task: Npm@1
+    displayName: "Database setup"
+    inputs: 
+      command: "custom"
+      customCommand: "run dev:db:setup"
+
+  - task: Npm@1
+    displayName: "Build and prune"
     inputs:
       command: "custom"
-      customCommand: "run ci-deploy"
+      customCommand: "run build:clean"
 
   - task: ArchiveFiles@2
     inputs:
