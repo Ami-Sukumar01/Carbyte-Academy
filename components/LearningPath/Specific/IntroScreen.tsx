@@ -31,10 +31,10 @@ export default function IntroScreen({ onClose }: { onClose: () => void }) {
         </p>
         <p className="font-semibold mb-2">Motivation:</p>
         <p className="mb-6">
-          It's perfect for helping you get to know your way around the space, especially if you're new here.
+          It&apos;s perfect for helping you get to know your way around the space, especially if you&apos;re new here.
         </p>
         <Button onClick={handleLetsGo} className="bg-purple-500 text-white px-6 py-2 rounded-md">
-          Let's go!
+          Let&apos;s go!
         </Button>
       </div>
     </div>
