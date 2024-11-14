@@ -1,7 +1,10 @@
 {
-  "name": "my-app",
+  "name": "popscle",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0 <21.0.0"
+  },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
   },
@@ -9,7 +12,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev:seed": " tsc prisma/seed.ts --outDir prisma/dist && node prisma/dist/prisma/seed.js && rm -rf prisma/dist",
+    "migrate": "npx prisma migrate deploy",
+    "dev:db:setup": "npm run migrate && npm run dev:seed",
+    "start-prod": "node_modules/next/dist/bin/next start",
+    "build:clean": "npm run build --if-present && npm prune --production"
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",

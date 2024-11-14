@@ -4,6 +4,7 @@ import { Resource } from "@prisma/client";
 import { Comment } from "@prisma/client";
 import { ArrowBigUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 // import {RightSidebar} from "@/components/"
 
 // Type for Resource Comment
@@ -76,11 +77,11 @@ export function ResourceDetail({ spaceAlias, resourceTitle }: { spaceAlias: stri
         <p className="text-lg font-medium">{resourceData.comments.length} comments</p>
         <label className="flex items-center space-x-2">
           <span>Most upvoted</span>
-          <input 
-            type="checkbox" 
-            className="toggle" 
-            checked={isMostUpvoted} 
-            onChange={() => setIsMostUpvoted(!isMostUpvoted)} 
+          <input
+            type="checkbox"
+            className="toggle"
+            checked={isMostUpvoted}
+            onChange={() => setIsMostUpvoted(!isMostUpvoted)}
           />
         </label>
       </div>
@@ -89,7 +90,7 @@ export function ResourceDetail({ spaceAlias, resourceTitle }: { spaceAlias: stri
       <div className="flex items-center space-x-2 mb-4">
         <div className="flex -space-x-3">
           {recentCommenters.map((comment, index) => (
-            <img
+            <Image
               key={index}
               src={comment.user.profile.avatarUrl || "https://i.pravatar.cc/150"}
               alt={comment.user.name}
@@ -102,7 +103,7 @@ export function ResourceDetail({ spaceAlias, resourceTitle }: { spaceAlias: stri
 
       {/* Add a comment section */}
       <div className="flex items-center mb-6">
-        <img
+        <Image
           src="https://i.pravatar.cc/150?img=3" // Placeholder for user avatar
           alt="User Avatar"
           className="w-10 h-10 rounded-full mr-2"
@@ -112,7 +113,7 @@ export function ResourceDetail({ spaceAlias, resourceTitle }: { spaceAlias: stri
           placeholder="Add a comment..."
           className="border-b border-gray-300 w-full py-2 px-4 focus:outline-none focus:border-gray-500"
         />
-        </div>
+      </div>
 
 
       {/* Render the comments list */}
@@ -120,7 +121,7 @@ export function ResourceDetail({ spaceAlias, resourceTitle }: { spaceAlias: stri
         {resourceData.comments.map((comment) => (
           <div key={comment.id} className="flex space-x-4 items-start mb-4">
             {/* Avatar */}
-            <img
+            <Image
               src={comment.user.profile.avatarUrl || "https://i.pravatar.cc/150"}
               alt={comment.user.name}
               className="w-10 h-10 rounded-full"

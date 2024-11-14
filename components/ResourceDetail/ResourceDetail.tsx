@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import RecomendationCard from "@/components/ResourceDetail/MinimalRecomCard";
 import ButtonWithPopup from "@/components/ResourceDetail/ButtonWithPopup";
+import Image from "next/image";
 
 // Type for Resource Comment
 interface TransformedComment extends Pick<Comment, 'id' | 'content' | 'createdAt'> {
@@ -87,50 +88,50 @@ export function ResourceDetail({ spaceAlias, resourceTitle }: { spaceAlias: stri
     <div className="flex">
       {/* Left Side */}
       <div className="w-[784px]">
-{/* Main Resource Content */}
-<div className="w-[785px] ml-0 p-6 bg-white shadow-md rounded-lg relative">
-  {/* Title */}
-  <h2 className="text-gray-800 font-inter font-normal text-2xl leading-[43.57px]">
-    {resourceData.title}
-  </h2>
+        {/* Main Resource Content */}
+        <div className="w-[785px] ml-0 p-6 bg-white shadow-md rounded-lg relative">
+          {/* Title */}
+          <h2 className="text-gray-800 font-inter font-normal text-2xl leading-[43.57px]">
+            {resourceData.title}
+          </h2>
 
-  {/* Buttons Section */}
-  <div className="absolute right-0 top-0 flex flex-col space-y-2">
-    <Button className="px-4 w-[125px] h-[44px] py-2 bg-grey-500 text-grey-900 mt-[20px] rounded-xs hover:text-white">
-      {resourceData.resourceType.name}
-    </Button>
-    <Button className="px-4 w-[125px] h-[44px] py-2 bg-grey-500 text-grey-900 mr-[10px] rounded-xs hover:text-white">
-      {resourceData.audience.name}
-    </Button>
-  </div>
+          {/* Buttons Section */}
+          <div className="absolute right-0 top-0 flex flex-col space-y-2">
+            <Button className="px-4 w-[125px] h-[44px] py-2 bg-grey-500 text-grey-900 mt-[20px] rounded-xs hover:text-white">
+              {resourceData.resourceType.name}
+            </Button>
+            <Button className="px-4 w-[125px] h-[44px] py-2 bg-grey-500 text-grey-900 mr-[10px] rounded-xs hover:text-white">
+              {resourceData.audience.name}
+            </Button>
+          </div>
 
-  {/* Metadata */}
-  <div className="flex items-center space-x-4 text-sm text-gray-500 mt-4">
-    <div className="flex items-center text-lg space-x-1">
-      <Eye size={24} />
-      <span>{resourceData.views}</span>
-    </div>
-    <div className="flex items-center text-lg space-x-1">
-      <ArrowBigUp size={24} />
-      <span>{resourceData.upvotes}</span>
-    </div>
-    <span>{resourceData.lastModifiedBy.name}</span>
-  </div>
+          {/* Metadata */}
+          <div className="flex items-center space-x-4 text-sm text-gray-500 mt-4">
+            <div className="flex items-center text-lg space-x-1">
+              <Eye size={24} />
+              <span>{resourceData.views}</span>
+            </div>
+            <div className="flex items-center text-lg space-x-1">
+              <ArrowBigUp size={24} />
+              <span>{resourceData.upvotes}</span>
+            </div>
+            <span>{resourceData.lastModifiedBy.name}</span>
+          </div>
 
-  {/* Description and URL */}
-  <p className="text-gray-700 mt-[35px] mb-4">{resourceData.description}</p>
-  <a
-    href={resourceData.url}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-purple-700 w-[550px] hover:underline mb-6 inline-block"
-  >
-    {resourceData.url}
-  </a>
+          {/* Description and URL */}
+          <p className="text-gray-700 mt-[35px] mb-4">{resourceData.description}</p>
+          <a
+            href={resourceData.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-purple-700 w-[550px] hover:underline mb-6 inline-block"
+          >
+            {resourceData.url}
+          </a>
 
-  {/* Buttons with Popup */}
-  <ButtonWithPopup className="mb-6" />
-</div>
+          {/* Buttons with Popup */}
+          <ButtonWithPopup className="mb-6" />
+        </div>
 
         {/* Comments Section */}
         <div className="w-[784px] ml-0 p-6 bg-white shadow-md rounded-lg mt-4">
@@ -148,7 +149,7 @@ export function ResourceDetail({ spaceAlias, resourceTitle }: { spaceAlias: stri
               {recentCommenters.map((comment, index) => (
                 <div key={index} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center text-gray-700 font-medium">
                   {comment.user.profile.avatarUrl ? (
-                    <img
+                    <Image
                       src={comment.user.profile.avatarUrl}
                       alt={comment.user.name}
                       className="w-full h-full rounded-full"
@@ -176,7 +177,7 @@ export function ResourceDetail({ spaceAlias, resourceTitle }: { spaceAlias: stri
               <div key={comment.id} className="flex space-x-4 items-start mb-4">
                 <div className="w-10 mr-2 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-medium">
                   {comment.user.profile.avatarUrl ? (
-                    <img
+                    <Image
                       src={comment.user.profile.avatarUrl}
                       alt={comment.user.name}
                       className="w-full h-full rounded-full"
