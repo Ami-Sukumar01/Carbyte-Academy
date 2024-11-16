@@ -1,4 +1,4 @@
-// components/LearningPath/Overview/Switch.tsx
+
 "use client";
 
 import React, { useState } from "react";

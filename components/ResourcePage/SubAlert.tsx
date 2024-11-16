@@ -7,9 +7,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Route, Search } from "lucide-react";
-import { FiChevronDown } from 'react-icons/fi'; // Example icon from react-icons
-import { SquareCheckBig } from "lucide-react"; // Icon for confirmation
-import { useRouter } from 'next/router'; // Import useRouter for navigation
+import { FiChevronDown } from 'react-icons/fi'; 
+import { SquareCheckBig } from "lucide-react"; 
+import { useRouter } from 'next/router'; 
 
 export default function CombinedModal() {
     // Initialize isSensitiveConfirmed as true to skip the first dialog and open the second dialog by default
@@ -18,8 +18,8 @@ export default function CombinedModal() {
     const [selectedPath, setSelectedPath] = useState('');
     const [showConfirmation, setShowConfirmation] = useState(false); // State for confirmation popup
     const [showError, setShowError] = useState(false); // State for error if section/subsection is not selected
-    const [openSection, setOpenSection] = useState<string | null>(null); // Allows both string and null
-    const [openSubsection, setOpenSubsection] = useState<string | null>(null); // Allows both string and null
+    const [openSection, setOpenSection] = useState<string | null>(null); 
+    const [openSubsection, setOpenSubsection] = useState<string | null>(null);
   
     const paths = [
         { id: 1, name: 'Fundamentals Frontend' },
@@ -30,7 +30,7 @@ export default function CombinedModal() {
         setIsSensitiveConfirmed(false); // Reset to the first dialog
         setShowCreatePathDialog(false); // Close the third dialog if it's open
         setShowConfirmation(false); // Close confirmation popup if it's open
-        setShowError(false); // Reset error state
+        setShowError(false); 
     };
 
     const handleCreatePath = () => {
@@ -39,7 +39,7 @@ export default function CombinedModal() {
 
     const handleAddInSectionDialog = (openSection: string | null, openSubsection: string | null) => {
         if (!openSection || !openSubsection) {
-            setShowError(true); // Show error if section or subsection is not selected
+            setShowError(true); 
         } else {
             setShowConfirmation(true); // Show confirmation popup when "Add" is clicked in the third dialog
             setShowError(false); // Reset error state if the section and subsection are selected
@@ -48,7 +48,7 @@ export default function CombinedModal() {
 
     // SectionDialog Component for the third dialog
     const SectionDialog = () => {
-        // Explicitly set the types to string | null
+       
         const [openSection, setOpenSection] = useState<string | null>(null); // To control which section's subsections are open
         const [openSubsection, setOpenSubsection] = useState<string | null>(null); // To control which subsection is open
 

@@ -1,4 +1,4 @@
-"use client"; // Mark this as a client-side component
+"use client"; 
 
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
@@ -10,7 +10,7 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 import { BookOpen, Video, Newspaper, SquareLibrary, Podcast, ChartPie, MousePointerClick, ChartLine, Files, Wrench } from 'lucide-react'; // Import icons from Lucide
 import { useRouter } from "next/navigation";
 import { Card, CardTitle, CardDescription } from "@/components/ui/card";
-import { Dialog, DialogTrigger, DialogContent, DialogFooter } from "@/components/ui/dialog"; // Import dialog components
+import { Dialog, DialogTrigger, DialogContent, DialogFooter } from "@/components/ui/dialog"; 
 import CombinedModal from "@/components/ResourcePage/SubAlert";
 
 // Define the type for the resourceTypes prop
@@ -115,14 +115,14 @@ export default function AddResourceClient({ resourceTypes, spaceAlias }: AddReso
 
   const handleConfirmPopover = () => {
     setShowPopover(false);
-    setShowDialog(true); // Trigger the additional confirmation dialog
+    setShowDialog(true); 
   };
 
   const handleFinalSubmission = () => {
     // Trigger the CombinedModal here
-    setShowCombinedModal(true); // Assuming you have state for CombinedModal visibility
-
-    // You can also include any additional logic, like form submission or API calls
+    setShowCombinedModal(true); 
+  
+    
   };
 
   return (

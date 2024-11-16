@@ -35,9 +35,6 @@ export default async function LearningPathPage({ params }: { params: { spaceAlia
 
   return (
     <>
-      <p>
-        Learning Path
-      </p>
       {learningPathData ? (
         <SpecificLearningPath spaceAlias={params.spaceAlias} learningPathData={learningPathData} />
       ) : (

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as Popover from "@radix-ui/react-popover";
-import { Filter, BookOpen } from "lucide-react"; // Import BookOpen
+import { Filter, BookOpen } from "lucide-react"; 
 
 // FilterPopover now accepts filters and onFilterChange props
 export function FilterPopover({
@@ -10,9 +10,9 @@ export function FilterPopover({
   selectedFilter,
   onFilterChange,
 }: {
-  filters: string[]; // Filters will come from resourceTypeName
-  selectedFilter: string | null; // The currently selected filter
-  onFilterChange: (selected: string) => void; // Function to handle filter changes
+  filters: string[]; 
+  selectedFilter: string | null; 
+  onFilterChange: (selected: string) => void; 
 }) {
   return (
     <Popover.Root>
@@ -28,10 +28,10 @@ export function FilterPopover({
       <Popover.Portal>
         <Popover.Content
           className="bg-white p-4 shadow-lg rounded-md border border-black w-[220px]"
-          align="end" // Align popover to the right of the button
-          side="bottom" // Open the popover below the button
-          sideOffset={8} // Offset from the button
-          avoidCollisions={false} // Allow placement even if near viewport edges
+          align="end" 
+          side="bottom"
+          sideOffset={8} 
+          avoidCollisions={false} 
         >
           <h3 className="text-sm font-inter mb-6">Add Filter</h3>
           <div className="grid grid-cols-2 gap-2">
@@ -48,7 +48,7 @@ export function FilterPopover({
               </button>
             ))}
           </div>
-          <Popover.Arrow className="fill-white" /> {/* Add an arrow to point to the button */}
+          <Popover.Arrow className="fill-white" /> 
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>
