@@ -71,7 +71,7 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
     // Show the popover message for a short duration
     setTimeout(() => {
       setPopoverMessage(null);
-    }, 2000); // Popover message disappears after 2 seconds
+    }, 2000); 
   };
 
   if (loading) {
@@ -110,47 +110,47 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
   const renderIcon = (resourceTypeName: string) => {
     switch (resourceTypeName.toLowerCase()) {
       case "video":
-        return <Video className="mr-2" />; // Video icon
+        return <Video className="mr-2" />; 
       case "presentation":
-        return <ChartPie className="mr-2" />; // Presentation icon
+        return <ChartPie className="mr-2" />; 
       case "article":
-        return <Newspaper className="mr-2" />; // Article icon
+        return <Newspaper className="mr-2" />; 
       case "book":
-        return <BookOpen className="mr-2" />; // Book icon
+        return <BookOpen className="mr-2" />; 
       case "online course":
-        return <ChartLine className="mr-2" />; // Online course icon
+        return <ChartLine className="mr-2" />; 
       case "document":
-        return <Files className="mr-2" />; // Document icon
+        return <Files className="mr-2" />; 
       case "podcast":
-        return <Podcast className="mr-2" />; // Podcast icon
+        return <Podcast className="mr-2" />; 
       case "interactive content":
-        return <BrainCircuit className="mr-2" />; // Others icon  
+        return <BrainCircuit className="mr-2" />; 
       case "practical project":
-        return <Wrench className="mr-2" />; // Others icon     
+        return <Wrench className="mr-2" />;   
       case "others":
-        return <SquareLibrary className="mr-2" />; // Others icon
+        return <SquareLibrary className="mr-2" />; 
       default:
-        return null; // No icon for other types
+        return null; 
     }
   };
 
   // Function to render action icons (edit, delete, save) only on hover
   const renderActionIcons = (resourceId: string, createdBy: string) => {
-    const isBookmarked = bookmarkedResources.includes(resourceId); // Check if the resource is bookmarked
+    const isBookmarked = bookmarkedResources.includes(resourceId); 
     if (hoveredResource === resourceId) {
       return (
         <div className="flex items-center space-x-2">
           <Edit size={16} className="text-black" />
           <Bookmark
             size={16}
-            className={isBookmarked ? "text-purple-600" : "text-black"} // Toggle color based on bookmark state
-            onClick={() => handleBookmarkToggle(resourceId)} // Toggle bookmark on click
+            className={isBookmarked ? "text-purple-600" : "text-black"} 
+            onClick={() => handleBookmarkToggle(resourceId)} 
           />
           <Trash size={16} className="text-black" />
         </div>
       );
     }
-    return null; // Don't render icons if not hovered
+    return null; 
   };
 
   return (
@@ -158,7 +158,7 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
       <div className="max-w-4xl mx-auto p-6">
         {/* Filter Section */}
         <div className="flex items-center space-x-4 mb-6">
-          {/* Recently Added Switch (Black) */}
+          {/* Recently Added Switch */}
           <div className="flex items-center">
             <Switch id="recently-added" className="mr-2 bg-black" />
             <label htmlFor="recently-added" className="text-gray-700">
@@ -166,7 +166,7 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
             </label>
           </div>
 
-          {/* Most Upvoted Switch (Grey) */}
+          {/* Most Upvoted Switch */}
           <div className="flex items-center">
             <Switch id="most-upvoted" className="mr-2 bg-gray-400" />
             <label htmlFor="most-upvoted" className="text-gray-700">
@@ -176,9 +176,9 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
 
           {/* Filter Button with Popover */}
           <FilterPopover
-            filters={Object.keys(groupedResources)} // Pass resourceTypeName as filter options
-            selectedFilter={selectedFilter} // Pass the currently selected filter
-            onFilterChange={handleFilterChange} // Function to handle filter changes
+            filters={Object.keys(groupedResources)} 
+            selectedFilter={selectedFilter}
+            onFilterChange={handleFilterChange}
           />
         </div>
 
@@ -194,8 +194,8 @@ export function ResourceCard({ spaceAlias }: { spaceAlias: string }) {
                   <div
                     key={resource.id}
                     className="flex items-center h-[25px] border-l-[1px] border-black mb-2"
-                    onMouseEnter={() => setHoveredResource(resource.id)} // Set hover state on mouse enter
-                    onMouseLeave={() => setHoveredResource(null)} // Remove hover state on mouse leave
+                    onMouseEnter={() => setHoveredResource(resource.id)} 
+                    onMouseLeave={() => setHoveredResource(null)} 
                   >
                     {/* Resource Title with Icons to the right */}
                     <div className="flex-1 flex space-x-2">

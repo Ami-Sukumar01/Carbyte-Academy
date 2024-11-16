@@ -1,5 +1,5 @@
 // SidebarClient.tsx (Client Component)
-"use client"; // This indicates the component uses client-side logic
+"use client"; 
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -7,7 +7,7 @@ import { Button } from './ui/button';
 import { Menu } from 'lucide-react'; // Import a hamburger menu icon
 
 interface SidebarClientProps {
-  spaces: { alias: string }[]; // Assuming spaces has an alias field
+  spaces: { alias: string }[]; 
   className?: string;
 }
 
@@ -20,7 +20,7 @@ export default function SidebarClient({ spaces, className }: SidebarClientProps)
       {/* Hamburger Menu Button (visible only on small screens) */}
       <Button 
         variant="outline"
-        onClick={() => setIsOpen(!isOpen)} // Toggle sidebar visibility
+        onClick={() => setIsOpen(!isOpen)} 
         className="lg:hidden flex items-center justify-start w-[50px] h-[40px] mb-2"
       >
         <Menu className="w-6 h-6" /> {/* Hamburger Icon */}

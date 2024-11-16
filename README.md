@@ -10,6 +10,7 @@
 [Prod Deploymen]()
 
 Product Owner: Adonis Almagro
+Frontend: Ami Sukumar
 
 Project Responsible: E2E Community, Carbyte GmbH.
 
@@ -23,6 +24,20 @@ With Popscle, you can explore and enhance your skills in new areas of interest. 
 ## Who this project is for
 This product is designed for individuals looking to enhance their skills in a new area. It is ideal for new employees, those transitioning to a different role, individuals joining a new project, or anyone with a keen interest in learning something new.
 
+## Tech Stack
+1. Frontend:
+-Framework: Next.js
+-Styling: Tailwind CSS
+-UI Components: shadcn
+
+2. Backend:
+-ORM: Prisma
+-Database: PostgreSQL
+
+3. Version Control: Git 
+4. Cloud Platform: Azure
+5. CI/CD: Azure DevOps Pipelines
+
 ## Project dependencies
 
 [//]: <> (TO DO: Add requirements.)
@@ -30,6 +45,10 @@ This product is designed for individuals looking to enhance their skills in a ne
 Before using *"Popscle"*, ensure you have:
 - postgres
 - nodejs
+
+
+## diagram of the architecture
+diagram.drawio (check the file with this file name)
 
 
 ## Instructions for using Popscle

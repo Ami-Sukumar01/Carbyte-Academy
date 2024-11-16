@@ -1,13 +1,13 @@
-// components/LevelDropdown.tsx
+
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button"; // Adjust the path to your ShadCN button component
-import { ChevronDown } from "lucide-react"; // Import the ChevronDown icon from Lucide
+import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react"; 
 
 interface LevelDropdownProps {
   onSelect: (level: string) => void;
-  levels: string[]; // Accept levels as a prop
+  levels: string[]; 
 }
 
 export const LevelDropdown: React.FC<LevelDropdownProps> = ({ onSelect, levels }) => {
@@ -25,9 +25,9 @@ export const LevelDropdown: React.FC<LevelDropdownProps> = ({ onSelect, levels }
     if (isOpen) {
       const timer = setTimeout(() => {
         setIsOpen(false);
-      }, 2000); // 2000 milliseconds = 2 seconds
+      }, 2000); 
 
-      return () => clearTimeout(timer); // Cleanup on component unmount or if isOpen changes
+      return () => clearTimeout(timer); 
     }
   }, [isOpen]);
 
