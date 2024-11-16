@@ -10,6 +10,7 @@
 [Prod Deploymen]()
 
 Product Owner: Adonis Almagro
+Frontend: Ami Sukumar
 
 Project Responsible: E2E Community, Carbyte GmbH.
 
