@@ -5,7 +5,7 @@
 
 ## Popscle. A Community-Driven Learning Hub
 [//]: <> (TO DO: Add links.)
-[Dev Deployment]()
+[Dev Deployment](https://lwa-carbyteacademy-dev-001.azurewebsites.net/spaces/E2E) (Only "E2E" Space has mockup data)
 
 [Prod Deploymen]()
 
@@ -128,43 +128,82 @@ npm run dev
 
 
 
+## Features and Status
 
+### Status Options
 
+- **Status: Not Started** – In Backlog.
+- **Status: Designed** – Figma designs ready.
+- **Status: Models Ready** – Prisma models set. Mockup data available.
+- **Status: Frontend Done** – Frontend complete, prisma models set, backend pending.
+- **Status: Backend Progress** – Backend being implemented.
+- **Status: Complete** – Fully implemented.
 
+### User and Profile Management
+- **Single Sign-On Authentication:**
+  - User can log in using their Microsoft account through Microsoft Entra. **Status: Complete**
+  - User is assigned a profile after login **Status: Not Started**
 
+- **Profile:**
+  - Users can manage their profiles. **Status: Designed**
 
+### Resource Management
 
+- **Resource Management:**
+  - User can view resource(s). **Status: Complete** [Example](https://lwa-carbyteacademy-dev-001.azurewebsites.net/spaces/E2E/r/Security%20in%20End2End%20Solutions)
+  - User can create a resource. **Status: Backend Progress**  [Example](https://lwa-carbyteacademy-dev-001.azurewebsites.net/spaces/E2E/add)
+  - Users can update, and delete resources. **Status: Backend Progress**
+  - User can mark a resource as public or private. **Status: Models Ready**
+  - User can mark resources as outdated. **Status: Models Ready**
+  - Users can comment on resources. **Status: Models Ready**
+  - Users can upvote resources only once. **Status: Backend Progress**
+  - Users can sort resources by recently added, most upvoted. **Status: Models Ready**
+  - Users can filter resources by resource type. **Status: Complete**
 
+### Learning Path Management
+- **Learning Path Management:**
+  - Users can view learning paths. **Status: Frontend Done** [Example](https://lwa-carbyteacademy-dev-001.azurewebsites.net/spaces/E2E/lp/Getting%20Started%20with%20End2End%20Solutions)
+  - Users can create, update, and manage learning paths. **Status: Models ready**
+  - User can add resources into sections and subsections. **Status: Models ready**
+  - Users can upvote learning paths. **Status: Models ready**
+  - Users can comment learning paths. **Status: Models ready**
 
+### Space and Project Management
 
-<!-- <!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). -->
+- **Space Management:**
+  - User can view spaces include resources, learning paths, and projects, top contributors. **Status: Completed** [Example](https://lwa-carbyteacademy-dev-001.azurewebsites.net/spaces/E2E)
+  - Users can create spaces. **Status: Models Ready**
+  - Users can update spaces. **Status: Models Ready**
+  - Users can set a space to be public or private. **Status: Models Ready**
 
-## Getting Started NextJs
+- **Project Management:**
+  - Users can create and manage projects within spaces. **Status: Not started**
+  - Users can create clients. **Status: Not started**
+  - User can be link clients to projects. **Status: Not Started**
 
-First, run the development server:
+### Contribution and Point System
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Contribution Tracking:**
+  - User can create earn points rules. **Status: Models Ready**
+  - User earns interaction points. **Status: Models Ready**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Discover Information
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Search bar:**
+    - User can search for key words. **Status: Designed**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Feed:**
+    - User can view notifications of created resources and learning paths. **Status: Designed**   
+    - User can view notifications of platform. **Status: Designed**   
 
-## Learn More
+- **Discover resources:**
+    - User can view recomended (most upvotes) resources on resource's page. **Status: Complete**  
+    - User can view recomended (most upvotes) resources on space page. **Status: Complete**  
 
-To learn more about Next.js, take a look at the following resources:
+### Security and Access Control
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Access Control:**
+  - Users can set spaces, resources, learning paths as public or private. **Status: Not Started**
+  - Role-based permissions for managing visibility, access, tasks. **Status: Not Started**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
